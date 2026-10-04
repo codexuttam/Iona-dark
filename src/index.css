@@ -1,0 +1,59 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-display: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+    --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+  }
+  
+  body {
+    font-family: var(--font-sans);
+    background-color: #02080D;
+    color: #FFFFFF;
+    overflow-x: hidden;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #02080D;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #083E50;
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #20BFD3;
+  }
+}
+
+.font-display {
+  font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+}
+
+.font-sans-refined {
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+}
+
+/* Water caustic subtle texture overlay */
+.caustic-overlay {
+  background-image: radial-gradient(circle at 50% 50%, rgba(32, 191, 211, 0.08) 0%, transparent 60%);
+}
+
+/* Glass panel */
+.glass-panel {
+  background: rgba(6, 35, 45, 0.45);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(125, 234, 240, 0.12);
+}
+
+.glass-panel-subtle {
+  background: rgba(4, 20, 29, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(125, 234, 240, 0.08);
+}
+
