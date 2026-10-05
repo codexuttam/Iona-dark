@@ -5,6 +5,7 @@ import { createWaterWave, WaterWaveInstance } from './WaterSurface';
 import { createWaterSphere, WaterSphereInstance } from './WaterSphere';
 import { createEnvironmentAtmosphere, EnvironmentAtmosphere } from './BubblesAndParticles';
 import { lerp } from '../../lib/utils';
+import envMapUrl from '../../assets/images/underwater_ambient_env_1791133503549.jpg';
 
 interface SceneProps {
   scrollProgress: number;
@@ -86,7 +87,7 @@ export default function Scene({
     // 5. Environment Map (Texture Loader)
     const textureLoader = new THREE.TextureLoader();
     textureLoader.load(
-      '/src/assets/images/underwater_ambient_env_1791133503549.jpg',
+      envMapUrl,
       (texture) => {
         texture.mapping = THREE.EquirectangularReflectionMapping;
         scene.environment = texture;
