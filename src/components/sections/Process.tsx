@@ -59,16 +59,7 @@ export default function Process() {
           A careful journey to bring you pure, alkaline and ionised water. From deep granite reservoirs through catalytic refinement, each molecule is calibrated for pristine physiological resonance.
         </p>
 
-        {/* Subtle Phase Indicator Pill */}
-        <div className="mt-8 flex items-center gap-3">
-          <span className="px-3 py-1 rounded-full text-[11px] font-mono bg-[#20BFD3]/15 text-[#7DEAF0] border border-[#20BFD3]/30 flex items-center gap-2 font-bold tracking-wider">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#7DEAF0] animate-pulse" />
-            CURRENT STAGE 0{activeStage + 1}: {PROCESS_STAGES[activeStage].name}
-          </span>
-          <span className="text-[11px] font-mono text-[#A9C4CA]">
-            {PROCESS_STAGES[activeStage].depth}
-          </span>
-        </div>
+
       </div>
 
       {/* Right Column: 4 Cards that appear dynamically one by one as the user scrolls */}
