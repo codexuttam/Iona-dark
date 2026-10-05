@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef } from 'react';
-import { ChevronRight, Layers, Sparkles } from 'lucide-react';
 import { PROCESS_STAGES } from '../../lib/constants';
 
 import imgArtesian from '../../assets/images/artesian_source_aquifer_1791133528234.jpg';
@@ -47,25 +46,25 @@ export default function Process() {
       <div className="max-w-xl pointer-events-auto">
 
         {/* Heading */}
-        <h2 className="font-serif-luxury text-5xl sm:text-7xl lg:text-8xl font-light tracking-tight text-white leading-[1.0] text-luminous-heading">
-          <span className="block font-light text-white">
+        <h2 className="font-serif-luxury text-5xl sm:text-7xl lg:text-8xl font-light tracking-tight text-[var(--theme-text-primary)] leading-[1.0] text-luminous-heading">
+          <span className="block font-light">
             Centuries in
           </span>
-          <span className="block italic text-[#E8F8FA] font-normal">
+          <span className="block italic text-accent-highlight font-normal">
             geological
           </span>
-          <span className="block font-light text-white/95">
+          <span className="block font-light opacity-95">
             creation.
           </span>
         </h2>
 
         {/* Supporting Copy */}
-        <p className="mt-8 text-sm sm:text-base text-[#E2E8F0] font-light tracking-wide leading-relaxed max-w-lg text-editorial-body">
+        <p className="mt-8 text-sm sm:text-base text-[var(--theme-text-secondary)] font-light tracking-wide leading-relaxed max-w-lg text-editorial-body">
           Filtered through prehistoric subterranean granite and quartz over centuries. We do not alter nature; we simply safeguard its highest state of balance until it reaches you.
         </p>
 
-        <div className="mt-8 flex items-center gap-4 text-xs font-mono text-[#CBD5E1]">
-          <span className="w-2 h-2 rounded-full bg-white/70 shadow-[0_0_8px_rgba(255,255,255,0.8)]" />
+        <div className="mt-8 flex items-center gap-4 text-xs font-mono text-[var(--theme-text-muted)]">
+          <span className="w-2 h-2 rounded-full bg-[var(--theme-text-accent)] shadow-sm" />
           <span>ZERO CONTAMINANTS · ZERO CHEMICAL ACCELERANTS</span>
         </div>
       </div>
@@ -73,16 +72,16 @@ export default function Process() {
       {/* Right Column: 4 Cards that appear dynamically one by one as the user scrolls */}
       <div className="hidden lg:flex flex-col gap-4 pointer-events-auto max-w-md w-full relative pl-6">
         {/* Subtle Header */}
-        <div className="flex items-center justify-between px-1 mb-1 text-[11px] font-mono uppercase tracking-[0.2em] text-[#CBD5E1] font-medium">
+        <div className="flex items-center justify-between px-1 mb-1 text-[11px] font-mono uppercase tracking-[0.2em] text-[var(--theme-text-muted)] font-medium">
           <span>PROVENANCE MILESTONES</span>
           <span>SCROLL TO ADVANCE</span>
         </div>
 
         {/* Vertical Progress Spine connecting the cards */}
         <div className="relative flex flex-col gap-3.5 pl-3">
-          <div className="absolute left-[3px] top-4 bottom-4 w-[1px] bg-white/20 overflow-hidden">
+          <div className="absolute left-[3px] top-4 bottom-4 w-[1px] bg-[var(--theme-border-medium)] overflow-hidden">
             <div
-              className="w-full bg-white transition-all duration-300"
+              className="w-full bg-[var(--theme-text-primary)] transition-all duration-300"
               style={{ height: `${Math.min(100, Math.max(0, scrollFraction * 100))}%` }}
             />
           </div>
@@ -106,25 +105,25 @@ export default function Process() {
                   pointerEvents: isRevealed ? 'auto' : 'none',
                   transition: 'all 0.65s cubic-bezier(0.16, 1, 0.3, 1)',
                 }}
-                className={`flex items-start gap-4 p-4 rounded-lg cursor-pointer transition-all duration-300 card-luxury-glass ${
+                className={`flex items-start gap-4 p-4 rounded-xl cursor-pointer transition-all duration-300 card-luxury-glass ${
                   isCurrent
-                    ? 'border-white/40 shadow-[0_12px_36px_rgba(0,0,0,0.85)] ring-1 ring-white/20'
+                    ? 'border-[var(--theme-border-highlight)] ring-1 ring-[var(--theme-border-highlight)]'
                     : isRevealed
-                    ? 'hover:border-white/35'
+                    ? ''
                     : 'opacity-0'
                 }`}
               >
                 {/* Circular Portal Thumbnail */}
                 <div className={`relative w-12 h-12 rounded-full overflow-hidden border shrink-0 transition-colors duration-300 mt-0.5 ${
-                  isCurrent ? 'border-white' : 'border-white/30'
+                  isCurrent ? 'border-[var(--theme-border-highlight)] ring-2 ring-[var(--theme-border-highlight)]/30' : 'border-[var(--theme-border-medium)]'
                 }`}>
                   <img
                     src={stageImages[idx]}
                     alt={stage.name}
-                    className="w-full h-full object-cover grayscale-[20%] contrast-[115%]"
+                    className="w-full h-full object-cover grayscale-[10%] contrast-[110%]"
                   />
-                  <div className="absolute inset-0 bg-[#030709]/20" />
-                  <div className="absolute inset-0 flex items-center justify-center font-serif-luxury text-xs text-white font-medium">
+                  <div className="absolute inset-0 bg-[var(--theme-bg)]/20" />
+                  <div className="absolute inset-0 flex items-center justify-center font-serif-luxury text-xs text-white font-medium drop-shadow-md">
                     {stage.step}
                   </div>
                 </div>
@@ -132,14 +131,14 @@ export default function Process() {
                 {/* Text Details */}
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-serif-luxury tracking-widest text-white uppercase font-medium">
+                    <span className="text-xs font-serif-luxury tracking-widest text-[var(--theme-text-primary)] uppercase font-medium">
                       {stage.name}
                     </span>
-                    <span className="text-[10px] font-mono text-[#CBD5E1] tracking-wider font-medium">
+                    <span className="text-[10px] font-mono text-[var(--theme-text-muted)] tracking-wider font-medium">
                       {stage.depth}
                     </span>
                   </div>
-                  <p className="text-xs text-[#E2E8F0] font-light leading-relaxed mt-1.5">
+                  <p className="text-xs text-[var(--theme-text-secondary)] font-light leading-relaxed mt-1.5">
                     {stage.description}
                   </p>
                 </div>
@@ -148,7 +147,7 @@ export default function Process() {
           })}
         </div>
 
-        <div className="p-3.5 rounded-lg card-luxury-glass text-xs font-light text-[#E2E8F0] mt-1">
+        <div className="p-3.5 rounded-xl card-luxury-glass text-xs font-light text-[var(--theme-text-secondary)] mt-1">
           Every micro-batch undergoes spectral mineral analysis prior to hermetic sealing.
         </div>
       </div>

@@ -6,6 +6,7 @@ import { createWaterSphere, WaterSphereInstance } from './WaterSphere';
 import { createEnvironmentAtmosphere, EnvironmentAtmosphere } from './BubblesAndParticles';
 import { lerp } from '../../lib/utils';
 import envMapUrl from '../../assets/images/underwater_ambient_env_1791133503549.jpg';
+import { useTheme } from '../../context/ThemeContext';
 
 interface SceneProps {
   scrollProgress: number;
@@ -19,6 +20,25 @@ export default function Scene({
   activeSectionIndex: _activeSectionIndex,
   selectedBottleIndex = 1,
 }: SceneProps) {
+  const { theme } = useTheme();
+  const themeRef = useRef(theme);
+  themeRef.current = theme;
+
+  const sceneElementsRef = useRef<{
+    scene?: THREE.Scene;
+    ambientLight?: THREE.AmbientLight;
+    mainKeyLight?: THREE.DirectionalLight;
+    rimLight?: THREE.DirectionalLight;
+    bottomDeepLight?: THREE.PointLight;
+    topSoftSpot?: THREE.SpotLight;
+    mainBottle?: BottleInstance;
+    bottle250?: BottleInstance;
+    bottle1L?: BottleInstance;
+    waterWave?: WaterWaveInstance;
+    waterSphere?: WaterSphereInstance;
+    atmosphere?: EnvironmentAtmosphere;
+  }>({});
+
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   
@@ -55,32 +75,33 @@ export default function Scene({
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
     // 2. Scene & Fog Setup
+    const isInitialLight = themeRef.current === 'light';
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color('#030709');
-    scene.fog = new THREE.FogExp2('#030709', 0.075);
+    scene.background = new THREE.Color(isInitialLight ? '#F4F8FA' : '#030709');
+    scene.fog = new THREE.FogExp2(isInitialLight ? '#F4F8FA' : '#030709', isInitialLight ? 0.018 : 0.075);
 
     // 3. Camera
     const camera = new THREE.PerspectiveCamera(40, width / height, 0.1, 100);
     camera.position.set(0, 0, 5.8);
 
-    // 4. Natural Luxury Lighting (Glacial daylight + subtle stone ambient)
-    const ambientLight = new THREE.AmbientLight('#0E181F', 1.8);
+    // 4. Natural Luxury Lighting (Glacial daylight + diamond specular key)
+    const ambientLight = new THREE.AmbientLight(isInitialLight ? '#FFFFFF' : '#0E181F', isInitialLight ? 2.2 : 1.8);
     scene.add(ambientLight);
 
-    const mainKeyLight = new THREE.DirectionalLight('#F4FAFB', 2.4);
-    mainKeyLight.position.set(3, 4.5, 3.5);
+    const mainKeyLight = new THREE.DirectionalLight('#FFFFFF', isInitialLight ? 3.0 : 2.4);
+    mainKeyLight.position.set(3.5, 4.5, 4.0);
     mainKeyLight.castShadow = !isMobile;
     scene.add(mainKeyLight);
 
-    const rimLight = new THREE.DirectionalLight('#D2E7ED', 2.2);
+    const rimLight = new THREE.DirectionalLight(isInitialLight ? '#B0E6F4' : '#D2E7ED', isInitialLight ? 2.6 : 2.2);
     rimLight.position.set(-3, 2, -2.5);
     scene.add(rimLight);
 
-    const bottomDeepLight = new THREE.PointLight('#081218', 1.2, 15);
+    const bottomDeepLight = new THREE.PointLight(isInitialLight ? '#D2EEF5' : '#081218', 1.2, 15);
     bottomDeepLight.position.set(0, -3, 2);
     scene.add(bottomDeepLight);
 
-    const topSoftSpot = new THREE.SpotLight('#FFFFFF', 2.5, 24, Math.PI / 3.8, 0.6, 1);
+    const topSoftSpot = new THREE.SpotLight('#FFFFFF', isInitialLight ? 3.2 : 2.5, 24, Math.PI / 3.8, 0.6, 1);
     topSoftSpot.position.set(0, 7.5, 2);
     scene.add(topSoftSpot);
 
@@ -99,13 +120,13 @@ export default function Scene({
     );
 
     // 6. Objects & Entities
-    // Main Hero Bottle
-    const mainBottle: BottleInstance = createIonaBottle();
+    // Main Hero Bottle (Faceted Crystal Bottle with pixel-perfect aspect ratio)
+    const mainBottle: BottleInstance = createIonaBottle({ initialTheme: themeRef.current });
     scene.add(mainBottle.group);
 
     // Secondary bottles for Section 07 (Product Range showcase) and Section 08
-    const bottle250: BottleInstance = createIonaBottle({ heightScale: 0.72, radiusScale: 0.85 });
-    const bottle1L: BottleInstance = createIonaBottle({ heightScale: 1.28, radiusScale: 1.15 });
+    const bottle250: BottleInstance = createIonaBottle({ heightScale: 0.75, radiusScale: 0.88, initialTheme: themeRef.current });
+    const bottle1L: BottleInstance = createIonaBottle({ heightScale: 1.25, radiusScale: 1.12, initialTheme: themeRef.current });
     bottle250.setScale(0.55);
     bottle1L.setScale(0.55);
     bottle250.group.position.set(-1.75, -0.68, 0);
@@ -129,6 +150,25 @@ export default function Scene({
     scene.add(atmosphere.particlesField);
     scene.add(atmosphere.energyRibbon);
     scene.add(atmosphere.lightRays);
+
+    // Save references for reactive theme updates
+    sceneElementsRef.current = {
+      scene,
+      ambientLight,
+      mainKeyLight,
+      rimLight,
+      bottomDeepLight,
+      topSoftSpot,
+      mainBottle,
+      bottle250,
+      bottle1L,
+      waterWave,
+      waterSphere,
+      atmosphere,
+    };
+
+    // Apply active theme immediately to the 3D scene
+    applyThemeToScene(themeRef.current);
 
     setIsReady(true);
 
@@ -325,7 +365,7 @@ export default function Scene({
         targetRotX = 0.04;
         targetRotY = 2.5 + bProgress * Math.PI + time * 0.06;
         targetRotZ = 0.0;
-        targetScale = isMobile ? 0.55 : 0.62;
+        targetScale = isMobile ? 0.62 : 0.72;
       } else if (processFraction >= 0) {
         // Section 05: THE IONA PROCESS (PROVENANCE)
         targetCamX = lerp(0.2, -0.05, processFraction);
@@ -339,7 +379,7 @@ export default function Scene({
         targetRotX = 0.05;
         targetRotY = 0.6 + processFraction * (Math.PI * 2) + time * 0.04;
         targetRotZ = -0.03;
-        targetScale = isMobile ? 0.55 : 0.6;
+        targetScale = isMobile ? 0.60 : 0.68;
       } else {
         // Sections 01 - 04 (Hero through Resonance)
         if (p < 0.12) {
@@ -356,7 +396,7 @@ export default function Scene({
           targetRotX = 0.03;
           targetRotY = -0.15 + time * 0.03;
           targetRotZ = -0.02;
-          targetScale = isMobile ? 0.55 : 0.6;
+          targetScale = isMobile ? 0.62 : 0.70;
         } else if (p < 0.25) {
           // Section 02: PHILOSOPHY (STILLNESS)
           const t = (p - 0.12) / 0.13;
@@ -371,7 +411,7 @@ export default function Scene({
           targetRotX = 0.04;
           targetRotY = lerp(-0.15, 0.3, t) + time * 0.03;
           targetRotZ = -0.02;
-          targetScale = isMobile ? 0.55 : 0.6;
+          targetScale = isMobile ? 0.62 : 0.70;
         } else if (p < 0.38) {
           // Section 03: EQUILIBRIUM (STONE & ALKALINE BALANCE)
           const t = (p - 0.25) / 0.13;
@@ -386,7 +426,7 @@ export default function Scene({
           targetRotX = 0.04;
           targetRotY = 0.4 + time * 0.03;
           targetRotZ = -0.02;
-          targetScale = isMobile ? 0.55 : 0.6;
+          targetScale = isMobile ? 0.62 : 0.70;
         } else {
           // Section 04: RESONANCE (MOLECULAR HARMONY)
           const t = Math.min(1, Math.max(0, (p - 0.38) / 0.12));
@@ -401,7 +441,7 @@ export default function Scene({
           targetRotX = 0.04;
           targetRotY = 0.8 + time * 0.03;
           targetRotZ = 0.02;
-          targetScale = isMobile ? 0.55 : 0.6;
+          targetScale = isMobile ? 0.62 : 0.70;
         }
       }
 
@@ -507,6 +547,47 @@ export default function Scene({
     };
   }, []);
 
+  const applyThemeToScene = (currentTheme: 'light' | 'dark') => {
+    const el = sceneElementsRef.current;
+    if (!el.scene) return;
+    const isLight = currentTheme === 'light';
+
+    el.scene.background = new THREE.Color(isLight ? '#F4F8FA' : '#030709');
+    el.scene.fog = new THREE.FogExp2(isLight ? '#F4F8FA' : '#030709', isLight ? 0.018 : 0.075);
+
+    if (el.ambientLight) {
+      el.ambientLight.color.set(isLight ? '#FFFFFF' : '#0E181F');
+      el.ambientLight.intensity = isLight ? 2.2 : 1.8;
+    }
+    if (el.mainKeyLight) {
+      el.mainKeyLight.color.set('#FFFFFF');
+      el.mainKeyLight.intensity = isLight ? 3.0 : 2.4;
+    }
+    if (el.rimLight) {
+      el.rimLight.color.set(isLight ? '#B0E6F4' : '#D2E7ED');
+      el.rimLight.intensity = isLight ? 2.6 : 2.2;
+    }
+    if (el.bottomDeepLight) {
+      el.bottomDeepLight.color.set(isLight ? '#D2EEF5' : '#081218');
+      el.bottomDeepLight.intensity = isLight ? 1.2 : 1.2;
+    }
+    if (el.topSoftSpot) {
+      el.topSoftSpot.intensity = isLight ? 3.2 : 2.5;
+    }
+
+    el.mainBottle?.setTheme(currentTheme);
+    el.bottle250?.setTheme(currentTheme);
+    el.bottle1L?.setTheme(currentTheme);
+    el.waterWave?.setTheme(currentTheme);
+    el.waterSphere?.setTheme(currentTheme);
+    el.atmosphere?.setTheme(currentTheme);
+  };
+
+  // Re-apply whenever user toggles light / dark theme
+  useEffect(() => {
+    applyThemeToScene(theme);
+  }, [theme]);
+
   // Update bottle size selection when user clicks a size in ProductRange
   useEffect(() => {
     // Subtly highlighted when selected
@@ -523,7 +604,7 @@ export default function Scene({
         className="w-full h-full block cursor-grab active:cursor-grabbing"
       />
       {!isReady && (
-        <div className="absolute inset-0 bg-[#02080D] transition-opacity duration-1000 pointer-events-none" />
+        <div className="absolute inset-0 bg-[var(--theme-bg)] transition-opacity duration-1000 pointer-events-none" />
       )}
     </div>
   );

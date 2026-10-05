@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { Droplets, Sparkles, Activity, ShieldCheck } from 'lucide-react';
 
 export default function Alkaline() {
   const [selectedMineral, setSelectedMineral] = useState<number>(0);
@@ -34,28 +33,28 @@ export default function Alkaline() {
       <div className="max-w-xl pointer-events-auto">
 
         {/* Heading */}
-        <h2 className="font-serif-luxury text-5xl sm:text-7xl lg:text-8xl font-light tracking-tight text-white leading-[1.0] text-luminous-heading">
-          <span className="block font-light text-white">
+        <h2 className="font-serif-luxury text-5xl sm:text-7xl lg:text-8xl font-light tracking-tight text-[var(--theme-text-primary)] leading-[1.0] text-luminous-heading">
+          <span className="block font-light">
             Shaped by
           </span>
-          <span className="block italic text-[#E8F8FA] font-normal">
+          <span className="block italic text-accent-highlight font-normal">
             subterranean
           </span>
-          <span className="block font-light text-white/95">
+          <span className="block font-light opacity-95">
             stone.
           </span>
         </h2>
 
         {/* Supporting Copy */}
-        <p className="mt-8 text-sm sm:text-base text-[#E2E8F0] font-light tracking-wide leading-relaxed max-w-lg text-editorial-body">
+        <p className="mt-8 text-sm sm:text-base text-[var(--theme-text-secondary)] font-light tracking-wide leading-relaxed max-w-lg text-editorial-body">
           True alkalinity cannot be rushed or chemically synthesized. Filtered through centuries of untouched alpine granite, IONA absorbs living electrolytes naturally, arriving at a gentle, stable pH 8.5 balance.
         </p>
 
         {/* pH Stately Presentation */}
-        <div className="mt-12 flex flex-wrap items-center gap-10 pt-8 border-t border-white/15">
+        <div className="mt-12 flex flex-wrap items-center gap-10 pt-8 border-t border-[var(--theme-border-subtle)]">
           <div className="flex items-baseline gap-3">
-            <span className="text-xs font-mono text-[#CBD5E1] uppercase tracking-widest font-medium">Natural pH</span>
-            <span className="font-serif-luxury text-5xl sm:text-6xl font-light text-white tracking-tight drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)]">
+            <span className="text-xs font-mono text-[var(--theme-text-muted)] uppercase tracking-widest font-medium">Natural pH</span>
+            <span className="font-serif-luxury text-5xl sm:text-6xl font-light text-[var(--theme-text-primary)] tracking-tight">
               8.5
             </span>
           </div>
@@ -67,8 +66,8 @@ export default function Alkaline() {
                 onClick={() => setSelectedMineral(idx)}
                 className={`px-4 py-2.5 rounded-full border text-xs tracking-wider transition-all duration-300 cursor-pointer ${
                   selectedMineral === idx
-                    ? 'border-white bg-white text-[#030709] font-medium shadow-[0_4px_20px_rgba(255,255,255,0.25)]'
-                    : 'border-white/20 bg-[#061118]/80 text-[#D4E3E8] hover:border-white/40 hover:text-white'
+                    ? 'border-[var(--theme-border-strong)] bg-[var(--theme-pill-hover-bg)] text-[var(--theme-pill-hover-text)] font-medium shadow-md'
+                    : 'border-[var(--theme-border-medium)] bg-[var(--theme-card-bg)] text-[var(--theme-text-secondary)] hover:border-[var(--theme-border-strong)] hover:text-[var(--theme-text-primary)]'
                 }`}
               >
                 {m.name}
@@ -78,12 +77,14 @@ export default function Alkaline() {
         </div>
 
         {/* Detail note */}
-        <div className="mt-6 p-5 rounded-lg card-luxury-glass">
-          <div className="flex items-center justify-between text-[11px] font-mono text-white mb-2">
-            <span className="uppercase tracking-widest font-medium text-white">{minerals[selectedMineral].name} · {minerals[selectedMineral].symbol}</span>
-            <span className="text-[#CBD5E1]">{minerals[selectedMineral].origin}</span>
+        <div className="mt-6 p-5 rounded-xl card-luxury-glass">
+          <div className="flex items-center justify-between text-[11px] font-mono mb-2">
+            <span className="uppercase tracking-widest font-medium text-[var(--theme-text-primary)]">
+              {minerals[selectedMineral].name} · {minerals[selectedMineral].symbol}
+            </span>
+            <span className="text-[var(--theme-text-muted)]">{minerals[selectedMineral].origin}</span>
           </div>
-          <p className="text-xs text-[#E2E8F0] font-light leading-relaxed">
+          <p className="text-xs text-[var(--theme-text-secondary)] font-light leading-relaxed">
             {minerals[selectedMineral].desc}
           </p>
         </div>

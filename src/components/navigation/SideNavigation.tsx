@@ -22,19 +22,19 @@ export default function SideNavigation({
             <button
               key={sec.id}
               onClick={() => onNavigate(sec.id)}
-              className="group flex items-center gap-3 text-left focus:outline-none focus-visible:ring-1 focus-visible:ring-[#20BFD3] cursor-pointer"
+              className="group flex items-center gap-3 text-left focus:outline-none focus-visible:ring-1 focus-visible:ring-[var(--theme-text-accent)] cursor-pointer"
             >
               {/* Number and ring */}
               <div className="relative flex items-center justify-center w-6 h-6">
                 <div
-                  className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${
+                  className={`rounded-full transition-all duration-300 ${
                     isActive
-                      ? 'w-2 h-2 bg-[#20BFD3] shadow-[0_0_8px_#20BFD3]'
-                      : 'bg-white/20 group-hover:bg-white/50'
+                      ? 'w-2 h-2 bg-[var(--theme-text-accent)] shadow-sm'
+                      : 'w-1.5 h-1.5 bg-[var(--theme-border-medium)] group-hover:bg-[var(--theme-border-strong)]'
                   }`}
                 />
                 {isActive && (
-                  <span className="absolute inset-0 rounded-full border border-[#20BFD3] scale-125 animate-pulse" />
+                  <span className="absolute inset-0 rounded-full border border-[var(--theme-text-accent)] scale-125 animate-pulse" />
                 )}
               </div>
 
@@ -42,7 +42,7 @@ export default function SideNavigation({
               <div className="flex items-center gap-2">
                 <span
                   className={`text-[11px] font-mono tracking-wider transition-colors duration-200 ${
-                    isActive ? 'text-[#7DEAF0] font-semibold' : 'text-[#A9C4CA]/40 group-hover:text-[#A9C4CA]'
+                    isActive ? 'text-[var(--theme-text-accent)] font-semibold' : 'text-[var(--theme-text-muted)] group-hover:text-[var(--theme-text-primary)]'
                   }`}
                 >
                   {sec.num}
@@ -50,8 +50,8 @@ export default function SideNavigation({
                 <span
                   className={`text-[10px] uppercase tracking-[0.2em] transition-all duration-200 ${
                     isActive
-                      ? 'text-white opacity-100 translate-x-0'
-                      : 'text-[#A9C4CA] opacity-0 -translate-x-2 group-hover:opacity-70 group-hover:translate-x-0'
+                      ? 'text-[var(--theme-text-primary)] opacity-100 translate-x-0 font-medium'
+                      : 'text-[var(--theme-text-muted)] opacity-0 -translate-x-2 group-hover:opacity-80 group-hover:translate-x-0'
                   }`}
                 >
                   {sec.label}

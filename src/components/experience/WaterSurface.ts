@@ -3,6 +3,7 @@ import * as THREE from 'three';
 export interface WaterWaveInstance {
   mesh: THREE.Mesh;
   update: (time: number, scrollProgress: number) => void;
+  setTheme: (theme: 'light' | 'dark') => void;
 }
 
 export function createWaterWave(): WaterWaveInstance {
@@ -61,5 +62,21 @@ export function createWaterWave(): WaterWaveInstance {
     mesh.position.y = -0.5 + Math.sin(time * 0.4) * 0.1 - scrollProgress * 0.8;
   };
 
-  return { mesh, update };
+  const setTheme = (theme: 'light' | 'dark') => {
+    if (theme === 'light') {
+      material.color.set('#D2EBF3');
+      material.emissive.set('#000000');
+      material.roughness = 0.04;
+      material.transmission = 0.92;
+      material.opacity = 0.35;
+    } else {
+      material.color.set('#06232D');
+      material.emissive.set('#04141D');
+      material.roughness = 0.1;
+      material.transmission = 0.85;
+      material.opacity = 0.75;
+    }
+  };
+
+  return { mesh, update, setTheme };
 }

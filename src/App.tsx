@@ -1,10 +1,11 @@
-/**
- * @license
- * SPDX-License-Identifier: Apache-2.0
- */
-
+import { ThemeProvider } from './context/ThemeContext';
 import Experience from './components/experience/Experience';
 
 export default function App() {
-  return <Experience />;
+  return (
+    <ThemeProvider>
+      <Experience />
+    </ThemeProvider>
+  );
 }
+

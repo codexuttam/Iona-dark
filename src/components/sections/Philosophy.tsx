@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { Shield, Droplets, Zap, CheckCircle2 } from 'lucide-react';
 
 interface PhilosophyProps {
   onLearnMore?: () => void;
@@ -35,26 +34,26 @@ export default function Philosophy({ onLearnMore: _onLearnMore }: PhilosophyProp
       <div className="max-w-xl pointer-events-auto">
 
         {/* Heading */}
-        <h2 className="font-serif-luxury text-5xl sm:text-7xl lg:text-8xl font-light tracking-tight text-white leading-[1.0] text-luminous-heading">
-          <span className="block font-light text-white">
+        <h2 className="font-serif-luxury text-5xl sm:text-7xl lg:text-8xl font-light tracking-tight text-[var(--theme-text-primary)] leading-[1.0] text-luminous-heading">
+          <span className="block font-light">
             An intention,
           </span>
-          <span className="block italic text-[#E8F8FA] font-normal">
+          <span className="block italic text-accent-highlight font-normal">
             not just
           </span>
-          <span className="block font-light text-white/95">
+          <span className="block font-light opacity-95">
             hydration.
           </span>
         </h2>
 
         {/* Supporting Narrative Copy */}
-        <p className="mt-8 text-sm sm:text-base text-[#E2E8F0] font-light tracking-wide leading-relaxed max-w-lg text-editorial-body">
+        <p className="mt-8 text-sm sm:text-base text-[var(--theme-text-secondary)] font-light tracking-wide leading-relaxed max-w-lg text-editorial-body">
           In a world defined by relentless acceleration, IONA is an invitation to pause. Crafted for individuals who curate their mental and physical environment with conscious discernment, water becomes an anchor of calm.
         </p>
 
         {/* Subtle quote element */}
-        <div className="mt-10 pl-6 border-l border-white/25">
-          <p className="text-sm text-white font-serif-luxury italic text-[16px] leading-relaxed drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]">
+        <div className="mt-10 pl-6 border-l border-[var(--theme-border-medium)]">
+          <p className="text-sm sm:text-base text-[var(--theme-text-primary)] font-serif-luxury italic leading-relaxed">
             "Purity is not the absence of impurities; it is the presence of quiet harmony."
           </p>
         </div>
@@ -68,19 +67,19 @@ export default function Philosophy({ onLearnMore: _onLearnMore }: PhilosophyProp
             <div
               key={pillar.title}
               onMouseEnter={() => setActiveFeature(idx)}
-              className={`p-6 rounded-lg transition-all duration-500 cursor-pointer card-luxury-glass ${
+              className={`p-6 rounded-xl transition-all duration-500 cursor-pointer card-luxury-glass ${
                 isActive
-                  ? 'border-white/40 shadow-[0_12px_36px_rgba(0,0,0,0.8)] translate-x-[-6px]'
-                  : 'hover:border-white/30'
+                  ? 'border-[var(--theme-border-highlight)] ring-1 ring-[var(--theme-border-highlight)] translate-x-[-6px]'
+                  : ''
               }`}
             >
               <div className="flex items-center justify-between">
-                <span className="text-xs font-serif-luxury tracking-[0.15em] text-white font-medium">
+                <span className="text-xs font-serif-luxury tracking-[0.15em] text-[var(--theme-text-primary)] font-medium">
                   0{idx + 1} · {pillar.title}
                 </span>
-                <span className="text-[10px] font-mono text-[#CBD5E1] uppercase tracking-widest">{pillar.sub}</span>
+                <span className="text-[10px] font-mono text-[var(--theme-text-muted)] uppercase tracking-widest">{pillar.sub}</span>
               </div>
-              <p className="mt-3 text-xs text-[#E2E8F0] font-light leading-relaxed">
+              <p className="mt-3 text-xs text-[var(--theme-text-secondary)] font-light leading-relaxed">
                 {pillar.desc}
               </p>
             </div>

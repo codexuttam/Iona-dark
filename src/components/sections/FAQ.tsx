@@ -1,7 +1,6 @@
 import { useState } from 'react';
-import { Plus, Minus, ArrowRight, Instagram, Youtube, Linkedin, Globe } from 'lucide-react';
+import { Plus, Minus } from 'lucide-react';
 import { FAQS } from '../../lib/constants';
-import MagneticButton from '../ui/MagneticButton';
 
 interface FAQProps {
   onExperience: () => void;
@@ -26,17 +25,17 @@ export default function FAQ({ onExperience, onNavigate, onOpenTerms, onOpenPriva
       <div className="max-w-4xl w-full pointer-events-auto mx-auto lg:mx-0">
 
         {/* Heading */}
-        <h2 className="font-serif-luxury text-5xl sm:text-7xl lg:text-8xl font-light tracking-tight text-white leading-[1.0] text-luminous-heading">
-          <span className="block font-light text-white">
+        <h2 className="font-serif-luxury text-5xl sm:text-7xl lg:text-8xl font-light tracking-tight text-[var(--theme-text-primary)] leading-[1.0] text-luminous-heading">
+          <span className="block font-light">
             Frequently
           </span>
-          <span className="block italic text-[#E8F8FA] font-normal">
+          <span className="block italic text-accent-highlight font-normal">
             pondered.
           </span>
         </h2>
 
         {/* FAQ Accordion List */}
-        <div className="mt-12 border-t border-white/15 divide-y divide-white/15">
+        <div className="mt-12 border-t border-[var(--theme-border-subtle)] divide-y divide-[var(--theme-border-subtle)]">
           {FAQS.map((item, idx) => {
             const isOpen = openIndex === idx;
             return (
@@ -46,16 +45,16 @@ export default function FAQ({ onExperience, onNavigate, onOpenTerms, onOpenPriva
                   className="w-full flex items-center justify-between text-left focus:outline-none cursor-pointer"
                   aria-expanded={isOpen}
                 >
-                  <span className="font-serif-luxury text-lg sm:text-xl text-white group-hover:text-[#E8F8FA] transition-colors pr-6 font-light">
+                  <span className="font-serif-luxury text-lg sm:text-xl text-[var(--theme-text-primary)] group-hover:text-[var(--theme-text-accent)] transition-colors pr-6 font-light">
                     {item.q}
                   </span>
-                  <div className="p-1 rounded-full border border-white/20 group-hover:border-white/40 text-white transition-colors shrink-0">
+                  <div className="p-1.5 rounded-full border border-[var(--theme-border-medium)] group-hover:border-[var(--theme-border-strong)] text-[var(--theme-text-primary)] transition-colors shrink-0">
                     {isOpen ? <Minus className="w-3.5 h-3.5" /> : <Plus className="w-3.5 h-3.5" />}
                   </div>
                 </button>
 
                 {isOpen && (
-                  <div className="mt-4 text-xs sm:text-sm text-[#E2E8F0] font-light leading-relaxed pr-8 animate-in fade-in duration-300">
+                  <div className="mt-4 text-xs sm:text-sm text-[var(--theme-text-secondary)] font-light leading-relaxed pr-8 animate-in fade-in duration-300">
                     {item.a}
                   </div>
                 )}
@@ -66,75 +65,75 @@ export default function FAQ({ onExperience, onNavigate, onOpenTerms, onOpenPriva
       </div>
 
       {/* FINAL SECTION: Sanctuary Invitation */}
-      <div id="ultimate-hydration" className="mt-32 max-w-4xl w-full pointer-events-auto mx-auto text-center flex flex-col items-center py-20 border-t border-white/15">
-        <span className="text-[11px] font-mono tracking-[0.3em] uppercase text-[#CBD5E1] mb-5 font-medium">
+      <div id="ultimate-hydration" className="mt-32 max-w-4xl w-full pointer-events-auto mx-auto text-center flex flex-col items-center py-20 border-t border-[var(--theme-border-subtle)]">
+        <span className="text-[11px] font-mono tracking-[0.3em] uppercase text-[var(--theme-text-muted)] mb-5 font-medium">
           AN ELEVATED BASELINE
         </span>
 
-        <h3 className="font-serif-luxury text-5xl sm:text-7xl font-light tracking-tight text-white leading-[1.05] text-luminous-heading">
+        <h3 className="font-serif-luxury text-5xl sm:text-7xl font-light tracking-tight text-[var(--theme-text-primary)] leading-[1.05] text-luminous-heading">
           Stillness in an <br />
-          <span className="italic text-[#E8F8FA] font-normal">
+          <span className="italic text-accent-highlight font-normal">
             accelerated world.
           </span>
         </h3>
 
-        <p className="mt-6 text-sm sm:text-base text-[#E2E8F0] font-light max-w-md leading-relaxed text-editorial-body">
+        <p className="mt-6 text-sm sm:text-base text-[var(--theme-text-secondary)] font-light max-w-md leading-relaxed text-editorial-body">
           Welcome to a circle of individuals who regard purity, aesthetics, and mental clarity as essential foundations.
         </p>
 
         <div className="mt-10">
           <button
             onClick={() => onOpenContact ? onOpenContact() : onExperience()}
-            className="flex items-center gap-3 px-9 py-4 rounded-full border border-white/30 bg-white/[0.08] text-white text-xs tracking-[0.2em] uppercase hover:bg-white hover:text-[#030709] transition-all duration-500 cursor-pointer shadow-[0_4px_30px_rgba(0,0,0,0.6)]"
+            className="flex items-center gap-3 px-9 py-4 rounded-full border border-[var(--theme-pill-border)] bg-[var(--theme-pill-bg)] text-[var(--theme-pill-text)] text-xs tracking-[0.2em] uppercase hover:bg-[var(--theme-pill-hover-bg)] hover:text-[var(--theme-pill-hover-text)] transition-all duration-500 cursor-pointer shadow-sm"
           >
             <span>GET IN TOUCH / ORDER</span>
-            <span className="w-1.5 h-1.5 rounded-full bg-white transition-colors" />
+            <span className="w-1.5 h-1.5 rounded-full bg-[var(--theme-text-accent)] transition-colors" />
           </button>
         </div>
       </div>
 
       {/* CINEMATIC FOOTER */}
-      <footer className="mt-20 pt-8 border-t border-white/15 pointer-events-auto flex flex-col md:flex-row items-center justify-between gap-6 text-xs text-[#CBD5E1]">
+      <footer className="mt-20 pt-8 border-t border-[var(--theme-border-subtle)] pointer-events-auto flex flex-col md:flex-row items-center justify-between gap-6 text-xs text-[var(--theme-text-muted)]">
         {/* Left: Brand */}
         <div className="flex items-center gap-5">
-          <span className="font-serif-luxury text-2xl tracking-[0.15em] text-white">
+          <span className="font-serif-luxury text-2xl tracking-[0.15em] text-[var(--theme-text-primary)]">
             IONA
           </span>
-          <span className="text-white/30">|</span>
-          <span className="text-[11px] font-mono text-[#CBD5E1] tracking-wider">
+          <span className="opacity-30">|</span>
+          <span className="text-[11px] font-mono tracking-wider">
             NATURAL ALKALINE & IONISED WATER
           </span>
         </div>
 
         {/* Center: Navigation Links */}
-        <div className="flex flex-wrap items-center gap-6 font-mono text-[11px] tracking-widest uppercase text-[#CBD5E1]">
-          <button onClick={() => onNavigate('philosophy')} className="hover:text-white transition-colors cursor-pointer">
+        <div className="flex flex-wrap items-center gap-6 font-mono text-[11px] tracking-widest uppercase">
+          <button onClick={() => onNavigate('philosophy')} className="hover:text-[var(--theme-text-primary)] transition-colors cursor-pointer">
             PHILOSOPHY
           </button>
-          <button onClick={() => onNavigate('alkaline')} className="hover:text-white transition-colors cursor-pointer">
+          <button onClick={() => onNavigate('alkaline')} className="hover:text-[var(--theme-text-primary)] transition-colors cursor-pointer">
             ORIGIN
           </button>
-          <button onClick={() => onNavigate('process')} className="hover:text-white transition-colors cursor-pointer">
+          <button onClick={() => onNavigate('process')} className="hover:text-[var(--theme-text-primary)] transition-colors cursor-pointer">
             PROVENANCE
           </button>
-          <button onClick={() => onNavigate('range')} className="hover:text-white transition-colors cursor-pointer">
+          <button onClick={() => onNavigate('range')} className="hover:text-[var(--theme-text-primary)] transition-colors cursor-pointer">
             EDITIONS
           </button>
-          <button onClick={() => (onOpenContact ? onOpenContact() : onNavigate('questions'))} className="hover:text-white transition-colors cursor-pointer font-medium text-white">
+          <button onClick={() => (onOpenContact ? onOpenContact() : onNavigate('questions'))} className="hover:text-[var(--theme-text-primary)] transition-colors cursor-pointer font-medium text-[var(--theme-text-primary)]">
             CONTACT
           </button>
-          <span className="text-white/30 hidden md:inline">|</span>
-          <button onClick={onOpenTerms} className="hover:text-white text-[#CBD5E1] transition-colors cursor-pointer">
+          <span className="opacity-30 hidden md:inline">|</span>
+          <button onClick={onOpenTerms} className="hover:text-[var(--theme-text-primary)] transition-colors cursor-pointer">
             TERMS
           </button>
-          <button onClick={onOpenPrivacy} className="hover:text-white text-[#CBD5E1] transition-colors cursor-pointer">
+          <button onClick={onOpenPrivacy} className="hover:text-[var(--theme-text-primary)] transition-colors cursor-pointer">
             PRIVACY
           </button>
         </div>
 
         {/* Right: Socials & Copyright */}
-        <div className="flex items-center gap-5 text-[#CBD5E1]">
-          <span className="text-[11px] font-mono text-[#CBD5E1]">© 2026 IONA SANCTUARY.</span>
+        <div className="flex items-center gap-5">
+          <span className="text-[11px] font-mono">© 2026 IONA SANCTUARY.</span>
         </div>
       </footer>
     </section>

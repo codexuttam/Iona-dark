@@ -7,28 +7,30 @@ export interface WaterSphereInstance {
   update: (time: number, scrollProgress: number) => void;
   setVisible: (visible: boolean) => void;
   setOpacity: (opacity: number) => void;
+  setTheme: (theme: 'light' | 'dark') => void;
 }
 
 export function createWaterSphere(): WaterSphereInstance {
   const group = new THREE.Group();
   group.name = 'water-sphere-group';
 
-  // Radius ~1.5 - huge transparent water sphere
+  // Radius ~1.4 - ethereal transparent water sphere
   const sphereGeo = new THREE.SphereGeometry(1.4, 48, 48);
   const sphereMat = new THREE.MeshPhysicalMaterial({
-    color: new THREE.Color('#7DEAF0'),
-    roughness: 0.05,
-    metalness: 0.05,
-    transmission: 0.94,
-    ior: 1.34,
-    thickness: 1.4,
+    color: new THREE.Color('#FFFFFF'),
+    roughness: 0.02,
+    metalness: 0.02,
+    transmission: 0.98,
+    ior: 1.25,
+    thickness: 0.4,
     transparent: true,
     opacity: 0.0, // starts invisible, revealed at Section 03
-    reflectivity: 0.9,
+    reflectivity: 0.95,
     clearcoat: 1.0,
-    clearcoatRoughness: 0.04,
-    attenuationColor: new THREE.Color('#083E50'),
-    attenuationDistance: 2.0,
+    clearcoatRoughness: 0.02,
+    attenuationColor: new THREE.Color('#D8F2F8'),
+    attenuationDistance: 8.0,
+    depthWrite: false,
   });
 
   const sphereMesh = new THREE.Mesh(sphereGeo, sphereMat);
@@ -36,19 +38,20 @@ export function createWaterSphere(): WaterSphereInstance {
 
   // Floating internal mineral particles inside the water sphere
   const particlesGroup = new THREE.Group();
-  const particleCount = 60;
-  const pGeo = new THREE.SphereGeometry(0.024, 8, 8);
+  const particleCount = 45;
+  const pGeo = new THREE.SphereGeometry(0.02, 8, 8);
   const pMat = new THREE.MeshBasicMaterial({
-    color: new THREE.Color('#20BFD3'),
+    color: new THREE.Color('#00A2BD'),
     transparent: true,
     opacity: 0.0,
+    depthWrite: false,
   });
 
   const pData: { mesh: THREE.Mesh; speed: number; orbitR: number; phi: number; theta: number }[] = [];
 
   for (let i = 0; i < particleCount; i++) {
     const mesh = new THREE.Mesh(pGeo, pMat);
-    const orbitR = 0.2 + Math.random() * 1.05;
+    const orbitR = 0.25 + Math.random() * 0.95;
     const phi = Math.random() * Math.PI;
     const theta = Math.random() * Math.PI * 2;
 
@@ -61,7 +64,7 @@ export function createWaterSphere(): WaterSphereInstance {
     particlesGroup.add(mesh);
     pData.push({
       mesh,
-      speed: 0.3 + Math.random() * 0.5,
+      speed: 0.25 + Math.random() * 0.4,
       orbitR,
       phi,
       theta,
@@ -69,12 +72,14 @@ export function createWaterSphere(): WaterSphereInstance {
   }
   group.add(particlesGroup);
 
-  // Position for Section 03: placed to the right
-  group.position.set(1.4, 0.0, 0.2);
+  // Positioned slightly offset so the 3D bottle is in front and clearly visible
+  group.position.set(1.2, 0.0, -0.3);
+
+  let activeTheme: 'light' | 'dark' = 'light';
 
   const update = (time: number, scrollProgress: number) => {
     // Gentle pulsation and wobble
-    const pulse = 1 + Math.sin(time * 1.5) * 0.03;
+    const pulse = 1 + Math.sin(time * 1.5) * 0.02;
     sphereMesh.scale.set(pulse, 1 / pulse, pulse);
 
     // Orbit particles inside
@@ -86,11 +91,10 @@ export function createWaterSphere(): WaterSphereInstance {
       p.mesh.position.z = p.orbitR * Math.sin(p.phi) * Math.sin(p.theta);
     });
 
-    // Control visibility and opacity based on scrollProgress
-    // Section 03 is around scroll 0.28 to 0.44
-    const sStart = 0.25;
-    const sPeak = 0.35;
-    const sEnd = 0.46;
+    // Active strictly around Section 03 (scroll 0.25 to 0.40)
+    const sStart = 0.24;
+    const sPeak = 0.32;
+    const sEnd = 0.40;
 
     let targetAlpha = 0;
     if (scrollProgress >= sStart && scrollProgress <= sEnd) {
@@ -101,8 +105,9 @@ export function createWaterSphere(): WaterSphereInstance {
       }
     }
 
-    sphereMat.opacity = Math.max(0, Math.min(1, targetAlpha * 0.88));
-    pMat.opacity = Math.max(0, Math.min(1, targetAlpha * 0.95));
+    const maxSphereAlpha = activeTheme === 'light' ? 0.35 : 0.55;
+    sphereMat.opacity = Math.max(0, Math.min(maxSphereAlpha, targetAlpha * maxSphereAlpha));
+    pMat.opacity = Math.max(0, Math.min(0.7, targetAlpha * 0.7));
     group.visible = targetAlpha > 0.01;
   };
 
@@ -115,5 +120,18 @@ export function createWaterSphere(): WaterSphereInstance {
     pMat.opacity = op;
   };
 
-  return { group, sphereMesh, particlesGroup, update, setVisible, setOpacity };
+  const setTheme = (theme: 'light' | 'dark') => {
+    activeTheme = theme;
+    if (theme === 'light') {
+      sphereMat.color.set('#FFFFFF');
+      sphereMat.attenuationColor.set('#D8F2F8');
+      pMat.color.set('#00A2BD');
+    } else {
+      sphereMat.color.set('#7DEAF0');
+      sphereMat.attenuationColor.set('#083E50');
+      pMat.color.set('#20BFD3');
+    }
+  };
+
+  return { group, sphereMesh, particlesGroup, update, setVisible, setOpacity, setTheme };
 }

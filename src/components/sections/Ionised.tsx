@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { Droplet, Waves, Atom, Sparkles } from 'lucide-react';
 
 export default function Ionised() {
   const [activeTab, setActiveTab] = useState<'clarity' | 'fluidity' | 'vitality'>('clarity');
@@ -34,20 +33,20 @@ export default function Ionised() {
       <div className="max-w-xl pointer-events-auto">
 
         {/* Heading */}
-        <h2 className="font-serif-luxury text-5xl sm:text-7xl lg:text-8xl font-light tracking-tight text-white leading-[1.0] text-luminous-heading">
-          <span className="block font-light text-white">
+        <h2 className="font-serif-luxury text-5xl sm:text-7xl lg:text-8xl font-light tracking-tight text-[var(--theme-text-primary)] leading-[1.0] text-luminous-heading">
+          <span className="block font-light">
             Molecular
           </span>
-          <span className="block italic text-[#E8F8FA] font-normal">
+          <span className="block italic text-accent-highlight font-normal">
             harmony &
           </span>
-          <span className="block font-light text-white/95">
+          <span className="block font-light opacity-95">
             clarity.
           </span>
         </h2>
 
         {/* Supporting Copy */}
-        <p className="mt-8 text-sm sm:text-base text-[#E2E8F0] font-light tracking-wide leading-relaxed max-w-lg text-editorial-body">
+        <p className="mt-8 text-sm sm:text-base text-[var(--theme-text-secondary)] font-light tracking-wide leading-relaxed max-w-lg text-editorial-body">
           In untouched glacial springs, water is alive and structurally coherent. Gentle ionisation realigns molecular clusters into their most bio-available form, imparting a silky mouthfeel that dissolves effortlessly upon consumption.
         </p>
 
@@ -59,19 +58,19 @@ export default function Ionised() {
               <div
                 key={dim.id}
                 onClick={() => setActiveTab(dim.id as any)}
-                className={`p-5 rounded-lg transition-all duration-300 cursor-pointer card-luxury-glass ${
+                className={`p-5 rounded-xl transition-all duration-300 cursor-pointer card-luxury-glass ${
                   isSelected
-                    ? 'border-white/40 shadow-[0_12px_36px_rgba(0,0,0,0.8)]'
-                    : 'hover:border-white/30'
+                    ? 'border-[var(--theme-border-highlight)] ring-1 ring-[var(--theme-border-highlight)] translate-x-1'
+                    : ''
                 }`}
               >
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-serif-luxury tracking-widest text-white uppercase font-medium">
+                  <span className="text-xs font-serif-luxury tracking-widest text-[var(--theme-text-primary)] uppercase font-medium">
                     {dim.label}
                   </span>
-                  <span className="text-[10px] font-mono text-[#CBD5E1] tracking-wider font-medium">{dim.metric}</span>
+                  <span className="text-[10px] font-mono text-[var(--theme-text-accent)] tracking-wider font-semibold">{dim.metric}</span>
                 </div>
-                <p className="mt-2 text-xs text-[#E2E8F0] font-light leading-relaxed">
+                <p className="mt-2 text-xs text-[var(--theme-text-secondary)] font-light leading-relaxed">
                   {dim.description}
                 </p>
               </div>

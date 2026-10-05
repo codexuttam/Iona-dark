@@ -1,10 +1,10 @@
-import { Shield, Sparkles, RefreshCcw } from 'lucide-react';
+import { RotateCcw } from 'lucide-react';
 
 interface ProductBottleProps {
   onRotateBottle?: () => void;
 }
 
-export default function ProductBottle({ onRotateBottle: _onRotateBottle }: ProductBottleProps) {
+export default function ProductBottle({ onRotateBottle }: ProductBottleProps) {
   return (
     <section
       id="bottle"
@@ -14,71 +14,81 @@ export default function ProductBottle({ onRotateBottle: _onRotateBottle }: Produ
       <div className="max-w-md pointer-events-auto">
 
         {/* Heading */}
-        <h2 className="font-serif-luxury text-5xl sm:text-7xl lg:text-8xl font-light tracking-tight text-white leading-[1.0] text-luminous-heading">
-          <span className="block font-light text-white">
+        <h2 className="font-serif-luxury text-5xl sm:text-7xl lg:text-8xl font-light tracking-tight text-[var(--theme-text-primary)] leading-[1.0] text-luminous-heading">
+          <span className="block font-light">
             An architectural
           </span>
-          <span className="block italic text-[#E8F8FA] font-normal">
+          <span className="block italic text-accent-highlight font-normal">
             object of
           </span>
-          <span className="block font-light text-white/95">
+          <span className="block font-light opacity-95">
             desire.
           </span>
         </h2>
 
         {/* Supporting Copy */}
-        <p className="mt-8 text-sm sm:text-base text-[#E2E8F0] font-light tracking-wide leading-relaxed text-editorial-body">
-          Sculpted for curated desks, bedside marble, and quiet sanctuaries. Delivering the optical refraction of hand-blown crystal glass with modern featherweight durability.
+        <p className="mt-8 text-sm sm:text-base text-[var(--theme-text-secondary)] font-light tracking-wide leading-relaxed text-editorial-body">
+          Sculpted with diamond-cut crystal facets that catch and refract ambient light from every angle. Delivering the optical brilliance of hand-cut crystal glass with featherweight durability.
         </p>
 
-        <div className="mt-8 pl-5 border-l border-white/20">
-          <p className="text-xs text-[#D4E3E8] font-light leading-relaxed">
-            Crowned with a precision brushed platinum closure that preserves carbon-neutral micro-pressures.
+        <div className="mt-8 pl-5 border-l border-[var(--theme-border-medium)]">
+          <p className="text-xs text-[var(--theme-text-secondary)] font-light leading-relaxed">
+            Crowned with a high-gloss obsidian fluted closure and hermetically sealed to preserve electrolytic equilibrium.
           </p>
+        </div>
+
+        <div className="mt-8">
+          <button
+            onClick={onRotateBottle}
+            className="flex items-center gap-2.5 px-5 py-2.5 rounded-full border border-[var(--theme-border-strong)] bg-[var(--theme-pill-bg)] hover:bg-[var(--theme-pill-hover-bg)] text-[var(--theme-pill-text)] hover:text-[var(--theme-pill-hover-text)] text-xs font-mono tracking-widest uppercase transition-all duration-300 cursor-pointer shadow-sm group"
+          >
+            <RotateCcw className="w-3.5 h-3.5 group-hover:-rotate-90 transition-transform duration-500" />
+            <span>DRAG OR CLICK TO INSPECT 360°</span>
+          </button>
         </div>
       </div>
 
       {/* Right Column: Architectural Annotations */}
-      <div className="hidden lg:flex flex-col justify-between h-[380px] pointer-events-auto pl-12">
+      <div className="hidden lg:flex flex-col justify-between h-[390px] pointer-events-auto pl-12">
         {/* Top Annotation */}
         <div className="flex items-center gap-4 group">
           <div className="flex items-center">
-            <span className="w-1.5 h-1.5 rounded-full bg-white/80 shadow-[0_0_8px_rgba(255,255,255,0.8)]" />
-            <span className="w-16 h-[1px] bg-gradient-to-r from-white/40 to-transparent" />
+            <span className="w-1.5 h-1.5 rounded-full bg-[var(--theme-text-accent)] shadow-sm" />
+            <span className="w-16 h-[1px] bg-gradient-to-r from-[var(--theme-text-accent)]/50 to-transparent" />
           </div>
-          <div className="p-4 rounded-lg card-luxury-glass">
-            <div className="text-xs font-serif-luxury text-white tracking-widest uppercase font-medium">
-              BRUSHED PLATINUM CROWN
+          <div className="p-4 rounded-xl card-luxury-glass">
+            <div className="text-xs font-serif-luxury text-[var(--theme-text-primary)] tracking-widest uppercase font-medium">
+              OBSIDIAN FLUTED CROWN
             </div>
-            <div className="text-xs text-[#CBD5E1] font-light mt-1">Hermetic precision twist seal</div>
+            <div className="text-xs text-[var(--theme-text-muted)] font-light mt-1">Hermetic precision twist seal with laser emblem</div>
           </div>
         </div>
 
         {/* Middle Annotation */}
         <div className="flex items-center gap-4 group">
           <div className="flex items-center">
-            <span className="w-1.5 h-1.5 rounded-full bg-white/80 shadow-[0_0_8px_rgba(255,255,255,0.8)]" />
-            <span className="w-20 h-[1px] bg-gradient-to-r from-white/40 to-transparent" />
+            <span className="w-1.5 h-1.5 rounded-full bg-[var(--theme-text-accent)] shadow-sm" />
+            <span className="w-20 h-[1px] bg-gradient-to-r from-[var(--theme-text-accent)]/50 to-transparent" />
           </div>
-          <div className="p-4 rounded-lg card-luxury-glass">
-            <div className="text-xs font-serif-luxury text-white tracking-widest uppercase font-medium">
-              CRYSTAL-GRADE RESIN
+          <div className="p-4 rounded-xl card-luxury-glass">
+            <div className="text-xs font-serif-luxury text-[var(--theme-text-primary)] tracking-widest uppercase font-medium">
+              DIAMOND-CUT CRYSTAL PRISMS
             </div>
-            <div className="text-xs text-[#CBD5E1] font-light mt-1">High-transmission, BPA/BPS-free clarity</div>
+            <div className="text-xs text-[var(--theme-text-muted)] font-light mt-1">Refractive faceted geometry, BPA/BPS-free clarity</div>
           </div>
         </div>
 
         {/* Bottom Annotation */}
         <div className="flex items-center gap-4 group">
           <div className="flex items-center">
-            <span className="w-1.5 h-1.5 rounded-full bg-white/80 shadow-[0_0_8px_rgba(255,255,255,0.8)]" />
-            <span className="w-14 h-[1px] bg-gradient-to-r from-white/40 to-transparent" />
+            <span className="w-1.5 h-1.5 rounded-full bg-[var(--theme-text-accent)] shadow-sm" />
+            <span className="w-14 h-[1px] bg-gradient-to-r from-[var(--theme-text-accent)]/50 to-transparent" />
           </div>
-          <div className="p-4 rounded-lg card-luxury-glass">
-            <div className="text-xs font-serif-luxury text-white tracking-widest uppercase font-medium">
-              MONOLITHIC BALANCE
+          <div className="p-4 rounded-xl card-luxury-glass">
+            <div className="text-xs font-serif-luxury text-[var(--theme-text-primary)] tracking-widest uppercase font-medium">
+              MONOLITHIC WEIGHTED BASE
             </div>
-            <div className="text-xs text-[#CBD5E1] font-light mt-1">Weighted base calibrated for stillness</div>
+            <div className="text-xs text-[var(--theme-text-muted)] font-light mt-1">Chamfered facets engineered for grounded stillness</div>
           </div>
         </div>
       </div>

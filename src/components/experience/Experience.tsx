@@ -56,7 +56,7 @@ export default function Experience() {
   };
 
   return (
-    <main className="relative w-full min-h-screen bg-[#02080D] text-white overflow-hidden selection:bg-[#20BFD3] selection:text-[#02080D]">
+    <main className="relative w-full min-h-screen bg-[var(--theme-bg)] text-[var(--theme-text-primary)] transition-colors duration-500 overflow-hidden selection:bg-[#20BFD3] selection:text-white">
       {/* Initial cinematic luxury loader */}
       {!isLoaded && <Loader onComplete={() => setIsLoaded(true)} />}
 

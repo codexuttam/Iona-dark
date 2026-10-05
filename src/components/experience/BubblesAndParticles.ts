@@ -6,6 +6,7 @@ export interface EnvironmentAtmosphere {
   energyRibbon: THREE.Points;
   lightRays: THREE.Group;
   update: (time: number, scrollProgress: number) => void;
+  setTheme: (theme: 'light' | 'dark') => void;
 }
 
 export function createEnvironmentAtmosphere(): EnvironmentAtmosphere {
@@ -195,5 +196,23 @@ export function createEnvironmentAtmosphere(): EnvironmentAtmosphere {
     rayMat.opacity = 0.05 + Math.sin(time * 0.8) * 0.02 + scrollProgress * 0.03;
   };
 
-  return { bubblesGroup, particlesField, energyRibbon, lightRays, update };
+  const setTheme = (theme: 'light' | 'dark') => {
+    if (theme === 'light') {
+      bubbleMat.color.set('#B6EBF2');
+      bubbleMat.opacity = 0.55;
+      pMaterial.opacity = 0.42;
+      pMaterial.blending = THREE.NormalBlending;
+      rayMat.color.set('#008DA5');
+      rayMat.opacity = 0.03;
+    } else {
+      bubbleMat.color.set('#DDFEFF');
+      bubbleMat.opacity = 0.65;
+      pMaterial.opacity = 0.65;
+      pMaterial.blending = THREE.AdditiveBlending;
+      rayMat.color.set('#B8EDF8');
+      rayMat.opacity = 0.06;
+    }
+  };
+
+  return { bubblesGroup, particlesField, energyRibbon, lightRays, update, setTheme };
 }
