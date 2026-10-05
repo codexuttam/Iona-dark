@@ -97,6 +97,12 @@ export function createIonaBottle(options?: {
   const neckHeight = 0.55 * hScale;
   const capHeight = 0.45 * hScale;
 
+  // Centering container so the entire bottle's geometric midpoint (from base to cap) is at y = 0
+  const container = new THREE.Group();
+  container.name = 'bottle-container';
+  container.position.y = -0.49 * hScale;
+  group.add(container);
+
   // 1. Outer Glass/PET Shell
   // Create bottle profile curve using LatheGeometry for photorealistic smooth organic curves
   const points: THREE.Vector2[] = [];
@@ -122,14 +128,14 @@ export function createIonaBottle(options?: {
   const latheGeometry = new THREE.LatheGeometry(points, 48);
   
   const glassMaterial = new THREE.MeshPhysicalMaterial({
-    color: new THREE.Color('#DDFEFF'),
-    metalness: 0.05,
+    color: new THREE.Color('#FFFFFF'),
+    metalness: 0.02,
     roughness: 0.03,
-    transmission: 0.92,
-    ior: 1.48,
-    thickness: 0.8,
+    transmission: 0.94,
+    ior: 1.46,
+    thickness: 0.6,
     transparent: true,
-    opacity: 0.92,
+    opacity: 0.94,
     reflectivity: 0.85,
     clearcoat: 1.0,
     clearcoatRoughness: 0.03,
@@ -139,7 +145,7 @@ export function createIonaBottle(options?: {
   const bottleBody = new THREE.Mesh(latheGeometry, glassMaterial);
   bottleBody.castShadow = true;
   bottleBody.receiveShadow = true;
-  group.add(bottleBody);
+  container.add(bottleBody);
 
   // 2. Inner Water Mesh
   const innerPoints: THREE.Vector2[] = [];
@@ -156,20 +162,20 @@ export function createIonaBottle(options?: {
 
   const waterLathe = new THREE.LatheGeometry(innerPoints, 36);
   const waterMaterial = new THREE.MeshPhysicalMaterial({
-    color: new THREE.Color(waterColor),
+    color: new THREE.Color('#EBF7FA'),
     metalness: 0.0,
     roughness: 0.02,
-    transmission: 0.85,
+    transmission: 0.90,
     ior: 1.333, // Water refractive index
-    thickness: 1.2,
+    thickness: 1.0,
     transparent: true,
     opacity: 0.88,
-    attenuationColor: new THREE.Color('#06232D'),
-    attenuationDistance: 1.5,
+    attenuationColor: new THREE.Color('#0A1C24'),
+    attenuationDistance: 2.5,
   });
 
   const waterMesh = new THREE.Mesh(waterLathe, waterMaterial);
-  group.add(waterMesh);
+  container.add(waterMesh);
 
   // 3. Precision Brushed Platinum / Silver Cap
   const capGeo = new THREE.CylinderGeometry(neckRadius * 1.07, neckRadius * 1.07, capHeight, 36);
@@ -180,7 +186,7 @@ export function createIonaBottle(options?: {
   });
   const capMesh = new THREE.Mesh(capGeo, capMat);
   capMesh.position.y = bodyHeight * 0.5 + neckHeight + capHeight * 0.45;
-  group.add(capMesh);
+  container.add(capMesh);
 
   // Cap bevel ring (Polished subtle platinum chamfer)
   const capRingGeo = new THREE.TorusGeometry(neckRadius * 1.075, 0.015, 16, 36);
@@ -192,7 +198,7 @@ export function createIonaBottle(options?: {
   const capRing = new THREE.Mesh(capRingGeo, capRingMat);
   capRing.rotation.x = Math.PI / 2;
   capRing.position.y = capMesh.position.y - capHeight * 0.45;
-  group.add(capRing);
+  container.add(capRing);
 
   // 4. Label Surface Cylinder (Hugging the body)
   const labelGeo = new THREE.CylinderGeometry(
@@ -215,7 +221,7 @@ export function createIonaBottle(options?: {
   });
   const labelMesh = new THREE.Mesh(labelGeo, labelMat);
   labelMesh.position.y = -bodyHeight * 0.06;
-  group.add(labelMesh);
+  container.add(labelMesh);
 
   // 5. Internal micro-bubbles
   const bubblesGroup = new THREE.Group();
@@ -253,7 +259,7 @@ export function createIonaBottle(options?: {
       baseY,
     });
   }
-  group.add(bubblesGroup);
+  container.add(bubblesGroup);
 
   // 6. Exterior Water Droplets
   const dropletsGroup = new THREE.Group();
@@ -292,7 +298,7 @@ export function createIonaBottle(options?: {
       baseY
     });
   }
-  group.add(dropletsGroup);
+  container.add(dropletsGroup);
 
   const update = (time: number, _scrollProgress: number) => {
     // Animate inner bubbles rising gently

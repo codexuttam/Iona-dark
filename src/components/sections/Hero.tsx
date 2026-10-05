@@ -12,14 +12,7 @@ export default function Hero({ onExplore }: HeroProps) {
       className="relative min-h-screen w-full flex items-center justify-between px-6 sm:px-12 lg:px-24 pointer-events-none select-none z-10"
     >
       {/* Left Column Content */}
-      <div className="max-w-2xl pointer-events-auto pt-28 sm:pt-0">
-        {/* Subtle Provenance Eyebrow */}
-        <div className="flex items-center gap-3 mb-6">
-          <span className="w-6 h-[1px] bg-white/20" />
-          <span className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#8D9FA7]">
-            CHAPTER I · THE GENESIS
-          </span>
-        </div>
+      <div className="max-w-2xl pointer-events-auto pt-24 sm:pt-0">
 
         {/* Timeless Editorial Luxury Heading */}
         <h1 className="font-serif-luxury text-5xl sm:text-7xl lg:text-8xl font-light tracking-tight text-white leading-[0.98]">

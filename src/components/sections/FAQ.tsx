@@ -24,13 +24,6 @@ export default function FAQ({ onExperience, onNavigate, onOpenTerms, onOpenPriva
       className="relative min-h-screen w-full flex flex-col justify-between px-6 sm:px-12 lg:px-24 pointer-events-none select-none z-10 pt-28 pb-12"
     >
       <div className="max-w-4xl w-full pointer-events-auto mx-auto lg:mx-0">
-        {/* Subtle Eyebrow */}
-        <div className="flex items-center gap-3 mb-6">
-          <span className="w-6 h-[1px] bg-white/20" />
-          <span className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#8D9FA7]">
-            CHAPTER VIII · INQUIRIES
-          </span>
-        </div>
 
         {/* Heading */}
         <h2 className="font-serif-luxury text-5xl sm:text-7xl lg:text-8xl font-light tracking-tight text-white leading-[1.0]">

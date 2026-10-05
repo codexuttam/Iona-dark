@@ -45,13 +45,6 @@ export default function Process() {
     >
       {/* Left Column Content */}
       <div className="max-w-xl pointer-events-auto">
-        {/* Subtle Eyebrow */}
-        <div className="flex items-center gap-3 mb-6">
-          <span className="w-6 h-[1px] bg-white/20" />
-          <span className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#8D9FA7]">
-            CHAPTER V · PROVENANCE
-          </span>
-        </div>
 
         {/* Heading */}
         <h2 className="font-serif-luxury text-5xl sm:text-7xl lg:text-8xl font-light tracking-tight text-white leading-[1.0]">
