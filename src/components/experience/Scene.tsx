@@ -234,105 +234,37 @@ export default function Scene({
       let targetRotZ = 0;
       let targetScale = isMobile ? 0.8 : 1.0;
 
-      // Multi-bottle visibility flag for Section 07
+      // Multi-bottle visibility flag for Section 07 and 08
       let showMultiBottles = false;
 
-      if (p < 0.15) {
-        // Section 01: HERO
-        // Floating diagonally (~38 deg)
-        const t = p / 0.15;
-        targetCamX = lerp(0, 0.3, t);
-        targetCamY = lerp(0, 0.1, t);
-        targetCamZ = lerp(5.8, 5.4, t);
+      // Check section element positions for pinpoint accurate scroll choreography
+      const processEl = document.getElementById('process');
+      const bottleEl = document.getElementById('bottle');
+      const rangeEl = document.getElementById('range');
+      const questionsEl = document.getElementById('questions');
 
-        targetBottleX = lerp(0.85, 1.1, t);
-        targetBottleY = lerp(0.1, 0.15, t);
-        targetBottleZ = 0;
+      let processFraction = -1;
+      if (processEl) {
+        const pRect = processEl.getBoundingClientRect();
+        if (pRect.top <= window.innerHeight * 0.8 && pRect.bottom >= window.innerHeight * 0.2) {
+          const totalDistance = pRect.height + window.innerHeight * 0.6;
+          const current = (window.innerHeight * 0.8) - pRect.top;
+          processFraction = Math.min(1, Math.max(0, current / totalDistance));
+        }
+      }
 
-        targetRotX = 0.25;
-        targetRotY = -0.45 + time * 0.15;
-        targetRotZ = -0.58; // Diagonal tilt matching visual reference
-      } else if (p < 0.30) {
-        // Section 02: PHILOSOPHY (WATER, REIMAGINED.)
-        const t = (p - 0.15) / 0.15;
-        targetCamX = lerp(0.3, -0.8, t);
-        targetCamY = lerp(0.1, 0.25, t);
-        targetCamZ = lerp(5.4, 5.1, t);
+      const rangeRect = rangeEl?.getBoundingClientRect();
+      const bottleRect = bottleEl?.getBoundingClientRect();
+      const questionsRect = questionsEl?.getBoundingClientRect();
 
-        targetBottleX = lerp(1.1, 1.35, t);
-        targetBottleY = lerp(0.15, 0.0, t);
-        targetBottleZ = 0;
-
-        targetRotX = 0.15;
-        targetRotY = lerp(-0.45, 0.4, t) + time * 0.1;
-        targetRotZ = lerp(-0.58, -0.15, t); // Straightens upright
-      } else if (p < 0.45) {
-        // Section 03: ALKALINE WATER (BALANCED BY NATURE.)
-        // Water sphere on right, bottle slightly behind/beside
-        const t = (p - 0.30) / 0.15;
-        targetCamX = lerp(-0.8, -1.0, t);
-        targetCamY = lerp(0.25, 0.35, t);
-        targetCamZ = lerp(5.1, 4.8, t);
-
-        targetBottleX = lerp(1.35, 1.8, t);
-        targetBottleY = lerp(0.0, -0.1, t);
-        targetBottleZ = lerp(0, -0.6, t);
-
-        targetRotX = 0.1;
-        targetRotY = 0.6 + time * 0.12;
-        targetRotZ = -0.1;
-      } else if (p < 0.60) {
-        // Section 04: IONISED WATER (IONISED. REFINED.)
-        // Electric flowing particle field
-        const t = (p - 0.45) / 0.15;
-        targetCamX = lerp(-1.0, 1.1, t);
-        targetCamY = lerp(0.35, 0.4, t);
-        targetCamZ = lerp(4.8, 4.6, t);
-
-        targetBottleX = lerp(1.8, -1.2, t);
-        targetBottleY = lerp(-0.1, 0.1, t);
-        targetBottleZ = 0;
-
-        targetRotX = 0.2;
-        targetRotY = 1.2 + time * 0.25;
-        targetRotZ = 0.2;
-      } else if (p < 0.75) {
-        // Section 05: THE IONA PROCESS (FROM NATURE TO YOU.)
-        const t = (p - 0.60) / 0.15;
-        targetCamX = lerp(1.1, -1.2, t);
-        targetCamY = lerp(0.4, 0.15, t);
-        targetCamZ = lerp(4.6, 5.0, t);
-
-        targetBottleX = lerp(-1.2, 1.3, t);
-        targetBottleY = lerp(0.1, 0.0, t);
-        targetBottleZ = 0;
-
-        targetRotX = 0.1;
-        targetRotY = lerp(1.2, 2.5, t) + time * 0.1;
-        targetRotZ = -0.12;
-      } else if (p < 0.88) {
-        // Section 06: OUR BOTTLE SHOWCASE (Close-up 360 inspection)
-        const t = (p - 0.75) / 0.13;
-        targetCamX = lerp(-1.2, 0.0, t);
-        targetCamY = lerp(0.15, 0.0, t);
-        targetCamZ = lerp(5.0, 3.8, t); // Zoom in close!
-
-        targetBottleX = lerp(1.3, 0.0, t);
-        targetBottleY = 0;
-        targetBottleZ = 0;
-
-        targetRotX = 0.05;
-        targetRotY = lerp(2.5, Math.PI * 2, t) + time * 0.18;
-        targetRotZ = 0.0;
-        targetScale = isMobile ? 0.95 : 1.15;
-      } else if (p < 0.95) {
-        // Section 07: PRODUCT RANGE (250ml, 500ml, 1L side by side)
-        const t = (p - 0.88) / 0.07;
+      if (rangeRect && rangeRect.top <= window.innerHeight * 0.6) {
+        // Section 07 & 08: PRODUCT RANGE & QUESTIONS
+        showMultiBottles = true;
         targetCamX = 0;
-        targetCamY = lerp(0.0, -0.15, t);
-        targetCamZ = lerp(3.8, 5.6, t);
+        targetCamY = questionsRect && questionsRect.top <= window.innerHeight * 0.5 ? 0.1 : -0.15;
+        targetCamZ = 5.6;
 
-        targetBottleX = 0; // 500ml/750ml in center
+        targetBottleX = 0;
         targetBottleY = -0.1;
         targetBottleZ = 0;
 
@@ -340,23 +272,97 @@ export default function Scene({
         targetRotY = time * 0.1;
         targetRotZ = 0;
         targetScale = 0.95;
+      } else if (bottleRect && bottleRect.top <= window.innerHeight * 0.5) {
+        // Section 06: OUR BOTTLE SHOWCASE (Close-up 360 inspection)
+        const bTotal = bottleRect.height || window.innerHeight;
+        const bProgress = Math.min(1, Math.max(0, (window.innerHeight * 0.5 - bottleRect.top) / bTotal));
+        targetCamX = lerp(-0.5, 0.0, bProgress);
+        targetCamY = 0.0;
+        targetCamZ = lerp(4.5, 3.8, bProgress);
 
-        showMultiBottles = true;
-      } else {
-        // Section 08: QUESTIONS & FINAL CALM
-        const t = (p - 0.95) / 0.05;
-        targetCamX = 0;
-        targetCamY = lerp(-0.15, 0.1, t);
-        targetCamZ = lerp(5.6, 6.0, t);
+        targetBottleX = lerp(0.5, 0.0, bProgress);
+        targetBottleY = 0;
+        targetBottleZ = 0;
 
-        targetBottleX = 0.9;
+        targetRotX = 0.05;
+        targetRotY = 2.5 + bProgress * Math.PI + time * 0.15;
+        targetRotZ = 0.0;
+        targetScale = isMobile ? 0.95 : 1.15;
+      } else if (processFraction >= 0) {
+        // Section 05: THE IONA PROCESS (FROM NATURE TO YOU.)
+        // Dynamic bottle rotation driven directly by scrolling through the 4 stages!
+        targetCamX = lerp(0.3, -0.1, processFraction);
+        targetCamY = 0.05;
+        targetCamZ = 4.8;
+
+        targetBottleX = isMobile ? 0 : 0.48;
         targetBottleY = 0.0;
         targetBottleZ = 0;
 
-        targetRotX = 0.1;
-        targetRotY = time * 0.15;
-        targetRotZ = -0.2;
-        targetScale = 0.9;
+        targetRotX = 0.08;
+        // Rotates smoothly through 450 degrees dynamically linked to the user's scroll:
+        targetRotY = 0.6 + processFraction * (Math.PI * 2.5) + time * 0.04;
+        targetRotZ = -0.06;
+        targetScale = isMobile ? 0.75 : 1.05;
+      } else {
+        // Sections 01 - 04 (before Process)
+        if (p < 0.12) {
+          // Section 01: HERO
+          const t = p / 0.12;
+          targetCamX = lerp(0, 0.3, t);
+          targetCamY = lerp(0, 0.1, t);
+          targetCamZ = lerp(5.8, 5.4, t);
+
+          targetBottleX = lerp(0.85, 1.1, t);
+          targetBottleY = lerp(0.1, 0.15, t);
+          targetBottleZ = 0;
+
+          targetRotX = 0.25;
+          targetRotY = -0.45 + time * 0.15;
+          targetRotZ = -0.58;
+        } else if (p < 0.25) {
+          // Section 02: PHILOSOPHY (WATER, REIMAGINED.)
+          const t = (p - 0.12) / 0.13;
+          targetCamX = lerp(0.3, -0.8, t);
+          targetCamY = lerp(0.1, 0.25, t);
+          targetCamZ = lerp(5.4, 5.1, t);
+
+          targetBottleX = lerp(1.1, 1.35, t);
+          targetBottleY = lerp(0.15, 0.0, t);
+          targetBottleZ = 0;
+
+          targetRotX = 0.15;
+          targetRotY = lerp(-0.45, 0.4, t) + time * 0.1;
+          targetRotZ = lerp(-0.58, -0.15, t);
+        } else if (p < 0.38) {
+          // Section 03: ALKALINE WATER (BALANCED BY NATURE.)
+          const t = (p - 0.25) / 0.13;
+          targetCamX = lerp(-0.8, -1.0, t);
+          targetCamY = lerp(0.25, 0.35, t);
+          targetCamZ = lerp(5.1, 4.8, t);
+
+          targetBottleX = lerp(1.35, 1.0, t);
+          targetBottleY = lerp(0.0, -0.1, t);
+          targetBottleZ = 0;
+
+          targetRotX = 0.1;
+          targetRotY = 0.6 + time * 0.12;
+          targetRotZ = -0.1;
+        } else {
+          // Section 04: IONISED WATER (IONISED. REFINED.)
+          const t = Math.min(1, Math.max(0, (p - 0.38) / 0.12));
+          targetCamX = lerp(-1.0, 0.8, t);
+          targetCamY = lerp(0.35, 0.2, t);
+          targetCamZ = lerp(4.8, 4.6, t);
+
+          targetBottleX = lerp(1.0, -0.8, t);
+          targetBottleY = lerp(-0.1, 0.0, t);
+          targetBottleZ = 0;
+
+          targetRotX = 0.15;
+          targetRotY = 1.0 + time * 0.2;
+          targetRotZ = 0.1;
+        }
       }
 
       // Smooth camera interpolation

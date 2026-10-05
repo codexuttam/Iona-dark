@@ -6,9 +6,12 @@ import MagneticButton from '../ui/MagneticButton';
 interface FAQProps {
   onExperience: () => void;
   onNavigate: (sectionId: string) => void;
+  onOpenTerms?: () => void;
+  onOpenPrivacy?: () => void;
+  onOpenContact?: () => void;
 }
 
-export default function FAQ({ onExperience, onNavigate }: FAQProps) {
+export default function FAQ({ onExperience, onNavigate, onOpenTerms, onOpenPrivacy, onOpenContact }: FAQProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   const toggleAccordion = (idx: number) => {
@@ -21,17 +24,8 @@ export default function FAQ({ onExperience, onNavigate }: FAQProps) {
       className="relative min-h-screen w-full flex flex-col justify-between px-6 sm:px-12 lg:px-24 pointer-events-none select-none z-10 pt-28 pb-12"
     >
       <div className="max-w-4xl w-full pointer-events-auto mx-auto lg:mx-0">
-        {/* Eyebrow Label */}
-        <div className="flex items-center gap-3 mb-6">
-          <span className="text-xs font-mono text-[#20BFD3] tracking-widest font-bold">08</span>
-          <span className="w-8 h-[1px] bg-[#20BFD3]/40" />
-          <span className="text-[11px] font-mono tracking-[0.25em] text-[#7DEAF0] uppercase">
-            EDITORIAL INQUIRIES
-          </span>
-        </div>
-
         {/* Heading */}
-        <h2 className="font-display text-6xl sm:text-8xl lg:text-9xl font-black italic tracking-tighter uppercase leading-[0.88] text-white">
+        <h2 className="font-display text-6xl sm:text-8xl lg:text-9xl font-extrabold italic tracking-tight uppercase leading-none text-white">
           <span className="block hover:text-[#7DEAF0] transition-colors duration-300">
             QUESTIONS
           </span>
@@ -73,7 +67,7 @@ export default function FAQ({ onExperience, onNavigate }: FAQProps) {
           THE ULTIMATE HYDRATION
         </span>
 
-        <h3 className="font-display text-6xl sm:text-8xl font-black italic tracking-tight uppercase leading-[0.9] text-white">
+        <h3 className="font-display text-6xl sm:text-8xl font-extrabold italic tracking-tight uppercase leading-none text-white">
           PURE WATER.<br />
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-[#DDFEFF] to-[#7DEAF0]">
             CLEARER TOMORROWS.
@@ -99,7 +93,7 @@ export default function FAQ({ onExperience, onNavigate }: FAQProps) {
       <footer className="mt-20 pt-8 border-t border-white/10 pointer-events-auto flex flex-col md:flex-row items-center justify-between gap-6 text-xs text-[#A9C4CA]">
         {/* Left: Brand */}
         <div className="flex items-center gap-6">
-          <span className="font-display text-2xl font-black italic tracking-wider text-white">
+          <span className="font-display text-2xl font-extrabold italic tracking-wider text-white">
             IONA
           </span>
           <span className="text-white/20">|</span>
@@ -122,8 +116,15 @@ export default function FAQ({ onExperience, onNavigate }: FAQProps) {
           <button onClick={() => onNavigate('range')} className="hover:text-white transition-colors cursor-pointer">
             PRODUCT
           </button>
-          <button onClick={() => onNavigate('questions')} className="hover:text-white transition-colors cursor-pointer">
+          <button onClick={() => (onOpenContact ? onOpenContact() : onNavigate('questions'))} className="hover:text-white transition-colors cursor-pointer">
             CONTACT
+          </button>
+          <span className="text-white/20 hidden md:inline">|</span>
+          <button onClick={onOpenTerms} className="hover:text-[#7DEAF0] text-[#A9C4CA] transition-colors cursor-pointer">
+            TERMS & CONDITIONS
+          </button>
+          <button onClick={onOpenPrivacy} className="hover:text-[#7DEAF0] text-[#A9C4CA] transition-colors cursor-pointer">
+            PRIVACY POLICY
           </button>
         </div>
 

@@ -1,9 +1,10 @@
 import { useState, useMemo } from 'react';
 import Scene from './Scene';
 import Navbar from '../navigation/Navbar';
-import SideNavigation from '../navigation/SideNavigation';
 import ProgressBar from '../navigation/ProgressBar';
 import MenuModal from '../navigation/MenuModal';
+import ContactModal from '../ui/ContactModal';
+import LegalModal from '../ui/LegalModal';
 import Loader from '../ui/Loader';
 import Hero from '../sections/Hero';
 import Philosophy from '../sections/Philosophy';
@@ -20,6 +21,9 @@ import { ambientSound } from '../ui/AmbientAudio';
 export default function Experience() {
   const { scrollProgress, scrollTo } = useLenis();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isContactOpen, setIsContactOpen] = useState(false);
+  const [contactSubject, setContactSubject] = useState('');
+  const [legalModalType, setLegalModalType] = useState<'terms' | 'privacy' | null>(null);
   const [selectedBottleSizeIndex, setSelectedBottleSizeIndex] = useState(1);
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -45,6 +49,12 @@ export default function Experience() {
     handleNavigate(target);
   };
 
+  const handleOpenContact = (subject = 'General Concierge Inquiry') => {
+    ambientSound.playDropChime();
+    setContactSubject(subject);
+    setIsContactOpen(true);
+  };
+
   return (
     <main className="relative w-full min-h-screen bg-[#02080D] text-white overflow-hidden selection:bg-[#20BFD3] selection:text-[#02080D]">
       {/* Initial cinematic luxury loader */}
@@ -57,35 +67,12 @@ export default function Experience() {
         selectedBottleIndex={selectedBottleSizeIndex}
       />
 
-      {/* Giant Low-Opacity Background Typography for Atmospheric Depth (PDF page 15) */}
-      <div className="fixed inset-0 pointer-events-none select-none z-0 flex items-center justify-center overflow-hidden">
-        <div
-          className="font-display font-black italic tracking-tighter text-white/[0.035] uppercase text-[28vw] leading-none transition-transform duration-700 ease-out"
-          style={{
-            transform: `translate3d(${-(scrollProgress - 0.5) * 120}px, 0, 0)`,
-          }}
-        >
-          {activeSectionIndex === 0 && 'IONA'}
-          {activeSectionIndex === 1 && 'PURITY'}
-          {activeSectionIndex === 2 && 'ALKALINE'}
-          {activeSectionIndex === 3 && 'IONISE'}
-          {activeSectionIndex === 4 && 'REFINE'}
-          {activeSectionIndex === 5 && 'BOTTLE'}
-          {activeSectionIndex === 6 && 'RESERVE'}
-          {activeSectionIndex >= 7 && 'FOREVER'}
-        </div>
-      </div>
-
       {/* Fixed Cinematic Navigation */}
       <Navbar
         onOpenMenu={() => setIsMenuOpen(true)}
         onNavigate={handleNavigate}
         activeSection={SECTIONS[activeSectionIndex]?.id || 'hero'}
-      />
-
-      <SideNavigation
-        activeSectionIndex={activeSectionIndex}
-        onNavigate={handleNavigate}
+        onOpenContact={() => handleOpenContact('Client Inquiry - Private Concierge')}
       />
 
       <ProgressBar
@@ -97,6 +84,21 @@ export default function Experience() {
         isOpen={isMenuOpen}
         onClose={() => setIsMenuOpen(false)}
         onNavigate={handleNavigate}
+      />
+
+      {/* Contact Concierge & Case Allocation Modal */}
+      <ContactModal
+        isOpen={isContactOpen}
+        onClose={() => setIsContactOpen(false)}
+        initialSubject={contactSubject}
+      />
+
+      {/* Terms & Conditions / Privacy Policy Modal */}
+      <LegalModal
+        isOpen={legalModalType !== null}
+        type={legalModalType}
+        onClose={() => setLegalModalType(null)}
+        onSwitchType={(type) => setLegalModalType(type)}
       />
 
       {/* DOM Content Sections (Spaced along the scroll track) */}
@@ -113,10 +115,14 @@ export default function Experience() {
             setSelectedBottleSizeIndex(idx);
             ambientSound.playDropChime();
           }}
+          onReserveCase={(size) => handleOpenContact(`Reserve Case Allocation - ${size}`)}
         />
         <FAQ
           onExperience={() => handleNavigate('bottle')}
           onNavigate={handleNavigate}
+          onOpenTerms={() => setLegalModalType('terms')}
+          onOpenPrivacy={() => setLegalModalType('privacy')}
+          onOpenContact={() => handleOpenContact('Editorial & Concierge Inquiries')}
         />
       </div>
     </main>

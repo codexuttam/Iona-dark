@@ -1,4 +1,4 @@
-import { RotateCw, Shield, Sparkles, RefreshCcw } from 'lucide-react';
+import { Shield, Sparkles, RefreshCcw } from 'lucide-react';
 
 interface ProductBottleProps {
   onRotateBottle?: () => void;
@@ -12,17 +12,8 @@ export default function ProductBottle({ onRotateBottle: _onRotateBottle }: Produ
     >
       {/* Left Column Content */}
       <div className="max-w-md pointer-events-auto">
-        {/* Eyebrow Label */}
-        <div className="flex items-center gap-3 mb-6">
-          <span className="text-xs font-mono text-[#20BFD3] tracking-widest font-bold">06</span>
-          <span className="w-8 h-[1px] bg-[#20BFD3]/40" />
-          <span className="text-[11px] font-mono tracking-[0.25em] text-[#7DEAF0] uppercase">
-            OUR BOTTLE
-          </span>
-        </div>
-
         {/* Heading */}
-        <h2 className="font-display text-5xl sm:text-7xl lg:text-8xl font-black italic tracking-tighter uppercase leading-[0.88] text-white">
+        <h2 className="font-display text-5xl sm:text-7xl lg:text-8xl font-extrabold italic tracking-tight uppercase leading-none text-white">
           <span className="block hover:text-[#7DEAF0] transition-colors duration-300">
             DESIGNED
           </span>
@@ -38,14 +29,6 @@ export default function ProductBottle({ onRotateBottle: _onRotateBottle }: Produ
         <p className="mt-8 text-base text-[#A9C4CA] font-normal tracking-wide leading-relaxed">
           A premium bottle for a premium experience. Sleek, sustainable and crafted for everyday hydration. Engineered from ultra-durable medical-grade resin that delivers crystal-glass clarity with lightweight portability.
         </p>
-
-        {/* Interactive 3D drag hint */}
-        <div className="mt-8 flex items-center gap-3 p-3.5 rounded-full border border-[#20BFD3]/30 bg-[#04141D]/60 w-fit">
-          <RotateCw className="w-4 h-4 text-[#7DEAF0] animate-spin" style={{ animationDuration: '6s' }} />
-          <span className="text-[11px] font-mono uppercase tracking-widest text-[#A9C4CA]">
-            CLICK & DRAG TO ROTATE 360°
-          </span>
-        </div>
       </div>
 
       {/* Right Column: Technical Leader Line Annotations (Matching Storyboard 06) */}

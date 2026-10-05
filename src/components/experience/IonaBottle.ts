@@ -280,6 +280,8 @@ export function createIonaBottle(options?: {
     opacity: 0.85,
   });
 
+  const dropInstances: { mesh: THREE.Mesh; angle: number; speed: number; baseY: number }[] = [];
+
   for (let i = 0; i < dropletCount; i++) {
     const drop = new THREE.Mesh(dropGeo, dropMat);
     const dScale = 0.012 + Math.random() * 0.028;
@@ -287,14 +289,20 @@ export function createIonaBottle(options?: {
     drop.scale.set(dScale, dScale * 1.3, dScale * 0.45);
 
     const angle = Math.random() * Math.PI * 2;
-    const y = -bodyHeight * 0.4 + Math.random() * (bodyHeight * 0.75);
+    const baseY = -bodyHeight * 0.4 + Math.random() * (bodyHeight * 0.75);
     drop.position.x = Math.cos(angle) * (bodyRadius + 0.008);
     drop.position.z = Math.sin(angle) * (bodyRadius + 0.008);
-    drop.position.y = y;
-    drop.lookAt(new THREE.Vector3(0, y, 0));
+    drop.position.y = baseY;
+    drop.lookAt(new THREE.Vector3(0, baseY, 0));
     drop.rotateY(Math.PI);
 
     dropletsGroup.add(drop);
+    dropInstances.push({
+      mesh: drop,
+      angle,
+      speed: 0.02 + Math.random() * 0.05,
+      baseY
+    });
   }
   group.add(dropletsGroup);
 
@@ -309,6 +317,22 @@ export function createIonaBottle(options?: {
       b.mesh.position.y = newY;
       b.mesh.position.x += Math.sin(time * 2 + b.seed) * 0.0008;
       b.mesh.position.z += Math.cos(time * 2 + b.seed) * 0.0008;
+    });
+
+    // Animate exterior droplets trickling down
+    dropInstances.forEach((d) => {
+      const topLimit = bodyHeight * 0.35;
+      const bottomLimit = -bodyHeight * 0.4;
+      const travelRange = topLimit - bottomLimit;
+      
+      // Trickle down (negative speed)
+      let newY = bottomLimit + (((d.baseY - bottomLimit) - time * d.speed) % travelRange);
+      if (newY < bottomLimit) {
+        newY += travelRange; // wrap around to top
+      }
+      d.mesh.position.y = newY;
+      d.mesh.lookAt(new THREE.Vector3(0, newY, 0));
+      d.mesh.rotateY(Math.PI);
     });
   };
 

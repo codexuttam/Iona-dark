@@ -6,9 +6,10 @@ interface NavbarProps {
   onOpenMenu: () => void;
   onNavigate: (sectionId: string) => void;
   activeSection: string;
+  onOpenContact?: () => void;
 }
 
-export default function Navbar({ onOpenMenu, onNavigate }: NavbarProps) {
+export default function Navbar({ onOpenMenu, onNavigate, activeSection: _activeSection, onOpenContact }: NavbarProps) {
   const [isAudioActive, setIsAudioActive] = useState(false);
 
   const toggleSound = () => {
@@ -18,11 +19,12 @@ export default function Navbar({ onOpenMenu, onNavigate }: NavbarProps) {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 lg:px-12 py-5 bg-gradient-to-b from-[#02080D]/90 via-[#02080D]/50 to-transparent backdrop-blur-[2px] border-b border-white/[0.04]">
-      {/* Left: Menu trigger */}
-      <div className="flex items-center gap-3">
+      {/* Left: Nav Links (Desktop) & Menu (Mobile) */}
+      <div className="flex items-center gap-6 flex-1">
+        {/* Mobile Menu trigger */}
         <button
           onClick={onOpenMenu}
-          className="flex items-center gap-2.5 text-xs font-semibold tracking-[0.2em] text-[#A9C4CA] hover:text-white uppercase transition-colors group cursor-pointer"
+          className="flex lg:hidden items-center gap-2.5 text-xs font-semibold tracking-[0.2em] text-[#A9C4CA] hover:text-white uppercase transition-colors group cursor-pointer"
           aria-label="Open navigation menu"
         >
           <span className="p-1.5 rounded-sm border border-white/10 group-hover:border-[#20BFD3]/50 transition-colors">
@@ -30,10 +32,18 @@ export default function Navbar({ onOpenMenu, onNavigate }: NavbarProps) {
           </span>
           <span className="hidden sm:inline">MENU</span>
         </button>
+
+        {/* Desktop 4 Nav Links */}
+        <nav className="hidden lg:flex items-center gap-7 text-xs font-medium tracking-[0.16em] uppercase text-[#A9C4CA]">
+          <button onClick={() => onNavigate('philosophy')} className="hover:text-white transition-colors cursor-pointer">ABOUT</button>
+          <button onClick={() => onNavigate('alkaline')} className="hover:text-white transition-colors cursor-pointer">THE WATER</button>
+          <button onClick={() => onNavigate('process')} className="hover:text-white transition-colors cursor-pointer">PROCESS</button>
+          <button onClick={() => onNavigate('range')} className="hover:text-white transition-colors cursor-pointer">PRODUCT</button>
+        </nav>
       </div>
 
       {/* Center: Brand Wordmark */}
-      <div className="absolute left-1/2 -translate-x-1/2">
+      <div className="flex-shrink-0 flex items-center justify-center">
         <button
           onClick={() => onNavigate('hero')}
           className="cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-[#20BFD3]"
@@ -44,34 +54,8 @@ export default function Navbar({ onOpenMenu, onNavigate }: NavbarProps) {
         </button>
       </div>
 
-      {/* Right: Nav Links + Audio + Action */}
-      <div className="flex items-center gap-6 lg:gap-8">
-        <nav className="hidden lg:flex items-center gap-7 text-xs font-medium tracking-[0.16em] uppercase text-[#A9C4CA]">
-          <button
-            onClick={() => onNavigate('philosophy')}
-            className="hover:text-white transition-colors cursor-pointer"
-          >
-            ABOUT
-          </button>
-          <button
-            onClick={() => onNavigate('alkaline')}
-            className="hover:text-white transition-colors cursor-pointer"
-          >
-            THE WATER
-          </button>
-          <button
-            onClick={() => onNavigate('process')}
-            className="hover:text-white transition-colors cursor-pointer"
-          >
-            PROCESS
-          </button>
-          <button
-            onClick={() => onNavigate('range')}
-            className="hover:text-white transition-colors cursor-pointer"
-          >
-            PRODUCT
-          </button>
-        </nav>
+      {/* Right: Audio + Action */}
+      <div className="flex items-center justify-end gap-5 xl:gap-8 flex-1">
 
         {/* Ambient Sound Toggle */}
         <button
@@ -92,7 +76,7 @@ export default function Navbar({ onOpenMenu, onNavigate }: NavbarProps) {
 
         {/* Primary Action Button */}
         <button
-          onClick={() => onNavigate('bottle')}
+          onClick={() => (onOpenContact ? onOpenContact() : onNavigate('bottle'))}
           className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 rounded-full border border-white/20 hover:border-[#20BFD3] text-xs font-semibold tracking-[0.14em] uppercase text-white hover:text-[#02080D] hover:bg-[#20BFD3] transition-all duration-300 shadow-[0_0_15px_rgba(32,191,211,0.15)] cursor-pointer"
         >
           <span>GET IN TOUCH</span>

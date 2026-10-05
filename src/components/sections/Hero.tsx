@@ -13,20 +13,10 @@ export default function Hero({ onExplore }: HeroProps) {
     >
       {/* Left Column Content */}
       <div className="max-w-2xl pointer-events-auto pt-20 sm:pt-0">
-        {/* Eyebrow Label */}
-        <div className="flex items-center gap-3 mb-6">
-          <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-[#20BFD3] shadow-[0_0_8px_#20BFD3]" />
-            <span className="text-[11px] font-mono tracking-[0.25em] text-[#7DEAF0] uppercase">
-              PREMIUM ALKALINE IONISED WATER
-            </span>
-          </div>
-          <span className="text-white/20">|</span>
-          <span className="text-[11px] font-mono text-[#A9C4CA]/60">pH 8.5+</span>
-        </div>
+
 
         {/* Large Bold Condensed Italic Heading */}
-        <h1 className="font-display text-6xl sm:text-8xl lg:text-9xl font-black italic tracking-tighter uppercase leading-[0.88] text-white">
+        <h1 className="font-display text-6xl sm:text-8xl lg:text-9xl font-extrabold italic tracking-tight uppercase leading-none text-white">
           <span className="block hover:text-[#7DEAF0] transition-colors duration-300">
             PURE
           </span>

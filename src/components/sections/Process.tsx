@@ -1,9 +1,11 @@
-import { useState } from 'react';
-import { ArrowRight, CheckCircle2, ChevronRight, Layers } from 'lucide-react';
+import { useState, useEffect, useRef } from 'react';
+import { ChevronRight, Layers, Sparkles } from 'lucide-react';
 import { PROCESS_STAGES } from '../../lib/constants';
 
 export default function Process() {
-  const [selectedStage, setSelectedStage] = useState(0);
+  const sectionRef = useRef<HTMLElement>(null);
+  const [scrollFraction, setScrollFraction] = useState(0);
+  const [manualActive, setManualActive] = useState<number | null>(null);
 
   const stageImages = [
     '/src/assets/images/artesian_source_aquifer_1791133528234.jpg',
@@ -12,24 +14,35 @@ export default function Process() {
     '/src/assets/images/water_droplet_macro_1791133515454.jpg',
   ];
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!sectionRef.current) return;
+      const rect = sectionRef.current.getBoundingClientRect();
+      const totalDistance = rect.height + window.innerHeight * 0.4;
+      const current = window.innerHeight - rect.top;
+      const progress = Math.min(1, Math.max(0, current / totalDistance));
+      setScrollFraction(progress);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Compute active stage based on scroll fraction
+  const autoActiveIndex = scrollFraction < 0.32 ? 0 : scrollFraction < 0.52 ? 1 : scrollFraction < 0.72 ? 2 : 3;
+  const activeStage = manualActive !== null ? manualActive : autoActiveIndex;
+
   return (
     <section
+      ref={sectionRef}
       id="process"
-      className="relative min-h-screen w-full flex items-center justify-between px-6 sm:px-12 lg:px-24 pointer-events-none select-none z-10 py-24"
+      className="relative min-h-screen w-full flex items-center justify-between px-6 sm:px-12 lg:px-24 pointer-events-none select-none z-10 py-28"
     >
-      {/* Left Column Content */}
+      {/* Left Column Content - Clean without the removed card description */}
       <div className="max-w-xl pointer-events-auto">
-        {/* Eyebrow Label */}
-        <div className="flex items-center gap-3 mb-6">
-          <span className="text-xs font-mono text-[#20BFD3] tracking-widest font-bold">05</span>
-          <span className="w-8 h-[1px] bg-[#20BFD3]/40" />
-          <span className="text-[11px] font-mono tracking-[0.25em] text-[#7DEAF0] uppercase">
-            THE IONA PROCESS
-          </span>
-        </div>
-
         {/* Heading */}
-        <h2 className="font-display text-6xl sm:text-8xl lg:text-9xl font-black italic tracking-tighter uppercase leading-[0.88] text-white">
+        <h2 className="font-display text-6xl sm:text-8xl lg:text-9xl font-extrabold italic tracking-tight uppercase leading-none text-white">
           <span className="block hover:text-[#7DEAF0] transition-colors duration-300">
             FROM
           </span>
@@ -42,96 +55,118 @@ export default function Process() {
         </h2>
 
         {/* Supporting Copy */}
-        <p className="mt-8 text-base sm:text-lg text-[#A9C4CA] font-normal tracking-wide leading-relaxed">
+        <p className="mt-8 text-base sm:text-lg text-[#A9C4CA] font-normal tracking-wide leading-relaxed max-w-lg">
           A careful journey to bring you pure, alkaline and ionised water. From deep granite reservoirs through catalytic refinement, each molecule is calibrated for pristine physiological resonance.
         </p>
 
-        {/* Interactive Active Stage Expanded Card */}
-        <div className="mt-8 p-5 rounded-lg border border-[#20BFD3]/30 bg-[#04141D]/80 backdrop-blur-md">
-          <div className="flex items-center justify-between mb-3">
-            <div className="flex items-center gap-2">
-              <span className="px-2 py-0.5 rounded text-[10px] font-mono bg-[#20BFD3]/20 text-[#7DEAF0] border border-[#20BFD3]/40">
-                ACTIVE STAGE {PROCESS_STAGES[selectedStage].step}
-              </span>
-              <span className="text-xs font-bold text-white font-mono uppercase tracking-wider">
-                {PROCESS_STAGES[selectedStage].name}
-              </span>
-            </div>
-            <span className="text-[11px] font-mono text-[#A9C4CA]">
-              {PROCESS_STAGES[selectedStage].depth}
-            </span>
-          </div>
-
-          <p className="text-xs text-[#A9C4CA] leading-relaxed">
-            {PROCESS_STAGES[selectedStage].description}
-          </p>
-
-          <div className="mt-4 pt-3 border-t border-white/10 flex items-center justify-between text-xs text-[#7DEAF0]">
-            <span className="flex items-center gap-1.5 text-[11px] font-mono">
-              <CheckCircle2 className="w-3.5 h-3.5 text-[#20BFD3]" />
-              Continuous Quality Calibration
-            </span>
-            <button
-              onClick={() => setSelectedStage((prev) => (prev + 1) % PROCESS_STAGES.length)}
-              className="flex items-center gap-1 text-[11px] font-bold uppercase tracking-wider text-white hover:text-[#7DEAF0] transition-colors cursor-pointer"
-            >
-              <span>Next Phase</span>
-              <ArrowRight className="w-3 h-3" />
-            </button>
-          </div>
+        {/* Subtle Phase Indicator Pill */}
+        <div className="mt-8 flex items-center gap-3">
+          <span className="px-3 py-1 rounded-full text-[11px] font-mono bg-[#20BFD3]/15 text-[#7DEAF0] border border-[#20BFD3]/30 flex items-center gap-2 font-bold tracking-wider">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#7DEAF0] animate-pulse" />
+            CURRENT STAGE 0{activeStage + 1}: {PROCESS_STAGES[activeStage].name}
+          </span>
+          <span className="text-[11px] font-mono text-[#A9C4CA]">
+            {PROCESS_STAGES[activeStage].depth}
+          </span>
         </div>
       </div>
 
-      {/* Right Column: 4 Illuminated Circular Stage Portals (Matching Storyboard 05) */}
-      <div className="hidden lg:flex flex-col gap-5 pointer-events-auto max-w-sm">
-        {PROCESS_STAGES.map((stage, idx) => {
-          const isCurrent = selectedStage === idx;
-          return (
+      {/* Right Column: 4 Cards that appear dynamically one by one as the user scrolls */}
+      <div className="hidden lg:flex flex-col gap-4 pointer-events-auto max-w-md w-full relative pl-6">
+        {/* Subtle Header */}
+        <div className="flex items-center justify-between px-1 mb-1 text-[10px] font-mono uppercase tracking-[0.2em] text-[#7DEAF0]">
+          <span className="flex items-center gap-2">
+            <Sparkles className="w-3 h-3 text-[#20BFD3]" />
+            FOUR-STAGE PURIFICATION
+          </span>
+          <span className="text-[#A9C4CA]/80">SCROLL TO ADVANCE</span>
+        </div>
+
+        {/* Vertical Progress Spine connecting the cards */}
+        <div className="relative flex flex-col gap-3.5 pl-3">
+          <div className="absolute left-[3px] top-4 bottom-4 w-[2px] bg-white/10 rounded-full overflow-hidden">
             <div
-              key={stage.step}
-              onClick={() => setSelectedStage(idx)}
-              className={`flex items-center gap-4 p-3.5 rounded-lg border transition-all duration-300 cursor-pointer ${
-                isCurrent
-                  ? 'border-[#20BFD3] bg-[#06232D]/80 shadow-[0_0_20px_rgba(32,191,211,0.2)] translate-x-[-6px]'
-                  : 'border-white/10 bg-[#04141D]/40 hover:border-white/20'
-              }`}
-            >
-              {/* Circular Portal Thumbnail */}
-              <div className="relative w-14 h-14 rounded-full overflow-hidden border-2 border-[#20BFD3]/50 shrink-0 group">
-                <img
-                  src={stageImages[idx]}
-                  alt={stage.name}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-[#02080D]/30" />
-                <div className="absolute inset-0 flex items-center justify-center font-mono text-xs font-bold text-white drop-shadow">
-                  {stage.step}
-                </div>
-              </div>
+              className="w-full bg-gradient-to-b from-[#20BFD3] to-[#7DEAF0] transition-all duration-300 shadow-[0_0_8px_#20BFD3]"
+              style={{ height: `${Math.min(100, Math.max(0, scrollFraction * 100))}%` }}
+            />
+          </div>
 
-              {/* Text */}
-              <div className="flex-1">
-                <div className="flex items-center justify-between">
-                  <div className="text-xs font-bold font-mono tracking-wider text-white uppercase">
-                    {stage.step} {stage.name}
-                  </div>
-                  <ChevronRight
-                    className={`w-3.5 h-3.5 transition-transform ${
-                      isCurrent ? 'text-[#7DEAF0] translate-x-1' : 'text-white/20'
-                    }`}
+          {PROCESS_STAGES.map((stage, idx) => {
+            // Stage reveal thresholds as user scrolls into the section:
+            // Stage 0: visible right away on entering
+            // Stage 1: reveals at >= 0.28
+            // Stage 2: reveals at >= 0.48
+            // Stage 3: reveals at >= 0.68
+            const threshold = idx === 0 ? 0.08 : idx * 0.2 + 0.08;
+            const isRevealed = scrollFraction >= threshold || (manualActive !== null && manualActive >= idx);
+            const isCurrent = activeStage === idx;
+
+            return (
+              <div
+                key={stage.step}
+                onClick={() => setManualActive(idx)}
+                style={{
+                  opacity: isRevealed ? 1 : 0,
+                  transform: isRevealed
+                    ? isCurrent
+                      ? 'translateY(0) scale(1.02) translateX(-4px)'
+                      : 'translateY(0) scale(1)'
+                    : 'translateY(36px) scale(0.92)',
+                  pointerEvents: isRevealed ? 'auto' : 'none',
+                  transition: 'all 0.65s cubic-bezier(0.16, 1, 0.3, 1)',
+                }}
+                className={`flex items-start gap-4 p-4 rounded-xl border cursor-pointer backdrop-blur-md transition-all duration-300 ${
+                  isCurrent
+                    ? 'border-[#20BFD3] bg-[#06232D]/90 shadow-[0_0_25px_rgba(32,191,211,0.25)]'
+                    : isRevealed
+                    ? 'border-white/10 bg-[#04141D]/60 hover:border-white/30 hover:bg-[#06232D]/50'
+                    : 'border-transparent bg-transparent'
+                }`}
+              >
+                {/* Circular Portal Thumbnail */}
+                <div className={`relative w-12 h-12 rounded-full overflow-hidden border-2 shrink-0 transition-colors duration-300 mt-0.5 ${
+                  isCurrent ? 'border-[#7DEAF0] shadow-[0_0_12px_#20BFD3]' : 'border-white/20'
+                }`}>
+                  <img
+                    src={stageImages[idx]}
+                    alt={stage.name}
+                    className="w-full h-full object-cover"
                   />
+                  <div className="absolute inset-0 bg-[#02080D]/30" />
+                  <div className="absolute inset-0 flex items-center justify-center font-mono text-xs font-bold text-white drop-shadow">
+                    {stage.step}
+                  </div>
                 </div>
-                <div className="text-[11px] text-[#A9C4CA] line-clamp-1 mt-0.5">
-                  {stage.description}
+
+                {/* Text Details */}
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <span className="text-xs font-bold font-mono tracking-wider text-white uppercase">
+                        {stage.step} {stage.name}
+                      </span>
+                      <span className="text-[10px] font-mono text-[#20BFD3] px-1.5 py-0.2 rounded bg-[#20BFD3]/10">
+                        {stage.depth}
+                      </span>
+                    </div>
+                    <ChevronRight
+                      className={`w-3.5 h-3.5 transition-transform duration-300 ${
+                        isCurrent ? 'text-[#7DEAF0] translate-x-1' : 'text-white/20'
+                      }`}
+                    />
+                  </div>
+                  <p className="text-[11px] text-[#A9C4CA] leading-relaxed mt-1.5">
+                    {stage.description}
+                  </p>
                 </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
 
-        <div className="p-3.5 rounded-sm border border-white/10 bg-[#02080D]/60 flex items-center gap-3 text-xs text-[#A9C4CA]">
+        <div className="p-3 rounded-sm border border-white/10 bg-[#02080D]/60 flex items-center gap-3 text-xs text-[#A9C4CA] mt-1">
           <Layers className="w-4 h-4 text-[#20BFD3] shrink-0" />
-          <span>Every bottle undergoes hermetic micro-batch scanning prior to seal release.</span>
+          <span className="text-[11px]">Every bottle undergoes hermetic micro-batch scanning prior to seal release.</span>
         </div>
       </div>
     </section>

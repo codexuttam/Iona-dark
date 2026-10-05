@@ -11,17 +11,8 @@ export default function Ionised() {
     >
       {/* Left Column Content */}
       <div className="max-w-xl pointer-events-auto">
-        {/* Eyebrow Label */}
-        <div className="flex items-center gap-3 mb-6">
-          <span className="text-xs font-mono text-[#20BFD3] tracking-widest font-bold">04</span>
-          <span className="w-8 h-[1px] bg-[#20BFD3]/40" />
-          <span className="text-[11px] font-mono tracking-[0.25em] text-[#7DEAF0] uppercase">
-            IONISED WATER
-          </span>
-        </div>
-
         {/* Heading */}
-        <h2 className="font-display text-6xl sm:text-8xl lg:text-9xl font-black italic tracking-tighter uppercase leading-[0.88] text-white">
+        <h2 className="font-display text-6xl sm:text-8xl lg:text-9xl font-extrabold italic tracking-tight uppercase leading-none text-white">
           <span className="block hover:text-[#7DEAF0] transition-colors duration-300">
             IONISED.
           </span>

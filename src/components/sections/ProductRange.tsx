@@ -5,16 +5,21 @@ import { PRODUCT_SIZES } from '../../lib/constants';
 interface ProductRangeProps {
   selectedSizeIndex: number;
   onSelectSize: (index: number) => void;
+  onReserveCase?: (size: string) => void;
 }
 
 export default function ProductRange({
   selectedSizeIndex,
   onSelectSize,
+  onReserveCase,
 }: ProductRangeProps) {
   const [reservedSize, setReservedSize] = useState<string | null>(null);
 
   const handleReserve = (size: string) => {
     setReservedSize(size);
+    if (onReserveCase) {
+      onReserveCase(size);
+    }
     setTimeout(() => setReservedSize(null), 3500);
   };
 
@@ -25,17 +30,8 @@ export default function ProductRange({
     >
       {/* Top Header */}
       <div className="max-w-xl pointer-events-auto">
-        {/* Eyebrow Label */}
-        <div className="flex items-center gap-3 mb-6">
-          <span className="text-xs font-mono text-[#20BFD3] tracking-widest font-bold">07</span>
-          <span className="w-8 h-[1px] bg-[#20BFD3]/40" />
-          <span className="text-[11px] font-mono tracking-[0.25em] text-[#7DEAF0] uppercase">
-            PRODUCT RANGE
-          </span>
-        </div>
-
         {/* Heading */}
-        <h2 className="font-display text-6xl sm:text-8xl lg:text-9xl font-black italic tracking-tighter uppercase leading-[0.88] text-white">
+        <h2 className="font-display text-6xl sm:text-8xl lg:text-9xl font-extrabold italic tracking-tight uppercase leading-none text-white">
           <span className="block hover:text-[#7DEAF0] transition-colors duration-300">
             PURE
           </span>
@@ -68,7 +64,7 @@ export default function ProductRange({
             >
               <div>
                 <div className="flex items-center justify-between">
-                  <span className="font-display text-3xl sm:text-4xl font-black italic text-white">
+                  <span className="font-display text-3xl sm:text-4xl font-extrabold italic text-white">
                     {prod.size}
                   </span>
                   <span className="text-[10px] font-mono uppercase tracking-wider text-[#20BFD3] px-2 py-0.5 rounded bg-[#20BFD3]/10 border border-[#20BFD3]/30">
