@@ -2,16 +2,20 @@ import { useState, useEffect, useRef } from 'react';
 import { ChevronRight, Layers, Sparkles } from 'lucide-react';
 import { PROCESS_STAGES } from '../../lib/constants';
 
+import imgArtesian from '../../assets/images/artesian_source_aquifer_1791133528234.jpg';
+import imgDroplet from '../../assets/images/water_droplet_macro_1791133515454.jpg';
+import imgEnv from '../../assets/images/underwater_ambient_env_1791133503549.jpg';
+
 export default function Process() {
   const sectionRef = useRef<HTMLElement>(null);
   const [scrollFraction, setScrollFraction] = useState(0);
   const [manualActive, setManualActive] = useState<number | null>(null);
 
   const stageImages = [
-    '/src/assets/images/artesian_source_aquifer_1791133528234.jpg',
-    '/src/assets/images/water_droplet_macro_1791133515454.jpg',
-    '/src/assets/images/underwater_ambient_env_1791133503549.jpg',
-    '/src/assets/images/water_droplet_macro_1791133515454.jpg',
+    imgArtesian,
+    imgDroplet,
+    imgEnv,
+    imgDroplet,
   ];
 
   useEffect(() => {
