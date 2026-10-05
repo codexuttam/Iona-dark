@@ -28,18 +28,18 @@ export default function LegalModal({ isOpen, type, onClose, onSwitchType }: Lega
               className={`flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-mono uppercase tracking-wider transition-colors cursor-pointer ${
                 isTerms
                   ? 'bg-white text-[#030709] font-medium'
-                  : 'text-[#8D9FA7] hover:text-white bg-white/5'
+                  : 'text-[#CBD5E1] hover:text-white bg-white/5'
               }`}
             >
               <FileText className="w-3.5 h-3.5" />
-              <span>TERMS OF RESERVATION</span>
+              <span>TERMS OF SERVICE</span>
             </button>
             <button
               onClick={() => onSwitchType('privacy')}
               className={`flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-mono uppercase tracking-wider transition-colors cursor-pointer ${
                 !isTerms
                   ? 'bg-white text-[#030709] font-medium'
-                  : 'text-[#8D9FA7] hover:text-white bg-white/5'
+                  : 'text-[#CBD5E1] hover:text-white bg-white/5'
               }`}
             >
               <ShieldCheck className="w-3.5 h-3.5" />
@@ -49,7 +49,7 @@ export default function LegalModal({ isOpen, type, onClose, onSwitchType }: Lega
 
           <button
             onClick={onClose}
-            className="p-2 rounded-full border border-white/10 hover:border-white/40 text-[#A9C4CA] hover:text-white transition-colors cursor-pointer"
+            className="p-2 rounded-full border border-white/10 hover:border-white/40 text-[#CBD5E1] hover:text-white transition-colors cursor-pointer"
             aria-label="Close dialog"
           >
             <X className="w-5 h-5" />
@@ -57,32 +57,32 @@ export default function LegalModal({ isOpen, type, onClose, onSwitchType }: Lega
         </div>
 
         {/* Scrollable Content */}
-        <div className="overflow-y-auto pr-2 mt-6 space-y-6 text-xs text-[#A9C4CA] leading-relaxed font-sans scrollbar-thin scrollbar-thumb-[#20BFD3]/30">
+        <div className="overflow-y-auto pr-2 mt-6 space-y-6 text-xs text-[#E2E8F0] leading-relaxed font-sans scrollbar-thin scrollbar-thumb-white/20">
           {isTerms ? (
             <>
               <div>
-                <span className="text-[10px] font-mono text-[#7DEAF0] uppercase tracking-widest block mb-1">
+                <span className="text-[10px] font-mono text-[#CBD5E1] uppercase tracking-widest block mb-1">
                   EFFECTIVE DATE: OCTOBER 2026
                 </span>
                 <h3 className="font-display text-2xl font-bold uppercase italic text-white">
-                  TERMS OF SERVICE & PRIVATE ALLOCATIONS
+                  TERMS OF SERVICE & ORDERS
                 </h3>
-                <p className="mt-2">
-                  Welcome to IONA. By accessing this platform, reserving case allocations, or interacting with our digital flagship, you agree to comply with and be bound by the following Terms & Conditions.
+                <p className="mt-2 text-[#E2E8F0]">
+                  Welcome to IONA. By accessing this platform, ordering cases, or interacting with our digital flagship, you agree to comply with and be bound by the following Terms & Conditions.
                 </p>
               </div>
 
               <div className="space-y-2">
-                <h4 className="font-mono text-xs font-bold uppercase tracking-wider text-[#7DEAF0]">
-                  1. CELLAR ALLOCATIONS & PRIVATE RESERVATIONS
+                <h4 className="font-mono text-xs font-bold uppercase tracking-wider text-white">
+                  1. ORDERS & RESERVATIONS
                 </h4>
                 <p>
-                  All case allocations reserved via IONA's concierge are processed subject to batch vintage availability and micro-filtration release clearance. Receipt of a reservation confirmation does not constitute a guaranteed dispatch until quality verification is confirmed.
+                  All case orders placed with IONA are processed subject to batch vintage availability and release clearance. Receipt of an order confirmation will be verified by our team prior to dispatch.
                 </p>
               </div>
 
               <div className="space-y-2">
-                <h4 className="font-mono text-xs font-bold uppercase tracking-wider text-[#7DEAF0]">
+                <h4 className="font-mono text-xs font-bold uppercase tracking-wider text-white">
                   2. HERMETIC PURITY & BATCH TESTING
                 </h4>
                 <p>
@@ -91,7 +91,7 @@ export default function LegalModal({ isOpen, type, onClose, onSwitchType }: Lega
               </div>
 
               <div className="space-y-2">
-                <h4 className="font-mono text-xs font-bold uppercase tracking-wider text-[#7DEAF0]">
+                <h4 className="font-mono text-xs font-bold uppercase tracking-wider text-white">
                   3. INTELLECTUAL PROPERTY & 3D ASSETS
                 </h4>
                 <p>
@@ -100,34 +100,34 @@ export default function LegalModal({ isOpen, type, onClose, onSwitchType }: Lega
               </div>
 
               <div className="space-y-2">
-                <h4 className="font-mono text-xs font-bold uppercase tracking-wider text-[#7DEAF0]">
+                <h4 className="font-mono text-xs font-bold uppercase tracking-wider text-white">
                   4. TEMPERATURE SENSITIVE DISPATCH
                 </h4>
                 <p>
-                  IONA bottles are transported via climate-regulated white-glove courier to maintain crystalline molecular structure and mineral equilibrium. Delivery timelines will be coordinated directly through private client concierge.
+                  IONA bottles are transported via climate-regulated courier to maintain crystalline molecular structure and mineral equilibrium. Delivery timelines will be coordinated directly through our support team.
                 </p>
               </div>
             </>
           ) : (
             <>
               <div>
-                <span className="text-[10px] font-mono text-[#7DEAF0] uppercase tracking-widest block mb-1">
+                <span className="text-[10px] font-mono text-[#CBD5E1] uppercase tracking-widest block mb-1">
                   EFFECTIVE DATE: OCTOBER 2026
                 </span>
                 <h3 className="font-display text-2xl font-bold uppercase italic text-white">
                   PRIVACY & DATA GOVERNANCE POLICY
                 </h3>
-                <p className="mt-2">
+                <p className="mt-2 text-[#E2E8F0]">
                   IONA is dedicated to safeguarding the privacy and digital sovereignty of our patrons. This document outlines how client inquiries and allocation data are managed with the highest encryption standards.
                 </p>
               </div>
 
               <div className="space-y-2">
-                <h4 className="font-mono text-xs font-bold uppercase tracking-wider text-[#7DEAF0]">
+                <h4 className="font-mono text-xs font-bold uppercase tracking-wider text-white">
                   1. INFORMATION WE COLLECT
                 </h4>
                 <p>
-                  We collect strictly necessary concierge information provided voluntarily when you request case allocations, including patron name, delivery jurisdiction, contact email, and special batch handling notes.
+                  We collect strictly necessary order information provided voluntarily when you request case allocations, including patron name, delivery jurisdiction, contact email, and special batch handling notes.
                 </p>
               </div>
 

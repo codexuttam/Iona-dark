@@ -63,3 +63,32 @@
   border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
+/* High Contrast Editorial Readability & Protection */
+.text-luminous-heading {
+  color: #FFFFFF;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.9), 0 0 35px rgba(0, 0, 0, 0.6);
+}
+
+.text-editorial-body {
+  color: #E2E8F0;
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.85);
+}
+
+.text-mono-tag {
+  color: #CBD5E1;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.8);
+}
+
+.card-luxury-glass {
+  background: rgba(4, 11, 16, 0.85);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.65);
+}
+
+.card-luxury-glass:hover {
+  background: rgba(6, 17, 25, 0.92);
+  border-color: rgba(255, 255, 255, 0.28);
+}
+

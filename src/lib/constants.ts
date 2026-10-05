@@ -8,7 +8,8 @@ export const COLORS = {
   glassHighlight: '#FFFFFF',
   white: '#FFFFFF',
   primaryText: '#FFFFFF',
-  secondaryText: '#8D9FA7',
+  secondaryText: '#D6E2E7',
+  mutedText: '#94A7B0',
 };
 
 export interface SectionDef {

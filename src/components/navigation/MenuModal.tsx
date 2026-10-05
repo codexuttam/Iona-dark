@@ -36,8 +36,8 @@ export default function MenuModal({ isOpen, onClose, onNavigate }: MenuModalProp
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 my-auto py-8">
         {/* Navigation Column */}
         <div className="lg:col-span-7 flex flex-col gap-2">
-          <span className="text-[11px] uppercase tracking-[0.25em] text-[#8D9FA7] font-mono mb-3">
-            CHAPTERS DIRECTORY
+          <span className="text-[11px] uppercase tracking-[0.25em] text-[#CBD5E1] font-mono mb-3 font-medium">
+            INDEX DIRECTORY
           </span>
           {SECTIONS.map((sec) => (
             <button
@@ -46,60 +46,60 @@ export default function MenuModal({ isOpen, onClose, onNavigate }: MenuModalProp
                 onNavigate(sec.id);
                 onClose();
               }}
-              className="group flex items-center justify-between py-2 text-left border-b border-white/[0.06] hover:border-white/30 transition-colors cursor-pointer"
+              className="group flex items-center justify-between py-2.5 text-left border-b border-white/10 hover:border-white/40 transition-colors cursor-pointer"
             >
               <div className="flex items-baseline gap-5">
-                <span className="text-xs font-mono text-[#8D9FA7]/60 group-hover:text-white transition-colors">
+                <span className="text-xs font-mono text-[#CBD5E1] group-hover:text-white transition-colors font-medium">
                   {sec.num}
                 </span>
-                <span className="font-serif-luxury text-2xl sm:text-3xl font-light text-white group-hover:text-[#E5F3F5] group-hover:translate-x-2 transition-all">
+                <span className="font-serif-luxury text-2xl sm:text-3xl font-light text-white group-hover:text-[#E8F8FA] group-hover:translate-x-2 transition-all">
                   {sec.title}
                 </span>
               </div>
-              <ArrowRight className="w-4 h-4 text-white/20 group-hover:text-white group-hover:translate-x-1 transition-all" />
+              <ArrowRight className="w-4 h-4 text-white/40 group-hover:text-white group-hover:translate-x-1 transition-all" />
             </button>
           ))}
         </div>
 
         {/* Specifications & Ethos */}
-        <div className="lg:col-span-5 flex flex-col justify-between gap-8 border-l border-white/[0.08] lg:pl-12">
+        <div className="lg:col-span-5 flex flex-col justify-between gap-8 border-l border-white/15 lg:pl-12">
           <div>
-            <span className="text-[11px] uppercase tracking-[0.25em] text-[#8D9FA7] font-mono">
+            <span className="text-[11px] uppercase tracking-[0.25em] text-[#CBD5E1] font-mono font-medium">
               ELEMENTAL BASELINE
             </span>
             <div className="mt-4 grid grid-cols-2 gap-4">
-              <div className="p-4 rounded-lg border border-white/10 bg-white/[0.02]">
-                <Droplets className="w-4 h-4 text-white/60 mb-2" />
+              <div className="p-4 rounded-lg card-luxury-glass">
+                <Droplets className="w-4 h-4 text-white mb-2" />
                 <div className="text-base font-serif-luxury text-white">8.5 - 8.8</div>
-                <div className="text-[10px] text-[#8D9FA7] uppercase tracking-wider font-mono">Natural pH</div>
+                <div className="text-[10px] text-[#CBD5E1] uppercase tracking-wider font-mono">Natural pH</div>
               </div>
-              <div className="p-4 rounded-lg border border-white/10 bg-white/[0.02]">
-                <Sparkles className="w-4 h-4 text-white/60 mb-2" />
+              <div className="p-4 rounded-lg card-luxury-glass">
+                <Sparkles className="w-4 h-4 text-white mb-2" />
                 <div className="text-base font-serif-luxury text-white">-200 mV</div>
-                <div className="text-[10px] text-[#8D9FA7] uppercase tracking-wider font-mono">Redox ORP</div>
+                <div className="text-[10px] text-[#CBD5E1] uppercase tracking-wider font-mono">Redox ORP</div>
               </div>
-              <div className="p-4 rounded-lg border border-white/10 bg-white/[0.02]">
-                <ShieldCheck className="w-4 h-4 text-white/60 mb-2" />
+              <div className="p-4 rounded-lg card-luxury-glass">
+                <ShieldCheck className="w-4 h-4 text-white mb-2" />
                 <div className="text-base font-serif-luxury text-white">Crystal Resin</div>
-                <div className="text-[10px] text-[#8D9FA7] uppercase tracking-wider font-mono">BPA-Free Vessel</div>
+                <div className="text-[10px] text-[#CBD5E1] uppercase tracking-wider font-mono">BPA-Free Vessel</div>
               </div>
-              <div className="p-4 rounded-lg border border-white/10 bg-white/[0.02]">
-                <Compass className="w-4 h-4 text-white/60 mb-2" />
+              <div className="p-4 rounded-lg card-luxury-glass">
+                <Compass className="w-4 h-4 text-white mb-2" />
                 <div className="text-base font-serif-luxury text-white">380m</div>
-                <div className="text-[10px] text-[#8D9FA7] uppercase tracking-wider font-mono">Aquifer Depth</div>
+                <div className="text-[10px] text-[#CBD5E1] uppercase tracking-wider font-mono">Aquifer Depth</div>
               </div>
             </div>
           </div>
 
-          <div className="p-5 rounded-lg border border-white/10 bg-white/[0.02] backdrop-blur-md">
-            <h4 className="text-xs font-serif-luxury tracking-widest text-white uppercase">
-              Private Concierge & Cellar Allocations
+          <div className="p-5 rounded-lg card-luxury-glass">
+            <h4 className="text-xs font-serif-luxury tracking-widest text-white uppercase font-medium">
+              Orders & Customer Inquiries
             </h4>
-            <p className="mt-2 text-xs text-[#8D9FA7] font-light leading-relaxed">
-              Available at select private residences, culinary sanctuaries, and through scheduled reserve allocation.
+            <p className="mt-2 text-xs text-[#E2E8F0] font-light leading-relaxed">
+              Available at select private residences, boutique spaces, and direct scheduled orders.
             </p>
-            <div className="mt-4 flex items-center gap-4 text-xs font-mono text-[#8D9FA7]">
-              <span>concierge@ionawater.com</span>
+            <div className="mt-4 flex items-center gap-4 text-xs font-mono text-[#CBD5E1]">
+              <span className="text-white font-medium">contact@ionawater.com</span>
             </div>
           </div>
         </div>

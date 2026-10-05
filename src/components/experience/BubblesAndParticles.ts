@@ -104,21 +104,21 @@ export function createEnvironmentAtmosphere(): EnvironmentAtmosphere {
 
   for (let i = 0; i < ribbonCount; i++) {
     const t = (i / ribbonCount) * Math.PI * 4;
-    const r = 1.2 + Math.sin(t * 2) * 0.4;
-    ribbonPos[i * 3] = Math.cos(t) * r;
-    ribbonPos[i * 3 + 1] = (i / ribbonCount - 0.5) * 5;
-    ribbonPos[i * 3 + 2] = Math.sin(t) * r;
+    const r = 0.8 + Math.sin(t * 2) * 0.25;
+    ribbonPos[i * 3] = Math.cos(t) * r + 0.6;
+    ribbonPos[i * 3 + 1] = (i / ribbonCount - 0.5) * 4;
+    ribbonPos[i * 3 + 2] = Math.sin(t) * r - 1.2;
 
-    ribbonColors[i * 3] = 0.85; // R
-    ribbonColors[i * 3 + 1] = 0.93; // G (mist)
-    ribbonColors[i * 3 + 2] = 0.96; // B
+    ribbonColors[i * 3] = 0.7; // R
+    ribbonColors[i * 3 + 1] = 0.85; // G (mist)
+    ribbonColors[i * 3 + 2] = 0.95; // B
   }
 
   ribbonGeo.setAttribute('position', new THREE.BufferAttribute(ribbonPos, 3));
   ribbonGeo.setAttribute('color', new THREE.BufferAttribute(ribbonColors, 3));
 
   const ribbonMat = new THREE.PointsMaterial({
-    size: 0.06,
+    size: 0.025,
     vertexColors: true,
     transparent: true,
     opacity: 0.0,
@@ -187,9 +187,9 @@ export function createEnvironmentAtmosphere(): EnvironmentAtmosphere {
         ribbonAlpha = 1 - (scrollProgress - sPeak) / (sEnd - sPeak);
       }
     }
-    ribbonMat.opacity = Math.max(0, Math.min(0.9, ribbonAlpha * 0.85));
-    energyRibbon.rotation.y = time * 0.8;
-    energyRibbon.rotation.x = Math.sin(time * 0.4) * 0.2;
+    ribbonMat.opacity = Math.max(0, Math.min(0.28, ribbonAlpha * 0.28));
+    energyRibbon.rotation.y = time * 0.5;
+    energyRibbon.rotation.x = Math.sin(time * 0.3) * 0.15;
 
     // 4. Subtle pulsation of light rays
     rayMat.opacity = 0.05 + Math.sin(time * 0.8) * 0.02 + scrollProgress * 0.03;

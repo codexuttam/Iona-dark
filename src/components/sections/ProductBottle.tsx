@@ -14,25 +14,25 @@ export default function ProductBottle({ onRotateBottle: _onRotateBottle }: Produ
       <div className="max-w-md pointer-events-auto">
 
         {/* Heading */}
-        <h2 className="font-serif-luxury text-5xl sm:text-7xl lg:text-8xl font-light tracking-tight text-white leading-[1.0]">
-          <span className="block font-light text-white/90">
+        <h2 className="font-serif-luxury text-5xl sm:text-7xl lg:text-8xl font-light tracking-tight text-white leading-[1.0] text-luminous-heading">
+          <span className="block font-light text-white">
             An architectural
           </span>
-          <span className="block italic text-[#E5F3F5] font-normal">
+          <span className="block italic text-[#E8F8FA] font-normal">
             object of
           </span>
-          <span className="block font-light text-white/70">
+          <span className="block font-light text-white/95">
             desire.
           </span>
         </h2>
 
         {/* Supporting Copy */}
-        <p className="mt-8 text-sm sm:text-base text-[#8D9FA7] font-light tracking-wide leading-relaxed">
+        <p className="mt-8 text-sm sm:text-base text-[#E2E8F0] font-light tracking-wide leading-relaxed text-editorial-body">
           Sculpted for curated desks, bedside marble, and quiet sanctuaries. Delivering the optical refraction of hand-blown crystal glass with modern featherweight durability.
         </p>
 
-        <div className="mt-8 pl-5 border-l border-white/15">
-          <p className="text-xs text-[#8D9FA7] font-light">
+        <div className="mt-8 pl-5 border-l border-white/20">
+          <p className="text-xs text-[#D4E3E8] font-light leading-relaxed">
             Crowned with a precision brushed platinum closure that preserves carbon-neutral micro-pressures.
           </p>
         </div>
@@ -43,42 +43,42 @@ export default function ProductBottle({ onRotateBottle: _onRotateBottle }: Produ
         {/* Top Annotation */}
         <div className="flex items-center gap-4 group">
           <div className="flex items-center">
-            <span className="w-1.5 h-1.5 rounded-full bg-white/60" />
-            <span className="w-16 h-[1px] bg-gradient-to-r from-white/30 to-transparent" />
+            <span className="w-1.5 h-1.5 rounded-full bg-white/80 shadow-[0_0_8px_rgba(255,255,255,0.8)]" />
+            <span className="w-16 h-[1px] bg-gradient-to-r from-white/40 to-transparent" />
           </div>
-          <div className="p-4 rounded-lg border border-white/10 bg-white/[0.02] backdrop-blur-md">
-            <div className="text-xs font-serif-luxury text-white tracking-widest uppercase">
+          <div className="p-4 rounded-lg card-luxury-glass">
+            <div className="text-xs font-serif-luxury text-white tracking-widest uppercase font-medium">
               BRUSHED PLATINUM CROWN
             </div>
-            <div className="text-[11px] text-[#8D9FA7] font-light mt-1">Hermetic precision twist seal</div>
+            <div className="text-xs text-[#CBD5E1] font-light mt-1">Hermetic precision twist seal</div>
           </div>
         </div>
 
         {/* Middle Annotation */}
         <div className="flex items-center gap-4 group">
           <div className="flex items-center">
-            <span className="w-1.5 h-1.5 rounded-full bg-white/60" />
-            <span className="w-20 h-[1px] bg-gradient-to-r from-white/30 to-transparent" />
+            <span className="w-1.5 h-1.5 rounded-full bg-white/80 shadow-[0_0_8px_rgba(255,255,255,0.8)]" />
+            <span className="w-20 h-[1px] bg-gradient-to-r from-white/40 to-transparent" />
           </div>
-          <div className="p-4 rounded-lg border border-white/10 bg-white/[0.02] backdrop-blur-md">
-            <div className="text-xs font-serif-luxury text-white tracking-widest uppercase">
+          <div className="p-4 rounded-lg card-luxury-glass">
+            <div className="text-xs font-serif-luxury text-white tracking-widest uppercase font-medium">
               CRYSTAL-GRADE RESIN
             </div>
-            <div className="text-[11px] text-[#8D9FA7] font-light mt-1">High-transmission, BPA/BPS-free clarity</div>
+            <div className="text-xs text-[#CBD5E1] font-light mt-1">High-transmission, BPA/BPS-free clarity</div>
           </div>
         </div>
 
         {/* Bottom Annotation */}
         <div className="flex items-center gap-4 group">
           <div className="flex items-center">
-            <span className="w-1.5 h-1.5 rounded-full bg-white/60" />
-            <span className="w-14 h-[1px] bg-gradient-to-r from-white/30 to-transparent" />
+            <span className="w-1.5 h-1.5 rounded-full bg-white/80 shadow-[0_0_8px_rgba(255,255,255,0.8)]" />
+            <span className="w-14 h-[1px] bg-gradient-to-r from-white/40 to-transparent" />
           </div>
-          <div className="p-4 rounded-lg border border-white/10 bg-white/[0.02] backdrop-blur-md">
-            <div className="text-xs font-serif-luxury text-white tracking-widest uppercase">
+          <div className="p-4 rounded-lg card-luxury-glass">
+            <div className="text-xs font-serif-luxury text-white tracking-widest uppercase font-medium">
               MONOLITHIC BALANCE
             </div>
-            <div className="text-[11px] text-[#8D9FA7] font-light mt-1">Weighted base calibrated for stillness</div>
+            <div className="text-xs text-[#CBD5E1] font-light mt-1">Weighted base calibrated for stillness</div>
           </div>
         </div>
       </div>

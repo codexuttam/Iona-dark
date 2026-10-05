@@ -34,20 +34,20 @@ export default function Ionised() {
       <div className="max-w-xl pointer-events-auto">
 
         {/* Heading */}
-        <h2 className="font-serif-luxury text-5xl sm:text-7xl lg:text-8xl font-light tracking-tight text-white leading-[1.0]">
-          <span className="block font-light text-white/90">
+        <h2 className="font-serif-luxury text-5xl sm:text-7xl lg:text-8xl font-light tracking-tight text-white leading-[1.0] text-luminous-heading">
+          <span className="block font-light text-white">
             Molecular
           </span>
-          <span className="block italic text-[#E5F3F5] font-normal">
+          <span className="block italic text-[#E8F8FA] font-normal">
             harmony &
           </span>
-          <span className="block font-light text-white/70">
+          <span className="block font-light text-white/95">
             clarity.
           </span>
         </h2>
 
         {/* Supporting Copy */}
-        <p className="mt-8 text-sm sm:text-base text-[#8D9FA7] font-light tracking-wide leading-relaxed max-w-lg">
+        <p className="mt-8 text-sm sm:text-base text-[#E2E8F0] font-light tracking-wide leading-relaxed max-w-lg text-editorial-body">
           In untouched glacial springs, water is alive and structurally coherent. Gentle ionisation realigns molecular clusters into their most bio-available form, imparting a silky mouthfeel that dissolves effortlessly upon consumption.
         </p>
 
@@ -59,19 +59,19 @@ export default function Ionised() {
               <div
                 key={dim.id}
                 onClick={() => setActiveTab(dim.id as any)}
-                className={`p-5 rounded-lg border transition-all duration-300 cursor-pointer backdrop-blur-md ${
+                className={`p-5 rounded-lg transition-all duration-300 cursor-pointer card-luxury-glass ${
                   isSelected
-                    ? 'border-white/30 bg-white/[0.04] shadow-[0_4px_24px_rgba(0,0,0,0.4)]'
-                    : 'border-white/10 bg-white/[0.015] hover:border-white/20'
+                    ? 'border-white/40 shadow-[0_12px_36px_rgba(0,0,0,0.8)]'
+                    : 'hover:border-white/30'
                 }`}
               >
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-serif-luxury tracking-widest text-white uppercase">
+                  <span className="text-xs font-serif-luxury tracking-widest text-white uppercase font-medium">
                     {dim.label}
                   </span>
-                  <span className="text-[10px] font-mono text-[#8D9FA7] tracking-wider">{dim.metric}</span>
+                  <span className="text-[10px] font-mono text-[#CBD5E1] tracking-wider font-medium">{dim.metric}</span>
                 </div>
-                <p className="mt-2 text-xs text-[#8D9FA7] font-light leading-relaxed">
+                <p className="mt-2 text-xs text-[#E2E8F0] font-light leading-relaxed">
                   {dim.description}
                 </p>
               </div>

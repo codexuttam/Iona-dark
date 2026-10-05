@@ -32,20 +32,20 @@ export default function ProductRange({
       <div className="max-w-xl pointer-events-auto">
 
         {/* Heading */}
-        <h2 className="font-serif-luxury text-5xl sm:text-7xl lg:text-8xl font-light tracking-tight text-white leading-[1.0]">
-          <span className="block font-light text-white/90">
+        <h2 className="font-serif-luxury text-5xl sm:text-7xl lg:text-8xl font-light tracking-tight text-white leading-[1.0] text-luminous-heading">
+          <span className="block font-light text-white">
             Curated vessels
           </span>
-          <span className="block italic text-[#E5F3F5] font-normal">
+          <span className="block italic text-[#E8F8FA] font-normal">
             for every
           </span>
-          <span className="block font-light text-white/70">
+          <span className="block font-light text-white/95">
             setting.
           </span>
         </h2>
 
         {/* Supporting Copy */}
-        <p className="mt-8 text-sm sm:text-base text-[#8D9FA7] font-light tracking-wide leading-relaxed">
+        <p className="mt-8 text-sm sm:text-base text-[#E2E8F0] font-light tracking-wide leading-relaxed text-editorial-body">
           Four calibrated silhouettes sharing the same architectural purity. Allocated in limited quarterly releases for private residences and curated hospitality.
         </p>
       </div>
@@ -60,43 +60,43 @@ export default function ProductRange({
             <div
               key={prod.size}
               onClick={() => onSelectSize(idx)}
-              className={`p-6 rounded-lg border transition-all duration-300 cursor-pointer flex flex-col justify-between backdrop-blur-md ${
+              className={`p-6 rounded-lg transition-all duration-300 cursor-pointer flex flex-col justify-between card-luxury-glass ${
                 isSelected
-                  ? 'border-white/40 bg-white/[0.05] shadow-[0_8px_30px_rgba(0,0,0,0.5)] translate-y-[-4px]'
-                  : 'border-white/10 bg-white/[0.015] hover:border-white/20'
+                  ? 'border-white/40 shadow-[0_12px_36px_rgba(0,0,0,0.85)] translate-y-[-4px] ring-1 ring-white/20'
+                  : 'hover:border-white/30'
               }`}
             >
               <div>
                 <div className="flex items-baseline justify-between">
-                  <span className="font-serif-luxury text-3xl sm:text-4xl font-light text-white tracking-tight">
+                  <span className="font-serif-luxury text-3xl sm:text-4xl font-light text-white tracking-tight drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]">
                     {prod.size}
                   </span>
-                  <span className="text-[10px] font-mono uppercase tracking-widest text-[#8D9FA7]">
+                  <span className="text-[10px] font-mono uppercase tracking-widest text-[#CBD5E1] font-medium">
                     {prod.tag}
                   </span>
                 </div>
 
-                <div className="text-xs font-serif-luxury tracking-widest text-white/90 mt-2 uppercase">
+                <div className="text-xs font-serif-luxury tracking-widest text-white mt-2 uppercase font-medium">
                   {prod.name}
                 </div>
 
-                <p className="text-xs text-[#8D9FA7] font-light mt-2.5 leading-relaxed">
+                <p className="text-xs text-[#E2E8F0] font-light mt-2.5 leading-relaxed">
                   {prod.description}
                 </p>
 
                 {/* Specs */}
-                <div className="mt-5 pt-4 border-t border-white/10 space-y-1.5 text-[11px] font-mono text-[#8D9FA7]">
+                <div className="mt-5 pt-4 border-t border-white/15 space-y-1.5 text-[11px] font-mono text-[#CBD5E1]">
                   <div className="flex justify-between">
                     <span>Height:</span>
-                    <span className="text-white/80">{prod.specs.height}</span>
+                    <span className="text-white font-medium">{prod.specs.height}</span>
                   </div>
                   <div className="flex justify-between">
                     <span>Filled Weight:</span>
-                    <span className="text-white/80">{prod.specs.weight}</span>
+                    <span className="text-white font-medium">{prod.specs.weight}</span>
                   </div>
                   <div className="flex justify-between">
                     <span>Closure:</span>
-                    <span className="text-white/80">{prod.specs.cap}</span>
+                    <span className="text-white font-medium">{prod.specs.cap}</span>
                   </div>
                 </div>
               </div>
@@ -111,19 +111,19 @@ export default function ProductRange({
                   isJustReserved
                     ? 'bg-white text-[#030709] font-medium'
                     : isSelected
-                    ? 'border border-white/40 bg-white/[0.08] text-white hover:bg-white hover:text-[#030709]'
-                    : 'border border-white/15 text-[#8D9FA7] hover:border-white/30 hover:text-white'
+                    ? 'border border-white/40 bg-white/[0.12] text-white hover:bg-white hover:text-[#030709]'
+                    : 'border border-white/25 text-[#CBD5E1] hover:border-white/40 hover:text-white'
                 }`}
               >
                 {isJustReserved ? (
                   <>
                     <Check className="w-3.5 h-3.5" />
-                    <span>ALLOCATION REQUESTED</span>
+                    <span>ORDER REQUESTED</span>
                   </>
                 ) : (
                   <>
                     <Box className="w-3.5 h-3.5" />
-                    <span>REQUEST CASE</span>
+                    <span>ORDER CASE</span>
                   </>
                 )}
               </button>
@@ -134,13 +134,13 @@ export default function ProductRange({
 
       {/* Case Allocation Notice */}
       {reservedSize && (
-        <div className="fixed bottom-16 right-8 z-50 p-4 rounded-lg bg-[#081216] border border-white/20 text-white shadow-2xl animate-in slide-in-from-bottom duration-300 pointer-events-auto backdrop-blur-md">
-          <div className="flex items-center gap-2 text-xs font-serif-luxury text-white">
-            <Check className="w-4 h-4 text-white/80" />
-            <span>Allocation reserved for {reservedSize} Case.</span>
+        <div className="fixed bottom-16 right-8 z-50 p-4 rounded-lg card-luxury-glass text-white shadow-2xl animate-in slide-in-from-bottom duration-300 pointer-events-auto">
+          <div className="flex items-center gap-2 text-xs font-serif-luxury text-white font-medium">
+            <Check className="w-4 h-4 text-white" />
+            <span>Order requested for {reservedSize} Case.</span>
           </div>
-          <p className="text-[11px] text-[#8D9FA7] font-light mt-1">
-            Our private concierge team will reach out with your batch delivery details.
+          <p className="text-xs text-[#CBD5E1] font-light mt-1">
+            Our team will reach out with your order and delivery details.
           </p>
         </div>
       )}

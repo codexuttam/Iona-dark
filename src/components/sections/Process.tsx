@@ -47,25 +47,25 @@ export default function Process() {
       <div className="max-w-xl pointer-events-auto">
 
         {/* Heading */}
-        <h2 className="font-serif-luxury text-5xl sm:text-7xl lg:text-8xl font-light tracking-tight text-white leading-[1.0]">
-          <span className="block font-light text-white/90">
+        <h2 className="font-serif-luxury text-5xl sm:text-7xl lg:text-8xl font-light tracking-tight text-white leading-[1.0] text-luminous-heading">
+          <span className="block font-light text-white">
             Centuries in
           </span>
-          <span className="block italic text-[#E5F3F5] font-normal">
+          <span className="block italic text-[#E8F8FA] font-normal">
             geological
           </span>
-          <span className="block font-light text-white/70">
+          <span className="block font-light text-white/95">
             creation.
           </span>
         </h2>
 
         {/* Supporting Copy */}
-        <p className="mt-8 text-sm sm:text-base text-[#8D9FA7] font-light tracking-wide leading-relaxed max-w-lg">
+        <p className="mt-8 text-sm sm:text-base text-[#E2E8F0] font-light tracking-wide leading-relaxed max-w-lg text-editorial-body">
           Filtered through prehistoric subterranean granite and quartz over centuries. We do not alter nature; we simply safeguard its highest state of balance until it reaches you.
         </p>
 
-        <div className="mt-8 flex items-center gap-4 text-xs font-mono text-[#8D9FA7]">
-          <span className="w-2 h-2 rounded-full bg-white/40" />
+        <div className="mt-8 flex items-center gap-4 text-xs font-mono text-[#CBD5E1]">
+          <span className="w-2 h-2 rounded-full bg-white/70 shadow-[0_0_8px_rgba(255,255,255,0.8)]" />
           <span>ZERO CONTAMINANTS · ZERO CHEMICAL ACCELERANTS</span>
         </div>
       </div>
@@ -73,14 +73,14 @@ export default function Process() {
       {/* Right Column: 4 Cards that appear dynamically one by one as the user scrolls */}
       <div className="hidden lg:flex flex-col gap-4 pointer-events-auto max-w-md w-full relative pl-6">
         {/* Subtle Header */}
-        <div className="flex items-center justify-between px-1 mb-1 text-[10px] font-mono uppercase tracking-[0.2em] text-[#8D9FA7]">
+        <div className="flex items-center justify-between px-1 mb-1 text-[11px] font-mono uppercase tracking-[0.2em] text-[#CBD5E1] font-medium">
           <span>PROVENANCE MILESTONES</span>
           <span>SCROLL TO ADVANCE</span>
         </div>
 
         {/* Vertical Progress Spine connecting the cards */}
         <div className="relative flex flex-col gap-3.5 pl-3">
-          <div className="absolute left-[3px] top-4 bottom-4 w-[1px] bg-white/10 overflow-hidden">
+          <div className="absolute left-[3px] top-4 bottom-4 w-[1px] bg-white/20 overflow-hidden">
             <div
               className="w-full bg-white transition-all duration-300"
               style={{ height: `${Math.min(100, Math.max(0, scrollFraction * 100))}%` }}
@@ -106,25 +106,25 @@ export default function Process() {
                   pointerEvents: isRevealed ? 'auto' : 'none',
                   transition: 'all 0.65s cubic-bezier(0.16, 1, 0.3, 1)',
                 }}
-                className={`flex items-start gap-4 p-4 rounded-lg border cursor-pointer backdrop-blur-md transition-all duration-300 ${
+                className={`flex items-start gap-4 p-4 rounded-lg cursor-pointer transition-all duration-300 card-luxury-glass ${
                   isCurrent
-                    ? 'border-white/30 bg-white/[0.05] shadow-[0_8px_30px_rgba(0,0,0,0.5)]'
+                    ? 'border-white/40 shadow-[0_12px_36px_rgba(0,0,0,0.85)] ring-1 ring-white/20'
                     : isRevealed
-                    ? 'border-white/10 bg-white/[0.015] hover:border-white/20'
-                    : 'border-transparent bg-transparent'
+                    ? 'hover:border-white/35'
+                    : 'opacity-0'
                 }`}
               >
                 {/* Circular Portal Thumbnail */}
                 <div className={`relative w-12 h-12 rounded-full overflow-hidden border shrink-0 transition-colors duration-300 mt-0.5 ${
-                  isCurrent ? 'border-white' : 'border-white/20'
+                  isCurrent ? 'border-white' : 'border-white/30'
                 }`}>
                   <img
                     src={stageImages[idx]}
                     alt={stage.name}
-                    className="w-full h-full object-cover grayscale-[30%] contrast-[110%]"
+                    className="w-full h-full object-cover grayscale-[20%] contrast-[115%]"
                   />
-                  <div className="absolute inset-0 bg-[#030709]/30" />
-                  <div className="absolute inset-0 flex items-center justify-center font-serif-luxury text-xs text-white">
+                  <div className="absolute inset-0 bg-[#030709]/20" />
+                  <div className="absolute inset-0 flex items-center justify-center font-serif-luxury text-xs text-white font-medium">
                     {stage.step}
                   </div>
                 </div>
@@ -132,14 +132,14 @@ export default function Process() {
                 {/* Text Details */}
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-serif-luxury tracking-widest text-white uppercase">
+                    <span className="text-xs font-serif-luxury tracking-widest text-white uppercase font-medium">
                       {stage.name}
                     </span>
-                    <span className="text-[9px] font-mono text-[#8D9FA7] tracking-wider">
+                    <span className="text-[10px] font-mono text-[#CBD5E1] tracking-wider font-medium">
                       {stage.depth}
                     </span>
                   </div>
-                  <p className="text-[11px] text-[#8D9FA7] font-light leading-relaxed mt-1.5">
+                  <p className="text-xs text-[#E2E8F0] font-light leading-relaxed mt-1.5">
                     {stage.description}
                   </p>
                 </div>
@@ -148,7 +148,7 @@ export default function Process() {
           })}
         </div>
 
-        <div className="p-3 rounded-lg border border-white/10 bg-white/[0.015] text-[11px] font-light text-[#8D9FA7] mt-1 backdrop-blur-md">
+        <div className="p-3.5 rounded-lg card-luxury-glass text-xs font-light text-[#E2E8F0] mt-1">
           Every micro-batch undergoes spectral mineral analysis prior to hermetic sealing.
         </div>
       </div>

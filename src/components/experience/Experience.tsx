@@ -49,7 +49,7 @@ export default function Experience() {
     handleNavigate(target);
   };
 
-  const handleOpenContact = (subject = 'General Concierge Inquiry') => {
+  const handleOpenContact = (subject = 'General Inquiry & Contact') => {
     ambientSound.playDropChime();
     setContactSubject(subject);
     setIsContactOpen(true);
@@ -72,7 +72,7 @@ export default function Experience() {
         onOpenMenu={() => setIsMenuOpen(true)}
         onNavigate={handleNavigate}
         activeSection={SECTIONS[activeSectionIndex]?.id || 'hero'}
-        onOpenContact={() => handleOpenContact('Client Inquiry - Private Concierge')}
+        onOpenContact={() => handleOpenContact('General Inquiry')}
       />
 
       <ProgressBar
@@ -86,7 +86,7 @@ export default function Experience() {
         onNavigate={handleNavigate}
       />
 
-      {/* Contact Concierge & Case Allocation Modal */}
+      {/* Contact & Orders Modal */}
       <ContactModal
         isOpen={isContactOpen}
         onClose={() => setIsContactOpen(false)}
@@ -115,14 +115,14 @@ export default function Experience() {
             setSelectedBottleSizeIndex(idx);
             ambientSound.playDropChime();
           }}
-          onReserveCase={(size) => handleOpenContact(`Reserve Case Allocation - ${size}`)}
+          onReserveCase={(size) => handleOpenContact(`Reserve Case Order - ${size}`)}
         />
         <FAQ
           onExperience={() => handleNavigate('bottle')}
           onNavigate={handleNavigate}
           onOpenTerms={() => setLegalModalType('terms')}
           onOpenPrivacy={() => setLegalModalType('privacy')}
-          onOpenContact={() => handleOpenContact('Editorial & Concierge Inquiries')}
+          onOpenContact={() => handleOpenContact('Contact & Inquiries')}
         />
       </div>
     </main>

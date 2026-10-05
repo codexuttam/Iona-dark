@@ -35,26 +35,26 @@ export default function Philosophy({ onLearnMore: _onLearnMore }: PhilosophyProp
       <div className="max-w-xl pointer-events-auto">
 
         {/* Heading */}
-        <h2 className="font-serif-luxury text-5xl sm:text-7xl lg:text-8xl font-light tracking-tight text-white leading-[1.0]">
-          <span className="block font-light text-white/90">
+        <h2 className="font-serif-luxury text-5xl sm:text-7xl lg:text-8xl font-light tracking-tight text-white leading-[1.0] text-luminous-heading">
+          <span className="block font-light text-white">
             An intention,
           </span>
-          <span className="block italic text-[#E5F3F5] font-normal">
+          <span className="block italic text-[#E8F8FA] font-normal">
             not just
           </span>
-          <span className="block font-light text-white/70">
+          <span className="block font-light text-white/95">
             hydration.
           </span>
         </h2>
 
         {/* Supporting Narrative Copy */}
-        <p className="mt-8 text-sm sm:text-base text-[#8D9FA7] font-light tracking-wide leading-relaxed max-w-lg">
+        <p className="mt-8 text-sm sm:text-base text-[#E2E8F0] font-light tracking-wide leading-relaxed max-w-lg text-editorial-body">
           In a world defined by relentless acceleration, IONA is an invitation to pause. Crafted for individuals who curate their mental and physical environment with conscious discernment, water becomes an anchor of calm.
         </p>
 
         {/* Subtle quote element */}
-        <div className="mt-10 pl-6 border-l border-white/15">
-          <p className="text-xs text-[#E5F3F5]/80 font-serif-luxury italic text-[15px] leading-relaxed">
+        <div className="mt-10 pl-6 border-l border-white/25">
+          <p className="text-sm text-white font-serif-luxury italic text-[16px] leading-relaxed drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]">
             "Purity is not the absence of impurities; it is the presence of quiet harmony."
           </p>
         </div>
@@ -68,19 +68,19 @@ export default function Philosophy({ onLearnMore: _onLearnMore }: PhilosophyProp
             <div
               key={pillar.title}
               onMouseEnter={() => setActiveFeature(idx)}
-              className={`p-6 rounded-lg border transition-all duration-500 cursor-pointer backdrop-blur-md ${
+              className={`p-6 rounded-lg transition-all duration-500 cursor-pointer card-luxury-glass ${
                 isActive
-                  ? 'border-white/30 bg-white/[0.04] shadow-[0_8px_30px_rgba(0,0,0,0.5)] translate-x-[-6px]'
-                  : 'border-white/10 bg-white/[0.015] hover:border-white/20'
+                  ? 'border-white/40 shadow-[0_12px_36px_rgba(0,0,0,0.8)] translate-x-[-6px]'
+                  : 'hover:border-white/30'
               }`}
             >
               <div className="flex items-center justify-between">
-                <span className="text-xs font-serif-luxury tracking-[0.15em] text-white">
+                <span className="text-xs font-serif-luxury tracking-[0.15em] text-white font-medium">
                   0{idx + 1} · {pillar.title}
                 </span>
-                <span className="text-[10px] font-mono text-[#8D9FA7] uppercase tracking-widest">{pillar.sub}</span>
+                <span className="text-[10px] font-mono text-[#CBD5E1] uppercase tracking-widest">{pillar.sub}</span>
               </div>
-              <p className="mt-3 text-xs text-[#8D9FA7] font-light leading-relaxed">
+              <p className="mt-3 text-xs text-[#E2E8F0] font-light leading-relaxed">
                 {pillar.desc}
               </p>
             </div>
