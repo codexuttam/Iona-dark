@@ -62,7 +62,7 @@ export default function FAQ({ onExperience, onNavigate, onOpenTerms, onOpenPriva
       </div>
 
       {/* FINAL SECTION: Bring everything back to calm (PDF page 19) */}
-      <div className="mt-32 max-w-4xl w-full pointer-events-auto mx-auto text-center flex flex-col items-center py-16 border-t border-white/10">
+      <div id="ultimate-hydration" className="mt-32 max-w-4xl w-full pointer-events-auto mx-auto text-center flex flex-col items-center py-16 border-t border-white/10">
         <span className="text-xs font-mono tracking-[0.3em] uppercase text-[#20BFD3] mb-4">
           THE ULTIMATE HYDRATION
         </span>

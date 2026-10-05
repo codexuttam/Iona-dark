@@ -103,11 +103,13 @@ export default function Scene({
     const mainBottle: BottleInstance = createIonaBottle();
     scene.add(mainBottle.group);
 
-    // Secondary bottles for Section 07 (Product Range showcase)
+    // Secondary bottles for Section 07 (Product Range showcase) and Section 08
     const bottle250: BottleInstance = createIonaBottle({ heightScale: 0.72, radiusScale: 0.85 });
     const bottle1L: BottleInstance = createIonaBottle({ heightScale: 1.28, radiusScale: 1.15 });
-    bottle250.group.position.set(-1.8, -0.4, 0);
-    bottle1L.group.position.set(1.8, 0.2, 0);
+    bottle250.setScale(0.55);
+    bottle1L.setScale(0.55);
+    bottle250.group.position.set(-1.75, -0.68, 0);
+    bottle1L.group.position.set(1.75, -0.32, 0);
     bottle250.group.visible = false;
     bottle1L.group.visible = false;
     scene.add(bottle250.group);
@@ -235,6 +237,15 @@ export default function Scene({
       let targetRotZ = 0;
       let targetScale = isMobile ? 0.8 : 1.0;
 
+      // Targets for secondary bottles (bottle250 and bottle1L)
+      let targetBottle250X = -1.75;
+      let targetBottle250Y = -0.68;
+      let targetBottle250Z = 0;
+      let targetBottle1LX = 1.75;
+      let targetBottle1LY = -0.32;
+      let targetBottle1LZ = 0;
+      let targetSecondaryScale = 0.55;
+
       // Multi-bottle visibility flag for Section 07 and 08
       let showMultiBottles = false;
 
@@ -243,6 +254,7 @@ export default function Scene({
       const bottleEl = document.getElementById('bottle');
       const rangeEl = document.getElementById('range');
       const questionsEl = document.getElementById('questions');
+      const ultimateEl = document.getElementById('ultimate-hydration');
 
       let processFraction = -1;
       if (processEl) {
@@ -257,22 +269,48 @@ export default function Scene({
       const rangeRect = rangeEl?.getBoundingClientRect();
       const bottleRect = bottleEl?.getBoundingClientRect();
       const questionsRect = questionsEl?.getBoundingClientRect();
+      const ultimateRect = ultimateEl?.getBoundingClientRect();
 
       if (rangeRect && rangeRect.top <= window.innerHeight * 0.6) {
-        // Section 07 & 08: PRODUCT RANGE & QUESTIONS
+        // Section 07 & 08: PRODUCT RANGE & QUESTIONS / ULTIMATE HYDRATION
         showMultiBottles = true;
+
+        const isUltimateSection = ultimateRect && ultimateRect.top <= window.innerHeight * 0.75;
+        const aspect = camera.aspect;
+        const isMobileView = aspect < 0.95 || window.innerWidth < 768;
+
+        // Dynamic scale and spacing ensuring all 3 bottles fit completely on any screen
+        const multiScale = isMobileView ? 0.38 : (aspect < 1.3 ? 0.46 : 0.52);
+        const spacingX = isMobileView ? Math.min(0.85, aspect * 1.05) : (aspect < 1.3 ? 1.4 : 1.75);
+
+        // Ground baseline aligned so all 3 bottle bottoms rest on the exact same plane
+        // and are comfortably visible above the footer
+        const baseY = isUltimateSection ? -1.15 : -1.05;
+
         targetCamX = 0;
-        targetCamY = questionsRect && questionsRect.top <= window.innerHeight * 0.5 ? 0.1 : -0.15;
-        targetCamZ = 5.6;
+        targetCamY = isUltimateSection ? 0.05 : (questionsRect && questionsRect.top <= window.innerHeight * 0.5 ? 0.0 : -0.1);
+        targetCamZ = isMobileView ? 7.2 : 6.4;
 
+        // Center Bottle (Main 750ML, hScale = 1.0)
         targetBottleX = 0;
-        targetBottleY = -0.1;
-        targetBottleZ = 0;
-
-        targetRotX = 0;
-        targetRotY = time * 0.1;
+        targetBottleY = baseY + 1.2 * 1.0 * multiScale;
+        targetBottleZ = selectedBottleIndex === 1 || selectedBottleIndex === 2 ? 0.3 : 0;
+        targetRotX = 0.02;
+        targetRotY = time * 0.08;
         targetRotZ = 0;
-        targetScale = 0.95;
+        targetScale = multiScale;
+
+        // Left Bottle (250ML, hScale = 0.72)
+        targetBottle250X = -spacingX;
+        targetBottle250Y = baseY + 1.2 * 0.72 * multiScale;
+        targetBottle250Z = selectedBottleIndex === 0 ? 0.3 : 0;
+
+        // Right Bottle (1L, hScale = 1.28)
+        targetBottle1LX = spacingX;
+        targetBottle1LY = baseY + 1.2 * 1.28 * multiScale;
+        targetBottle1LZ = selectedBottleIndex === 3 ? 0.3 : 0;
+
+        targetSecondaryScale = multiScale;
       } else if (bottleRect && bottleRect.top <= window.innerHeight * 0.5) {
         // Section 06: OUR BOTTLE SHOWCASE (Close-up 360 inspection)
         const bTotal = bottleRect.height || window.innerHeight;
@@ -379,7 +417,11 @@ export default function Scene({
 
       // Smooth Bottle interpolation
       mainBottle.group.position.x = lerp(mainBottle.group.position.x, targetBottleX, 0.06);
-      mainBottle.group.position.y = lerp(mainBottle.group.position.y, targetBottleY + Math.sin(time * 1.2) * 0.04, 0.06);
+      mainBottle.group.position.y = lerp(
+        mainBottle.group.position.y,
+        targetBottleY + Math.sin(time * 1.2) * (showMultiBottles ? 0.025 : 0.04),
+        0.06
+      );
       mainBottle.group.position.z = lerp(mainBottle.group.position.z, targetBottleZ, 0.06);
 
       // Add mouse drag manual rotation + gentle mouse follow
@@ -402,9 +444,38 @@ export default function Scene({
       bottle250.group.visible = showMultiBottles;
       bottle1L.group.visible = showMultiBottles;
       if (showMultiBottles) {
-        bottle250.group.rotation.y = time * 0.12;
-        bottle1L.group.rotation.y = time * 0.09;
+        bottle250.group.position.x = lerp(bottle250.group.position.x, targetBottle250X, 0.06);
+        bottle250.group.position.y = lerp(
+          bottle250.group.position.y,
+          targetBottle250Y + Math.sin(time * 1.2 + 0.6) * 0.025,
+          0.06
+        );
+        bottle250.group.position.z = lerp(bottle250.group.position.z, targetBottle250Z, 0.06);
+        bottle250.group.rotation.x = lerp(bottle250.group.rotation.x, targetRotX + mouseCurrent.current.y * 0.25, 0.06);
+        bottle250.group.rotation.y = lerp(
+          bottle250.group.rotation.y,
+          time * 0.11 + mouseCurrent.current.x * 0.35 + manualRotation.current.y * 0.5,
+          0.06
+        );
+        bottle250.group.rotation.z = lerp(bottle250.group.rotation.z, 0, 0.06);
+        bottle250.setScale(targetSecondaryScale);
         bottle250.update(time, p);
+
+        bottle1L.group.position.x = lerp(bottle1L.group.position.x, targetBottle1LX, 0.06);
+        bottle1L.group.position.y = lerp(
+          bottle1L.group.position.y,
+          targetBottle1LY + Math.sin(time * 1.2 + 1.2) * 0.025,
+          0.06
+        );
+        bottle1L.group.position.z = lerp(bottle1L.group.position.z, targetBottle1LZ, 0.06);
+        bottle1L.group.rotation.x = lerp(bottle1L.group.rotation.x, targetRotX + mouseCurrent.current.y * 0.25, 0.06);
+        bottle1L.group.rotation.y = lerp(
+          bottle1L.group.rotation.y,
+          time * 0.09 + mouseCurrent.current.x * 0.35 + manualRotation.current.y * 0.5,
+          0.06
+        );
+        bottle1L.group.rotation.z = lerp(bottle1L.group.rotation.z, 0, 0.06);
+        bottle1L.setScale(targetSecondaryScale);
         bottle1L.update(time, p);
       }
 
