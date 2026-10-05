@@ -35,23 +35,22 @@ export default function Loader({ onComplete }: LoaderProps) {
     >
       {/* Light sweep beam */}
       <div
-        className={`absolute inset-0 bg-gradient-to-r from-transparent via-[#20BFD3]/15 to-transparent -translate-x-full transition-transform duration-1000 ease-out ${
+        className={`absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.04] to-transparent -translate-x-full transition-transform duration-1000 ease-out ${
           phase >= 2 ? 'translate-x-full' : ''
         }`}
       />
 
       {/* Center minimalist monogram & pulse */}
       <div className="relative flex flex-col items-center">
-        <div className="font-display text-4xl sm:text-6xl font-black italic tracking-widest text-white animate-pulse">
-          IONA
+        <div className="font-serif-luxury text-3xl sm:text-5xl font-light tracking-[0.35em] text-white">
+          I O N A
         </div>
-        <div className="mt-3 flex items-center gap-2">
-          <div className="w-1.5 h-1.5 rounded-full bg-[#20BFD3] animate-ping" />
-          <span className="text-[10px] uppercase font-mono tracking-[0.3em] text-[#7DEAF0]/80">
-            {phase === 0 && 'INITIALIZING HYDRO-CHOREOGRAPHY'}
-            {phase === 1 && 'ALIGNING IONIC STRUCTURE'}
-            {phase === 2 && 'PURIFYING FIELD 8.5+'}
-            {phase >= 3 && 'WATER REFINED'}
+        <div className="mt-4 flex items-center gap-2">
+          <span className="text-[10px] uppercase font-mono tracking-[0.35em] text-[#8D9FA7]">
+            {phase === 0 && 'BORN FROM SILENCE'}
+            {phase === 1 && 'FILTERED THROUGH STONE'}
+            {phase === 2 && 'BALANCED BY NATURE'}
+            {phase >= 3 && 'ELEMENTAL STILLNESS'}
           </span>
         </div>
       </div>

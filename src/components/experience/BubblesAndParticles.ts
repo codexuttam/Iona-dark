@@ -58,9 +58,9 @@ export function createEnvironmentAtmosphere(): EnvironmentAtmosphere {
   const pBasePositions = new Float32Array(pCount * 3);
   const pColors = new Float32Array(pCount * 3);
 
-  const c1 = new THREE.Color('#20BFD3');
-  const c2 = new THREE.Color('#7DEAF0');
-  const c3 = new THREE.Color('#F7FFFF');
+  const c1 = new THREE.Color('#8EA8B3');
+  const c2 = new THREE.Color('#D5E9EE');
+  const c3 = new THREE.Color('#FFFFFF');
 
   for (let i = 0; i < pCount; i++) {
     const x = (Math.random() - 0.5) * 22;
@@ -86,17 +86,17 @@ export function createEnvironmentAtmosphere(): EnvironmentAtmosphere {
   pGeometry.setAttribute('color', new THREE.BufferAttribute(pColors, 3));
 
   const pMaterial = new THREE.PointsMaterial({
-    size: 0.04,
+    size: 0.035,
     vertexColors: true,
     transparent: true,
-    opacity: 0.75,
+    opacity: 0.65,
     blending: THREE.AdditiveBlending,
     depthWrite: false,
   });
 
   const particlesField = new THREE.Points(pGeometry, pMaterial);
 
-  // 3. Electric Ionised Energy Field (Curved stream active around Section 04)
+  // 3. Glacial Mist Stream (Gentle helical drift around Section 04)
   const ribbonCount = 800;
   const ribbonGeo = new THREE.BufferGeometry();
   const ribbonPos = new Float32Array(ribbonCount * 3);
@@ -109,9 +109,9 @@ export function createEnvironmentAtmosphere(): EnvironmentAtmosphere {
     ribbonPos[i * 3 + 1] = (i / ribbonCount - 0.5) * 5;
     ribbonPos[i * 3 + 2] = Math.sin(t) * r;
 
-    ribbonColors[i * 3] = 0.12; // R
-    ribbonColors[i * 3 + 1] = 0.75; // G (cyan)
-    ribbonColors[i * 3 + 2] = 0.88; // B
+    ribbonColors[i * 3] = 0.85; // R
+    ribbonColors[i * 3 + 1] = 0.93; // G (mist)
+    ribbonColors[i * 3 + 2] = 0.96; // B
   }
 
   ribbonGeo.setAttribute('position', new THREE.BufferAttribute(ribbonPos, 3));

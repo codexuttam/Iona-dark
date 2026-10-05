@@ -8,82 +8,87 @@ interface PhilosophyProps {
 export default function Philosophy({ onLearnMore: _onLearnMore }: PhilosophyProps) {
   const [activeFeature, setActiveFeature] = useState(0);
 
-  const features = [
+  const pillars = [
     {
-      title: 'PURE SOURCE',
-      desc: '380m subterranean artesian reserve preserved from all microplastics and runoff.',
-      metric: 'Glacial Origin',
-      icon: Droplets,
+      title: 'SUBTERRANEAN SILENCE',
+      desc: 'Resting 380 meters beneath dense granite strata, preserved in untouched geological stillness for centuries.',
+      sub: 'Untouched Origin',
     },
     {
-      title: 'ADVANCED PURIFICATION',
-      desc: '9-tier sub-micron filtration ensuring zero contaminants while preserving natural ionic integrity.',
-      metric: '0.001 Microns',
-      icon: Shield,
+      title: 'ELEMENTAL EQUILIBRIUM',
+      desc: 'A stable alkaline pH of 8.5 naturally enriched with living electrolytes that restore effortless clarity.',
+      sub: 'Bio-Harmony',
     },
     {
-      title: 'IONISATION TECHNOLOGY',
-      desc: 'Catalytic electrolytic micro-clustering creating smaller water groups for cellular osmosis.',
-      metric: 'Micro-Cluster H₂O',
-      icon: Zap,
-    },
-    {
-      title: 'BALANCED MINERALS',
-      desc: 'Naturally abundant bio-available magnesium, calcium, and potassium electrolytes.',
-      metric: 'Balanced Ca / Mg',
-      icon: CheckCircle2,
+      title: 'THE DISCERNING RITUAL',
+      desc: 'Not a mass commodity. An elevated daily companion crafted for those who value purity as a way of life.',
+      sub: 'Curated Identity',
     },
   ];
 
   return (
     <section
       id="philosophy"
-      className="relative min-h-screen w-full flex items-center justify-between px-6 sm:px-12 lg:px-24 pointer-events-none select-none z-10 py-24"
+      className="relative min-h-screen w-full flex items-center justify-between px-6 sm:px-12 lg:px-24 pointer-events-none select-none z-10 py-28"
     >
       {/* Left Column Content */}
       <div className="max-w-xl pointer-events-auto">
-        {/* Heading */}
-        <h2 className="font-display text-6xl sm:text-8xl lg:text-9xl font-extrabold italic tracking-tight uppercase leading-none text-white">
-          <span className="block hover:text-[#7DEAF0] transition-colors duration-300">
-            WATER,
+        {/* Subtle Eyebrow */}
+        <div className="flex items-center gap-3 mb-6">
+          <span className="w-6 h-[1px] bg-white/20" />
+          <span className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#8D9FA7]">
+            CHAPTER II · THE PHILOSOPHY
           </span>
-          <span className="block text-transparent bg-clip-text bg-gradient-to-r from-white via-[#DDFEFF] to-[#7DEAF0]">
-            REIMAGINED.
+        </div>
+
+        {/* Heading */}
+        <h2 className="font-serif-luxury text-5xl sm:text-7xl lg:text-8xl font-light tracking-tight text-white leading-[1.0]">
+          <span className="block font-light text-white/90">
+            An intention,
+          </span>
+          <span className="block italic text-[#E5F3F5] font-normal">
+            not just
+          </span>
+          <span className="block font-light text-white/70">
+            hydration.
           </span>
         </h2>
 
-        {/* Supporting Copy */}
-        <p className="mt-8 text-base sm:text-lg text-[#A9C4CA] font-normal tracking-wide leading-relaxed">
-          IONA combines naturally pure water with advanced ionisation technology to deliver a refined hydration experience. We challenge conventional bottling by delivering water in its highest biological resonance.
+        {/* Supporting Narrative Copy */}
+        <p className="mt-8 text-sm sm:text-base text-[#8D9FA7] font-light tracking-wide leading-relaxed max-w-lg">
+          In a world defined by relentless acceleration, IONA is an invitation to pause. Crafted for individuals who curate their mental and physical environment with conscious discernment, water becomes an anchor of calm.
         </p>
+
+        {/* Subtle quote element */}
+        <div className="mt-10 pl-6 border-l border-white/15">
+          <p className="text-xs text-[#E5F3F5]/80 font-serif-luxury italic text-[15px] leading-relaxed">
+            "Purity is not the absence of impurities; it is the presence of quiet harmony."
+          </p>
+        </div>
       </div>
 
-      {/* Right Column: Vertical Technical Data Markers */}
-      <div className="hidden xl:flex flex-col gap-6 pointer-events-auto max-w-xs">
-        {features.map((feat, idx) => {
+      {/* Right Column: Serene Minimalist Pillars */}
+      <div className="hidden xl:flex flex-col gap-5 pointer-events-auto max-w-sm">
+        {pillars.map((pillar, idx) => {
           const isActive = activeFeature === idx;
-          const Icon = feat.icon;
           return (
             <div
-              key={feat.title}
+              key={pillar.title}
               onMouseEnter={() => setActiveFeature(idx)}
-              className={`p-4 rounded-sm border transition-all duration-300 cursor-pointer ${
+              className={`p-6 rounded-lg border transition-all duration-500 cursor-pointer backdrop-blur-md ${
                 isActive
-                  ? 'border-[#20BFD3] bg-[#06232D]/70 shadow-[0_0_20px_rgba(32,191,211,0.15)] translate-x-[-8px]'
-                  : 'border-white/10 bg-[#04141D]/40 hover:border-white/30'
+                  ? 'border-white/30 bg-white/[0.04] shadow-[0_8px_30px_rgba(0,0,0,0.5)] translate-x-[-6px]'
+                  : 'border-white/10 bg-white/[0.015] hover:border-white/20'
               }`}
             >
               <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2.5">
-                  <Icon className={`w-4 h-4 ${isActive ? 'text-[#7DEAF0]' : 'text-[#A9C4CA]'}`} />
-                  <span className="text-xs font-bold font-mono tracking-wider text-white">
-                    {feat.title}
-                  </span>
-                </div>
-                <span className="text-[10px] font-mono text-[#20BFD3]">{feat.metric}</span>
+                <span className="text-xs font-serif-luxury tracking-[0.15em] text-white">
+                  0{idx + 1} · {pillar.title}
+                </span>
+                <span className="text-[10px] font-mono text-[#8D9FA7] uppercase tracking-widest">{pillar.sub}</span>
               </div>
-              <p className="mt-2 text-xs text-[#A9C4CA] leading-relaxed">
-                {feat.desc}
+              <p className="mt-3 text-xs text-[#8D9FA7] font-light leading-relaxed">
+                {pillar.desc}
               </p>
             </div>
           );

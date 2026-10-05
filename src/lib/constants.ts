@@ -1,14 +1,14 @@
 export const COLORS = {
-  bgPrimary: '#02080D',
-  deepNavy: '#04141D',
-  darkAqua: '#06232D',
-  oceanBlue: '#083E50',
-  electricAqua: '#20BFD3',
-  softCyan: '#7DEAF0',
-  glassHighlight: '#DDFEFF',
-  white: '#F7FFFF',
+  bgPrimary: '#030709',
+  deepSlate: '#081116',
+  mineralStone: '#121C22',
+  glacialIce: '#E5F3F5',
+  mistCyan: '#B8DDE3',
+  subtleAqua: '#6E98A0',
+  glassHighlight: '#FFFFFF',
+  white: '#FFFFFF',
   primaryText: '#FFFFFF',
-  secondaryText: '#A9C4CA',
+  secondaryText: '#8D9FA7',
 };
 
 export interface SectionDef {
@@ -19,40 +19,40 @@ export interface SectionDef {
 }
 
 export const SECTIONS: SectionDef[] = [
-  { id: 'hero', num: '01', label: 'WATER', title: 'PURE WATER. REFINED.' },
-  { id: 'philosophy', num: '02', label: 'PHILOSOPHY', title: 'WATER, REIMAGINED.' },
-  { id: 'alkaline', num: '03', label: 'ALKALINE', title: 'BALANCED BY NATURE.' },
-  { id: 'ionised', num: '04', label: 'IONISED', title: 'IONISED. REFINED.' },
-  { id: 'process', num: '05', label: 'PROCESS', title: 'FROM NATURE TO YOU.' },
-  { id: 'bottle', num: '06', label: 'OUR BOTTLE', title: 'DESIGNED FOR A BRIGHTER TODAY.' },
-  { id: 'range', num: '07', label: 'RANGE', title: 'PURE BY DESIGN.' },
-  { id: 'questions', num: '08', label: 'QUESTIONS', title: 'QUESTIONS' },
+  { id: 'hero', num: '01', label: 'GENESIS', title: 'WATER IN ITS PUREST FORM' },
+  { id: 'philosophy', num: '02', label: 'STILLNESS', title: 'THE ART OF STILLNESS' },
+  { id: 'alkaline', num: '03', label: 'EQUILIBRIUM', title: 'SHAPED BY SUBTERRANEAN STONE' },
+  { id: 'ionised', num: '04', label: 'RESONANCE', title: 'MOLECULAR HARMONY' },
+  { id: 'process', num: '05', label: 'PROVENANCE', title: 'CENTURIES IN CREATION' },
+  { id: 'bottle', num: '06', label: 'THE VESSEL', title: 'AN ARCHITECTURAL OBJECT' },
+  { id: 'range', num: '07', label: 'COLLECTION', title: 'CURATED EDITIONS' },
+  { id: 'questions', num: '08', label: 'INQUIRIES', title: 'THE SANCTUARY' },
 ];
 
 export const PROCESS_STAGES = [
   {
     step: '01',
-    name: 'SOURCE',
-    description: 'Naturally pure water drawn from deep protected subterranean aquifers, preserved from environmental pollutants.',
-    depth: 'Subterranean Aquifer 380m',
+    name: 'GLACIAL ORIGIN',
+    description: 'Prehistoric snowfall and alpine melt filtered through geological stone layers over centuries into a sealed aquifer.',
+    depth: 'Subterranean Reservoir · 380m',
   },
   {
     step: '02',
-    name: 'PURIFY',
-    description: 'Advanced multi-stage molecular filtration eliminating microscopic impurities while preserving structural integrity.',
-    depth: '9-Stage Precision Filtration',
+    name: 'MINERAL INFUSION',
+    description: 'Naturally enriched with bio-available magnesium, calcium, and silica from ancient granite and quartz strata.',
+    depth: 'Geological Mineral Balance',
   },
   {
     step: '03',
-    name: 'IONISE',
-    description: 'Proprietary electromagnetic ionisation realigns molecular clusters, optimizing cellular bio-availability and energy.',
-    depth: 'Electrolytic Cell Re-structuring',
+    name: 'MOLECULAR CLARITY',
+    description: 'Subtle micro-clustering and catalytic ionisation that aligns water molecules to reflect natural cellular resonance.',
+    depth: 'Electrolytic Harmony',
   },
   {
     step: '04',
-    name: 'REFINE',
-    description: 'Infusion of essential balanced electrolytes and alkaline mineral complexes, achieving optimal pH 8.5+ equilibrium.',
-    depth: 'Micro-mineral Equilibrium',
+    name: 'HERMETIC SEAL',
+    description: 'Bottled in clean-room stillness into architectural BPA-free crystal vessels to preserve living purity.',
+    depth: 'Micro-Batch Allocation',
   },
 ];
 

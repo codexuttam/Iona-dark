@@ -30,23 +30,34 @@ export default function ProductRange({
     >
       {/* Top Header */}
       <div className="max-w-xl pointer-events-auto">
-        {/* Heading */}
-        <h2 className="font-display text-6xl sm:text-8xl lg:text-9xl font-extrabold italic tracking-tight uppercase leading-none text-white">
-          <span className="block hover:text-[#7DEAF0] transition-colors duration-300">
-            PURE
+        {/* Subtle Eyebrow */}
+        <div className="flex items-center gap-3 mb-6">
+          <span className="w-6 h-[1px] bg-white/20" />
+          <span className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#8D9FA7]">
+            CHAPTER VII · THE EDITIONS
           </span>
-          <span className="block text-transparent bg-clip-text bg-gradient-to-r from-white via-[#DDFEFF] to-[#7DEAF0]">
-            BY DESIGN.
+        </div>
+
+        {/* Heading */}
+        <h2 className="font-serif-luxury text-5xl sm:text-7xl lg:text-8xl font-light tracking-tight text-white leading-[1.0]">
+          <span className="block font-light text-white/90">
+            Curated vessels
+          </span>
+          <span className="block italic text-[#E5F3F5] font-normal">
+            for every
+          </span>
+          <span className="block font-light text-white/70">
+            setting.
           </span>
         </h2>
 
         {/* Supporting Copy */}
-        <p className="mt-8 text-base sm:text-lg text-[#A9C4CA] font-normal tracking-wide leading-relaxed">
-          Available in multiple sizes for every need. From daily high-tempo commutes to peak endurance performance, every vessel is sculpted to preserve pristine hydro-molecular balance.
+        <p className="mt-8 text-sm sm:text-base text-[#8D9FA7] font-light tracking-wide leading-relaxed">
+          Four calibrated silhouettes sharing the same architectural purity. Allocated in limited quarterly releases for private residences and curated hospitality.
         </p>
       </div>
 
-      {/* Product Size Selector Cards (Matching Storyboard 07 with 250ML, 500ML, 1L) */}
+      {/* Product Size Selector Cards */}
       <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pointer-events-auto max-w-6xl">
         {PRODUCT_SIZES.map((prod, idx) => {
           const isSelected = selectedSizeIndex === idx;
@@ -56,43 +67,43 @@ export default function ProductRange({
             <div
               key={prod.size}
               onClick={() => onSelectSize(idx)}
-              className={`p-6 rounded-lg border transition-all duration-300 cursor-pointer flex flex-col justify-between ${
+              className={`p-6 rounded-lg border transition-all duration-300 cursor-pointer flex flex-col justify-between backdrop-blur-md ${
                 isSelected
-                  ? 'border-[#20BFD3] bg-[#06232D]/90 shadow-[0_0_25px_rgba(32,191,211,0.25)] translate-y-[-4px]'
-                  : 'border-white/10 bg-[#04141D]/50 hover:border-white/20'
+                  ? 'border-white/40 bg-white/[0.05] shadow-[0_8px_30px_rgba(0,0,0,0.5)] translate-y-[-4px]'
+                  : 'border-white/10 bg-white/[0.015] hover:border-white/20'
               }`}
             >
               <div>
-                <div className="flex items-center justify-between">
-                  <span className="font-display text-3xl sm:text-4xl font-extrabold italic text-white">
+                <div className="flex items-baseline justify-between">
+                  <span className="font-serif-luxury text-3xl sm:text-4xl font-light text-white tracking-tight">
                     {prod.size}
                   </span>
-                  <span className="text-[10px] font-mono uppercase tracking-wider text-[#20BFD3] px-2 py-0.5 rounded bg-[#20BFD3]/10 border border-[#20BFD3]/30">
+                  <span className="text-[10px] font-mono uppercase tracking-widest text-[#8D9FA7]">
                     {prod.tag}
                   </span>
                 </div>
 
-                <div className="text-sm font-semibold text-[#7DEAF0] mt-2">
+                <div className="text-xs font-serif-luxury tracking-widest text-white/90 mt-2 uppercase">
                   {prod.name}
                 </div>
 
-                <p className="text-xs text-[#A9C4CA] mt-2 leading-relaxed">
+                <p className="text-xs text-[#8D9FA7] font-light mt-2.5 leading-relaxed">
                   {prod.description}
                 </p>
 
                 {/* Specs */}
-                <div className="mt-4 pt-4 border-t border-white/10 space-y-1.5 text-[11px] font-mono text-[#A9C4CA]/80">
+                <div className="mt-5 pt-4 border-t border-white/10 space-y-1.5 text-[11px] font-mono text-[#8D9FA7]">
                   <div className="flex justify-between">
                     <span>Height:</span>
-                    <span className="text-white">{prod.specs.height}</span>
+                    <span className="text-white/80">{prod.specs.height}</span>
                   </div>
                   <div className="flex justify-between">
                     <span>Filled Weight:</span>
-                    <span className="text-white">{prod.specs.weight}</span>
+                    <span className="text-white/80">{prod.specs.weight}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span>Cap Interface:</span>
-                    <span className="text-white">{prod.specs.cap}</span>
+                    <span>Closure:</span>
+                    <span className="text-white/80">{prod.specs.cap}</span>
                   </div>
                 </div>
               </div>
@@ -103,12 +114,12 @@ export default function ProductRange({
                   e.stopPropagation();
                   handleReserve(prod.size);
                 }}
-                className={`mt-6 w-full py-2.5 px-4 rounded-md text-xs font-bold font-mono tracking-wider uppercase flex items-center justify-center gap-2 transition-all cursor-pointer ${
+                className={`mt-6 w-full py-2.5 px-4 rounded-full text-xs tracking-[0.15em] uppercase flex items-center justify-center gap-2 transition-all duration-300 cursor-pointer ${
                   isJustReserved
-                    ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40'
+                    ? 'bg-white text-[#030709] font-medium'
                     : isSelected
-                    ? 'bg-[#20BFD3] text-[#02080D] hover:bg-[#7DEAF0]'
-                    : 'border border-white/20 text-white hover:border-[#20BFD3] hover:text-[#7DEAF0]'
+                    ? 'border border-white/40 bg-white/[0.08] text-white hover:bg-white hover:text-[#030709]'
+                    : 'border border-white/15 text-[#8D9FA7] hover:border-white/30 hover:text-white'
                 }`}
               >
                 {isJustReserved ? (
@@ -119,7 +130,7 @@ export default function ProductRange({
                 ) : (
                   <>
                     <Box className="w-3.5 h-3.5" />
-                    <span>RESERVE CASE</span>
+                    <span>REQUEST CASE</span>
                   </>
                 )}
               </button>
@@ -130,13 +141,13 @@ export default function ProductRange({
 
       {/* Case Allocation Notice */}
       {reservedSize && (
-        <div className="fixed bottom-16 right-8 z-50 p-4 rounded-lg bg-[#06232D] border border-[#20BFD3] text-white shadow-2xl animate-in slide-in-from-bottom duration-300 pointer-events-auto">
-          <div className="flex items-center gap-2 text-xs font-mono text-[#7DEAF0]">
-            <Check className="w-4 h-4 text-[#20BFD3]" />
-            <span>Allocation reserved for {reservedSize} Case (12 Bottles).</span>
+        <div className="fixed bottom-16 right-8 z-50 p-4 rounded-lg bg-[#081216] border border-white/20 text-white shadow-2xl animate-in slide-in-from-bottom duration-300 pointer-events-auto backdrop-blur-md">
+          <div className="flex items-center gap-2 text-xs font-serif-luxury text-white">
+            <Check className="w-4 h-4 text-white/80" />
+            <span>Allocation reserved for {reservedSize} Case.</span>
           </div>
-          <p className="text-[11px] text-[#A9C4CA] mt-1">
-            Our private cellar logistics team will confirm your batch allocation.
+          <p className="text-[11px] text-[#8D9FA7] font-light mt-1">
+            Our private concierge team will reach out with your batch delivery details.
           </p>
         </div>
       )}

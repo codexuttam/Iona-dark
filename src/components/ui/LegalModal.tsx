@@ -17,33 +17,33 @@ export default function LegalModal({ isOpen, type, onClose, onSwitchType }: Lega
     <div
       role="dialog"
       aria-modal="true"
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-[#02080D]/90 backdrop-blur-xl animate-in fade-in duration-300 pointer-events-auto"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-[#030709]/90 backdrop-blur-2xl animate-in fade-in duration-300 pointer-events-auto"
     >
-      <div className="relative w-full max-w-2xl max-h-[85vh] rounded-2xl bg-[#04141D] border border-[#20BFD3]/30 p-6 sm:p-8 shadow-[0_0_50px_rgba(32,191,211,0.15)] text-white flex flex-col overflow-hidden">
+      <div className="relative w-full max-w-2xl max-h-[85vh] rounded-2xl bg-[#081216] border border-white/15 p-6 sm:p-8 shadow-[0_20px_60px_rgba(0,0,0,0.8)] text-white flex flex-col overflow-hidden">
         {/* Top Header */}
         <div className="flex items-center justify-between pb-4 border-b border-white/10 shrink-0">
           <div className="flex items-center gap-3">
             <button
               onClick={() => onSwitchType('terms')}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-mono uppercase tracking-wider transition-colors cursor-pointer ${
+              className={`flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-mono uppercase tracking-wider transition-colors cursor-pointer ${
                 isTerms
-                  ? 'bg-[#20BFD3] text-[#02080D] font-bold'
-                  : 'text-[#A9C4CA] hover:text-white bg-white/5'
+                  ? 'bg-white text-[#030709] font-medium'
+                  : 'text-[#8D9FA7] hover:text-white bg-white/5'
               }`}
             >
               <FileText className="w-3.5 h-3.5" />
-              <span>TERMS & CONDITIONS</span>
+              <span>TERMS OF RESERVATION</span>
             </button>
             <button
               onClick={() => onSwitchType('privacy')}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-mono uppercase tracking-wider transition-colors cursor-pointer ${
+              className={`flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-mono uppercase tracking-wider transition-colors cursor-pointer ${
                 !isTerms
-                  ? 'bg-[#20BFD3] text-[#02080D] font-bold'
-                  : 'text-[#A9C4CA] hover:text-white bg-white/5'
+                  ? 'bg-white text-[#030709] font-medium'
+                  : 'text-[#8D9FA7] hover:text-white bg-white/5'
               }`}
             >
               <ShieldCheck className="w-3.5 h-3.5" />
-              <span>PRIVACY POLICY</span>
+              <span>PRIVACY CHARTER</span>
             </button>
           </div>
 

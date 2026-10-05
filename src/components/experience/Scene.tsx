@@ -56,32 +56,32 @@ export default function Scene({
 
     // 2. Scene & Fog Setup
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color('#02080D');
-    scene.fog = new THREE.FogExp2('#02080D', 0.08);
+    scene.background = new THREE.Color('#030709');
+    scene.fog = new THREE.FogExp2('#030709', 0.075);
 
     // 3. Camera
     const camera = new THREE.PerspectiveCamera(40, width / height, 0.1, 100);
     camera.position.set(0, 0, 5.8);
 
-    // 4. Lighting
-    const ambientLight = new THREE.AmbientLight('#06232D', 1.4);
+    // 4. Natural Luxury Lighting (Glacial daylight + subtle stone ambient)
+    const ambientLight = new THREE.AmbientLight('#0E181F', 1.8);
     scene.add(ambientLight);
 
-    const mainCyanLight = new THREE.DirectionalLight('#20BFD3', 2.8);
-    mainCyanLight.position.set(3, 4, 3);
-    mainCyanLight.castShadow = !isMobile;
-    scene.add(mainCyanLight);
+    const mainKeyLight = new THREE.DirectionalLight('#F4FAFB', 2.4);
+    mainKeyLight.position.set(3, 4.5, 3.5);
+    mainKeyLight.castShadow = !isMobile;
+    scene.add(mainKeyLight);
 
-    const rimLight = new THREE.DirectionalLight('#7DEAF0', 3.2);
-    rimLight.position.set(-3, 2, -2);
+    const rimLight = new THREE.DirectionalLight('#D2E7ED', 2.2);
+    rimLight.position.set(-3, 2, -2.5);
     scene.add(rimLight);
 
-    const bottomDeepLight = new THREE.PointLight('#083E50', 2.0, 15);
+    const bottomDeepLight = new THREE.PointLight('#081218', 1.2, 15);
     bottomDeepLight.position.set(0, -3, 2);
     scene.add(bottomDeepLight);
 
-    const topSoftSpot = new THREE.SpotLight('#DDFEFF', 2.2, 20, Math.PI / 4, 0.5, 1);
-    topSoftSpot.position.set(0, 7, 2);
+    const topSoftSpot = new THREE.SpotLight('#FFFFFF', 2.5, 24, Math.PI / 3.8, 0.6, 1);
+    topSoftSpot.position.set(0, 7.5, 2);
     scene.add(topSoftSpot);
 
     // 5. Environment Map (Texture Loader)
@@ -346,61 +346,61 @@ export default function Scene({
       } else {
         // Sections 01 - 04 (before Process)
         if (p < 0.12) {
-          // Section 01: HERO
+          // Section 01: HERO - Monolithic & Statuesque
           const t = p / 0.12;
-          targetCamX = lerp(0, 0.3, t);
-          targetCamY = lerp(0, 0.1, t);
-          targetCamZ = lerp(5.8, 5.4, t);
+          targetCamX = lerp(0, 0.2, t);
+          targetCamY = lerp(0, 0.05, t);
+          targetCamZ = lerp(5.6, 5.2, t);
 
-          targetBottleX = lerp(0.85, 1.1, t);
-          targetBottleY = lerp(0.1, 0.15, t);
+          targetBottleX = lerp(0.85, 1.05, t);
+          targetBottleY = lerp(0.05, 0.08, t);
           targetBottleZ = 0;
 
-          targetRotX = 0.25;
-          targetRotY = -0.45 + time * 0.15;
-          targetRotZ = -0.58;
+          targetRotX = 0.04;
+          targetRotY = -0.2 + time * 0.04;
+          targetRotZ = -0.04;
         } else if (p < 0.25) {
-          // Section 02: PHILOSOPHY (WATER, REIMAGINED.)
+          // Section 02: PHILOSOPHY (STILLNESS)
           const t = (p - 0.12) / 0.13;
-          targetCamX = lerp(0.3, -0.8, t);
-          targetCamY = lerp(0.1, 0.25, t);
-          targetCamZ = lerp(5.4, 5.1, t);
+          targetCamX = lerp(0.2, -0.6, t);
+          targetCamY = lerp(0.05, 0.15, t);
+          targetCamZ = lerp(5.2, 5.0, t);
 
-          targetBottleX = lerp(1.1, 1.35, t);
-          targetBottleY = lerp(0.15, 0.0, t);
+          targetBottleX = lerp(1.05, 1.25, t);
+          targetBottleY = lerp(0.08, 0.0, t);
           targetBottleZ = 0;
 
-          targetRotX = 0.15;
-          targetRotY = lerp(-0.45, 0.4, t) + time * 0.1;
-          targetRotZ = lerp(-0.58, -0.15, t);
+          targetRotX = 0.06;
+          targetRotY = lerp(-0.2, 0.3, t) + time * 0.03;
+          targetRotZ = -0.02;
         } else if (p < 0.38) {
-          // Section 03: ALKALINE WATER (BALANCED BY NATURE.)
+          // Section 03: EQUILIBRIUM (SHAPED BY SUBTERRANEAN STONE)
           const t = (p - 0.25) / 0.13;
-          targetCamX = lerp(-0.8, -1.0, t);
-          targetCamY = lerp(0.25, 0.35, t);
-          targetCamZ = lerp(5.1, 4.8, t);
+          targetCamX = lerp(-0.6, -0.85, t);
+          targetCamY = lerp(0.15, 0.2, t);
+          targetCamZ = lerp(5.0, 4.8, t);
 
-          targetBottleX = lerp(1.35, 1.0, t);
-          targetBottleY = lerp(0.0, -0.1, t);
+          targetBottleX = lerp(1.25, 0.9, t);
+          targetBottleY = lerp(0.0, -0.05, t);
           targetBottleZ = 0;
 
-          targetRotX = 0.1;
-          targetRotY = 0.6 + time * 0.12;
-          targetRotZ = -0.1;
+          targetRotX = 0.05;
+          targetRotY = 0.4 + time * 0.04;
+          targetRotZ = -0.02;
         } else {
-          // Section 04: IONISED WATER (IONISED. REFINED.)
+          // Section 04: RESONANCE (MOLECULAR HARMONY)
           const t = Math.min(1, Math.max(0, (p - 0.38) / 0.12));
-          targetCamX = lerp(-1.0, 0.8, t);
-          targetCamY = lerp(0.35, 0.2, t);
+          targetCamX = lerp(-0.85, 0.65, t);
+          targetCamY = lerp(0.2, 0.15, t);
           targetCamZ = lerp(4.8, 4.6, t);
 
-          targetBottleX = lerp(1.0, -0.8, t);
-          targetBottleY = lerp(-0.1, 0.0, t);
+          targetBottleX = lerp(0.9, -0.75, t);
+          targetBottleY = lerp(-0.05, 0.0, t);
           targetBottleZ = 0;
 
-          targetRotX = 0.15;
-          targetRotY = 1.0 + time * 0.2;
-          targetRotZ = 0.1;
+          targetRotX = 0.06;
+          targetRotY = 0.8 + time * 0.04;
+          targetRotZ = 0.02;
         }
       }
 

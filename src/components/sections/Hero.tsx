@@ -12,47 +12,52 @@ export default function Hero({ onExplore }: HeroProps) {
       className="relative min-h-screen w-full flex items-center justify-between px-6 sm:px-12 lg:px-24 pointer-events-none select-none z-10"
     >
       {/* Left Column Content */}
-      <div className="max-w-2xl pointer-events-auto pt-20 sm:pt-0">
-
-
-        {/* Large Bold Condensed Italic Heading */}
-        <h1 className="font-display text-6xl sm:text-8xl lg:text-9xl font-extrabold italic tracking-tight uppercase leading-none text-white">
-          <span className="block hover:text-[#7DEAF0] transition-colors duration-300">
-            PURE
+      <div className="max-w-2xl pointer-events-auto pt-28 sm:pt-0">
+        {/* Subtle Provenance Eyebrow */}
+        <div className="flex items-center gap-3 mb-6">
+          <span className="w-6 h-[1px] bg-white/20" />
+          <span className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#8D9FA7]">
+            CHAPTER I · THE GENESIS
           </span>
-          <span className="block hover:text-[#7DEAF0] transition-colors duration-300">
-            WATER.
+        </div>
+
+        {/* Timeless Editorial Luxury Heading */}
+        <h1 className="font-serif-luxury text-5xl sm:text-7xl lg:text-8xl font-light tracking-tight text-white leading-[0.98]">
+          <span className="block font-light text-white/90">
+            Water in its
           </span>
-          <span className="block text-transparent bg-clip-text bg-gradient-to-r from-white via-[#DDFEFF] to-[#7DEAF0]">
-            REFINED.
+          <span className="block italic text-[#E5F3F5] font-normal">
+            purest elemental
+          </span>
+          <span className="block font-light text-white/70">
+            stillness.
           </span>
         </h1>
 
-        {/* Supporting Copy */}
-        <p className="mt-8 text-base sm:text-lg text-[#A9C4CA] font-normal tracking-wide max-w-md leading-relaxed">
-          Alkaline. Ionised. For a clearer you. Crafted from pristine subterranean glacial aquifers, molecularly aligned for optimal cellular hydration.
+        {/* Supporting Editorial Story Copy */}
+        <p className="mt-8 text-sm sm:text-base text-[#8D9FA7] font-light tracking-wide max-w-md leading-relaxed">
+          Born from prehistoric glacial snowpack, filtered through granite strata 380 meters beneath the surface. Sourced for a discerning audience who view hydration not as a utility, but as an intentional ritual.
         </p>
 
-        {/* CTA & Indicators */}
-        <div className="mt-10 flex flex-wrap items-center gap-6">
-          <MagneticButton
+        {/* Minimalist Tactile CTA & Elemental Specs */}
+        <div className="mt-12 flex flex-wrap items-center gap-8">
+          <button
             onClick={onExplore}
-            className="group flex items-center gap-3 px-7 py-3.5 rounded-full bg-[#20BFD3] text-[#02080D] font-bold text-xs uppercase tracking-[0.16em] hover:bg-[#7DEAF0] hover:shadow-[0_0_30px_rgba(32,191,211,0.4)] transition-all duration-300"
+            className="group flex items-center gap-3 px-8 py-3.5 rounded-full border border-white/20 bg-white/[0.03] backdrop-blur-md text-white text-xs tracking-[0.2em] uppercase hover:bg-white hover:text-[#030709] hover:border-white transition-all duration-500 cursor-pointer shadow-[0_4px_24px_rgba(0,0,0,0.4)]"
           >
-            <div className="w-5 h-5 rounded-full bg-[#02080D]/20 flex items-center justify-center group-hover:rotate-45 transition-transform duration-300">
-              <ArrowRight className="w-3 h-3 text-[#02080D]" />
-            </div>
-            <span>EXPLORE IONA</span>
-          </MagneticButton>
+            <span>DISCOVER THE STORY</span>
+            <span className="w-1.5 h-1.5 rounded-full bg-white group-hover:bg-[#030709] transition-colors" />
+          </button>
 
-          <div className="flex items-center gap-5 text-xs text-[#A9C4CA]/70 border-l border-white/10 pl-6">
-            <div className="flex items-center gap-1.5">
-              <Droplets className="w-3.5 h-3.5 text-[#20BFD3]" />
-              <span className="font-mono text-[11px]">8.5 pH</span>
+          <div className="flex items-center gap-6 text-[11px] text-[#8D9FA7]/70 font-mono tracking-wider border-l border-white/10 pl-6">
+            <div>
+              <span className="block text-white text-xs font-serif-luxury text-[14px]">380m</span>
+              <span className="text-[9px] text-[#8D9FA7] uppercase tracking-widest">Aquifer Depth</span>
             </div>
-            <div className="flex items-center gap-1.5">
-              <Sparkles className="w-3.5 h-3.5 text-[#7DEAF0]" />
-              <span className="font-mono text-[11px]">ELECTROLYTES</span>
+            <div className="w-[1px] h-6 bg-white/10" />
+            <div>
+              <span className="block text-white text-xs font-serif-luxury text-[14px]">pH 8.5</span>
+              <span className="text-[9px] text-[#8D9FA7] uppercase tracking-widest">Naturally Balanced</span>
             </div>
           </div>
         </div>

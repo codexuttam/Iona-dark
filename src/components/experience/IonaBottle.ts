@@ -21,64 +21,54 @@ export function createBottleLabelTexture(): THREE.CanvasTexture {
   if (ctx) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Transparent background
-    // Draw subtle vertical grid markers
-    ctx.strokeStyle = 'rgba(125, 234, 240, 0.15)';
+    // Whisper-thin delicate frame
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.07)';
     ctx.lineWidth = 1;
-    ctx.setLineDash([4, 6]);
     ctx.beginPath();
-    ctx.moveTo(120, 200);
-    ctx.lineTo(120, 1848);
-    ctx.moveTo(904, 200);
-    ctx.lineTo(904, 1848);
+    ctx.moveTo(140, 220);
+    ctx.lineTo(140, 1828);
+    ctx.moveTo(884, 220);
+    ctx.lineTo(884, 1828);
     ctx.stroke();
-    ctx.setLineDash([]);
 
-    // Small top branding
-    ctx.fillStyle = 'rgba(247, 255, 255, 0.75)';
-    ctx.font = '600 24px "Plus Jakarta Sans", sans-serif';
+    // Top provenance marker
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.55)';
+    ctx.font = '300 20px "Plus Jakarta Sans", sans-serif';
     ctx.textAlign = 'center';
-    ctx.letterSpacing = '6px';
-    ctx.fillText('EST. 2026', 512, 380);
+    ctx.letterSpacing = '10px';
+    ctx.fillText('SUBTERRANEAN SANCTUARY', 512, 380);
 
-    // Giant vertical IONA text
+    // Architectural Monolithic IONA text
     ctx.save();
     ctx.translate(512, 1024);
     ctx.rotate(-Math.PI / 2);
 
     ctx.fillStyle = '#FFFFFF';
-    ctx.font = '900 italic 280px "Barlow Condensed", sans-serif';
+    ctx.font = '300 220px "Cormorant Garamond", Georgia, serif';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
-    ctx.fillText('IONA', 0, 0);
+    ctx.letterSpacing = '18px';
+    ctx.fillText('I O N A', 0, 0);
 
-    // Secondary sub-label under IONA
-    ctx.font = '700 32px "Plus Jakarta Sans", sans-serif';
-    ctx.fillStyle = 'rgba(125, 234, 240, 0.95)';
-    ctx.letterSpacing = '8px';
-    ctx.fillText('ALKALINE IONISED WATER', 0, 130);
+    // Quiet, elegant secondary label under IONA
+    ctx.font = '300 24px "Plus Jakarta Sans", sans-serif';
+    ctx.fillStyle = 'rgba(215, 235, 240, 0.8)';
+    ctx.letterSpacing = '12px';
+    ctx.fillText('NATURAL ALKALINE & IONISED', 0, 120);
 
     ctx.restore();
 
-    // Bottom technical labels
-    ctx.fillStyle = 'rgba(255, 255, 255, 0.85)';
-    ctx.font = '700 28px "Barlow Condensed", sans-serif';
-    ctx.letterSpacing = '4px';
+    // Bottom origin and batch markers
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.65)';
+    ctx.font = '300 20px "Plus Jakarta Sans", sans-serif';
+    ctx.letterSpacing = '8px';
     ctx.textAlign = 'center';
-    ctx.fillText('750 ML · pH 8.5+ · BALANCED MINERALS', 512, 1720);
+    ctx.fillText('380M GLACIAL AQUIFER · pH 8.5', 512, 1710);
 
-    // Thin technical line
-    ctx.strokeStyle = 'rgba(32, 191, 211, 0.5)';
-    ctx.lineWidth = 2;
-    ctx.beginPath();
-    ctx.moveTo(300, 1750);
-    ctx.lineTo(724, 1750);
-    ctx.stroke();
-
-    ctx.fillStyle = 'rgba(169, 196, 202, 0.6)';
-    ctx.font = '500 18px "Plus Jakarta Sans", sans-serif';
-    ctx.letterSpacing = '2px';
-    ctx.fillText('RECYCLABLE BPA-FREE RESIN · REFINED BY NATURE', 512, 1780);
+    ctx.fillStyle = 'rgba(165, 185, 195, 0.45)';
+    ctx.font = '300 16px "Plus Jakarta Sans", sans-serif';
+    ctx.letterSpacing = '4px';
+    ctx.fillText('BPA-FREE CRYSTAL RESIN · BALANCED BY NATURE', 512, 1750);
   }
 
   const texture = new THREE.CanvasTexture(canvas);
@@ -181,25 +171,23 @@ export function createIonaBottle(options?: {
   const waterMesh = new THREE.Mesh(waterLathe, waterMaterial);
   group.add(waterMesh);
 
-  // 3. Precision Aluminum Cap
-  const capGeo = new THREE.CylinderGeometry(neckRadius * 1.08, neckRadius * 1.08, capHeight, 32);
+  // 3. Precision Brushed Platinum / Silver Cap
+  const capGeo = new THREE.CylinderGeometry(neckRadius * 1.07, neckRadius * 1.07, capHeight, 36);
   const capMat = new THREE.MeshStandardMaterial({
-    color: new THREE.Color('#E2EEF2'),
-    metalness: 0.92,
+    color: new THREE.Color('#DFE6E9'),
+    metalness: 0.94,
     roughness: 0.22,
   });
   const capMesh = new THREE.Mesh(capGeo, capMat);
   capMesh.position.y = bodyHeight * 0.5 + neckHeight + capHeight * 0.45;
   group.add(capMesh);
 
-  // Cap rim ring
-  const capRingGeo = new THREE.TorusGeometry(neckRadius * 1.09, 0.02, 16, 32);
+  // Cap bevel ring (Polished subtle platinum chamfer)
+  const capRingGeo = new THREE.TorusGeometry(neckRadius * 1.075, 0.015, 16, 36);
   const capRingMat = new THREE.MeshStandardMaterial({
-    color: new THREE.Color('#20BFD3'),
-    metalness: 0.8,
-    roughness: 0.3,
-    emissive: new THREE.Color('#20BFD3'),
-    emissiveIntensity: 0.4,
+    color: new THREE.Color('#FFFFFF'),
+    metalness: 0.98,
+    roughness: 0.1,
   });
   const capRing = new THREE.Mesh(capRingGeo, capRingMat);
   capRing.rotation.x = Math.PI / 2;

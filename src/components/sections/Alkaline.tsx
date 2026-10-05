@@ -2,119 +2,97 @@ import { useState } from 'react';
 import { Droplets, Sparkles, Activity, ShieldCheck } from 'lucide-react';
 
 export default function Alkaline() {
-  const [selectedMetric, setSelectedMetric] = useState<'balance' | 'minerals' | 'taste'>('balance');
+  const [selectedMineral, setSelectedMineral] = useState<number>(0);
+
+  const minerals = [
+    {
+      name: 'MAGNESIUM',
+      symbol: 'Mg²',
+      desc: 'Infuses water with a delicate, silky texture while supporting cellular resilience and deep physiological recovery.',
+      origin: 'Granite Strata',
+    },
+    {
+      name: 'CALCIUM',
+      symbol: 'Ca²',
+      desc: 'Essential alkaline mineral naturally drawn from subterranean limestone, yielding crisp structural purity.',
+      origin: 'Limestone Bed',
+    },
+    {
+      name: 'SILICA',
+      symbol: 'SiO₂',
+      desc: 'Trace quartz silica impart an ultra-smooth, velvety mouthfeel untouched by artificial additives.',
+      origin: 'Quartz Veins',
+    },
+  ];
 
   return (
     <section
       id="alkaline"
-      className="relative min-h-screen w-full flex items-center justify-between px-6 sm:px-12 lg:px-24 pointer-events-none select-none z-10 py-24"
+      className="relative min-h-screen w-full flex items-center justify-between px-6 sm:px-12 lg:px-24 pointer-events-none select-none z-10 py-28"
     >
       {/* Left Column Content */}
       <div className="max-w-xl pointer-events-auto">
-        {/* Heading */}
-        <h2 className="font-display text-6xl sm:text-8xl lg:text-9xl font-extrabold italic tracking-tight uppercase leading-none text-white">
-          <span className="block hover:text-[#7DEAF0] transition-colors duration-300">
-            BALANCED
+        {/* Subtle Eyebrow */}
+        <div className="flex items-center gap-3 mb-6">
+          <span className="w-6 h-[1px] bg-white/20" />
+          <span className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#8D9FA7]">
+            CHAPTER III · EQUILIBRIUM
           </span>
-          <span className="block text-transparent bg-clip-text bg-gradient-to-r from-white via-[#DDFEFF] to-[#7DEAF0]">
-            BY NATURE.
+        </div>
+
+        {/* Heading */}
+        <h2 className="font-serif-luxury text-5xl sm:text-7xl lg:text-8xl font-light tracking-tight text-white leading-[1.0]">
+          <span className="block font-light text-white/90">
+            Shaped by
+          </span>
+          <span className="block italic text-[#E5F3F5] font-normal">
+            subterranean
+          </span>
+          <span className="block font-light text-white/70">
+            stone.
           </span>
         </h2>
 
         {/* Supporting Copy */}
-        <p className="mt-8 text-base sm:text-lg text-[#A9C4CA] font-normal tracking-wide leading-relaxed">
-          IONA's alkaline water is designed with a carefully balanced mineral profile and elevated pH for a smooth, refreshing taste. Elevated alkalinity neutralizes systemic acidity and restores your body to equilibrium.
+        <p className="mt-8 text-sm sm:text-base text-[#8D9FA7] font-light tracking-wide leading-relaxed max-w-lg">
+          True alkalinity cannot be rushed or chemically synthesized. Filtered through centuries of untouched alpine granite, IONA absorbs living electrolytes naturally, arriving at a gentle, stable pH 8.5 balance.
         </p>
 
-        {/* pH Metric Block + Indicators */}
-        <div className="mt-10 flex flex-wrap items-end gap-8 pt-6 border-t border-white/10">
-          <div className="flex flex-col">
-            <span className="text-xs font-mono text-[#20BFD3] tracking-widest uppercase">
-              IONIC INDEX
-            </span>
-            <div className="flex items-baseline gap-2 mt-1">
-              <span className="text-2xl font-mono text-[#A9C4CA]">pH</span>
-              <span className="font-display text-6xl sm:text-7xl font-extrabold italic text-white tracking-tight drop-shadow-[0_0_20px_rgba(32,191,211,0.3)]">
-                8.5+
-              </span>
-            </div>
-            <span className="text-[11px] text-[#A9C4CA]/70 font-mono mt-1">
-              Stable Electrolytic Equilibrium
+        {/* pH Stately Presentation */}
+        <div className="mt-12 flex flex-wrap items-center gap-10 pt-8 border-t border-white/10">
+          <div className="flex items-baseline gap-3">
+            <span className="text-xs font-mono text-[#8D9FA7] uppercase tracking-widest">Natural pH</span>
+            <span className="font-serif-luxury text-5xl sm:text-6xl font-light text-white tracking-tight">
+              8.5
             </span>
           </div>
 
-          {/* Three Feature Badges matching reference storyboard */}
-          <div className="flex items-center gap-3 sm:gap-4">
-            <button
-              onClick={() => setSelectedMetric('balance')}
-              className={`flex flex-col items-center justify-center p-3 rounded-md border text-center transition-all cursor-pointer ${
-                selectedMetric === 'balance'
-                  ? 'border-[#20BFD3] bg-[#06232D]/80 shadow-[0_0_15px_rgba(32,191,211,0.2)]'
-                  : 'border-white/10 bg-[#04141D]/30 hover:border-white/20'
-              }`}
-            >
-              <div className="w-8 h-8 rounded-full border border-[#20BFD3]/40 flex items-center justify-center mb-1.5 bg-[#20BFD3]/10">
-                <Droplets className="w-4 h-4 text-[#7DEAF0]" />
-              </div>
-              <span className="text-[10px] font-bold tracking-wider uppercase text-white font-mono leading-tight">
-                NATURALLY<br />BALANCED
-              </span>
-            </button>
-
-            <button
-              onClick={() => setSelectedMetric('minerals')}
-              className={`flex flex-col items-center justify-center p-3 rounded-md border text-center transition-all cursor-pointer ${
-                selectedMetric === 'minerals'
-                  ? 'border-[#20BFD3] bg-[#06232D]/80 shadow-[0_0_15px_rgba(32,191,211,0.2)]'
-                  : 'border-white/10 bg-[#04141D]/30 hover:border-white/20'
-              }`}
-            >
-              <div className="w-8 h-8 rounded-full border border-[#20BFD3]/40 flex items-center justify-center mb-1.5 bg-[#20BFD3]/10">
-                <Activity className="w-4 h-4 text-[#7DEAF0]" />
-              </div>
-              <span className="text-[10px] font-bold tracking-wider uppercase text-white font-mono leading-tight">
-                RICH IN<br />MINERALS
-              </span>
-            </button>
-
-            <button
-              onClick={() => setSelectedMetric('taste')}
-              className={`flex flex-col items-center justify-center p-3 rounded-md border text-center transition-all cursor-pointer ${
-                selectedMetric === 'taste'
-                  ? 'border-[#20BFD3] bg-[#06232D]/80 shadow-[0_0_15px_rgba(32,191,211,0.2)]'
-                  : 'border-white/10 bg-[#04141D]/30 hover:border-white/20'
-              }`}
-            >
-              <div className="w-8 h-8 rounded-full border border-[#20BFD3]/40 flex items-center justify-center mb-1.5 bg-[#20BFD3]/10">
-                <Sparkles className="w-4 h-4 text-[#7DEAF0]" />
-              </div>
-              <span className="text-[10px] font-bold tracking-wider uppercase text-white font-mono leading-tight">
-                SMOOTH<br />TASTE
-              </span>
-            </button>
+          <div className="flex items-center gap-3">
+            {minerals.map((m, idx) => (
+              <button
+                key={m.name}
+                onClick={() => setSelectedMineral(idx)}
+                className={`px-4 py-2.5 rounded-full border text-xs tracking-wider transition-all duration-300 cursor-pointer backdrop-blur-md ${
+                  selectedMineral === idx
+                    ? 'border-white bg-white text-[#030709] font-medium shadow-[0_4px_20px_rgba(255,255,255,0.15)]'
+                    : 'border-white/15 bg-white/[0.02] text-[#8D9FA7] hover:border-white/30 hover:text-white'
+                }`}
+              >
+                {m.name}
+              </button>
+            ))}
           </div>
         </div>
 
-        {/* Dynamic Detail Card based on selected metric */}
-        <div className="mt-6 p-4 rounded-sm border border-white/10 bg-[#04141D]/50 text-xs text-[#A9C4CA]">
-          {selectedMetric === 'balance' && (
-            <div className="flex items-center gap-3">
-              <ShieldCheck className="w-4 h-4 text-[#20BFD3] shrink-0" />
-              <span>Bio-mimetic electrolytic ratio closely mirroring natural cellular fluid for immediate uptake.</span>
-            </div>
-          )}
-          {selectedMetric === 'minerals' && (
-            <div className="flex items-center gap-3">
-              <ShieldCheck className="w-4 h-4 text-[#20BFD3] shrink-0" />
-              <span>Naturally infused with magnesium, calcium, and trace quartz silica for cellular resilience.</span>
-            </div>
-          )}
-          {selectedMetric === 'taste' && (
-            <div className="flex items-center gap-3">
-              <ShieldCheck className="w-4 h-4 text-[#20BFD3] shrink-0" />
-              <span>Velvety soft palate with crisp mineral finish, devoid of harsh chemical or plastic aftertastes.</span>
-            </div>
-          )}
+        {/* Detail note */}
+        <div className="mt-6 p-5 rounded-lg border border-white/10 bg-white/[0.02] backdrop-blur-md">
+          <div className="flex items-center justify-between text-[11px] font-mono text-white/70 mb-2">
+            <span className="uppercase tracking-widest">{minerals[selectedMineral].name} · {minerals[selectedMineral].symbol}</span>
+            <span className="text-[#8D9FA7]">{minerals[selectedMineral].origin}</span>
+          </div>
+          <p className="text-xs text-[#8D9FA7] font-light leading-relaxed">
+            {minerals[selectedMineral].desc}
+          </p>
         </div>
       </div>
 

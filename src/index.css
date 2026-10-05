@@ -2,35 +2,41 @@
 
 @layer base {
   :root {
-    --font-display: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+    --font-display: 'Cormorant Garamond', Georgia, serif;
     --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
   }
   
   body {
     font-family: var(--font-sans);
-    background-color: #02080D;
+    background-color: #030709;
     color: #FFFFFF;
     overflow-x: hidden;
   }
 
   /* Custom scrollbar */
   ::-webkit-scrollbar {
-    width: 6px;
+    width: 5px;
   }
   ::-webkit-scrollbar-track {
-    background: #02080D;
+    background: #030709;
   }
   ::-webkit-scrollbar-thumb {
-    background: #083E50;
-    border-radius: 3px;
+    background: #142028;
+    border-radius: 2px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: #20BFD3;
+    background: #253945;
   }
 }
 
 .font-display {
-  font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-feature-settings: 'lnum', 'pnum';
+}
+
+.font-serif-luxury {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-feature-settings: 'lnum', 'pnum';
 }
 
 .font-sans-refined {
@@ -39,21 +45,21 @@
 
 /* Water caustic subtle texture overlay */
 .caustic-overlay {
-  background-image: radial-gradient(circle at 50% 50%, rgba(32, 191, 211, 0.08) 0%, transparent 60%);
+  background-image: radial-gradient(circle at 50% 50%, rgba(200, 230, 235, 0.04) 0%, transparent 65%);
 }
 
-/* Glass panel */
+/* Natural Luxury Glass panel */
 .glass-panel {
-  background: rgba(6, 35, 45, 0.45);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(125, 234, 240, 0.12);
+  background: rgba(8, 17, 22, 0.55);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .glass-panel-subtle {
-  background: rgba(4, 20, 29, 0.6);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(125, 234, 240, 0.08);
+  background: rgba(5, 12, 16, 0.5);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
