@@ -84,7 +84,7 @@ export default function FAQ({ onExperience, onNavigate, onOpenTerms, onOpenPriva
 
         <div className="mt-10">
           <button
-            onClick={onExperience}
+            onClick={() => onOpenContact ? onOpenContact() : onExperience()}
             className="flex items-center gap-3 px-9 py-4 rounded-full border border-white/30 bg-white/[0.08] text-white text-xs tracking-[0.2em] uppercase hover:bg-white hover:text-[#030709] transition-all duration-500 cursor-pointer shadow-[0_4px_30px_rgba(0,0,0,0.6)]"
           >
             <span>GET IN TOUCH / ORDER</span>

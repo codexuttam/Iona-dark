@@ -325,7 +325,7 @@ export default function Scene({
         targetRotX = 0.04;
         targetRotY = 2.5 + bProgress * Math.PI + time * 0.06;
         targetRotZ = 0.0;
-        targetScale = isMobile ? 0.65 : 0.75;
+        targetScale = isMobile ? 0.55 : 0.62;
       } else if (processFraction >= 0) {
         // Section 05: THE IONA PROCESS (PROVENANCE)
         targetCamX = lerp(0.2, -0.05, processFraction);
@@ -339,7 +339,7 @@ export default function Scene({
         targetRotX = 0.05;
         targetRotY = 0.6 + processFraction * (Math.PI * 2) + time * 0.04;
         targetRotZ = -0.03;
-        targetScale = isMobile ? 0.62 : 0.70;
+        targetScale = isMobile ? 0.55 : 0.6;
       } else {
         // Sections 01 - 04 (Hero through Resonance)
         if (p < 0.12) {
@@ -356,7 +356,7 @@ export default function Scene({
           targetRotX = 0.03;
           targetRotY = -0.15 + time * 0.03;
           targetRotZ = -0.02;
-          targetScale = isMobile ? 0.65 : 0.72;
+          targetScale = isMobile ? 0.55 : 0.6;
         } else if (p < 0.25) {
           // Section 02: PHILOSOPHY (STILLNESS)
           const t = (p - 0.12) / 0.13;
@@ -371,7 +371,7 @@ export default function Scene({
           targetRotX = 0.04;
           targetRotY = lerp(-0.15, 0.3, t) + time * 0.03;
           targetRotZ = -0.02;
-          targetScale = isMobile ? 0.65 : 0.72;
+          targetScale = isMobile ? 0.55 : 0.6;
         } else if (p < 0.38) {
           // Section 03: EQUILIBRIUM (STONE & ALKALINE BALANCE)
           const t = (p - 0.25) / 0.13;
@@ -386,7 +386,7 @@ export default function Scene({
           targetRotX = 0.04;
           targetRotY = 0.4 + time * 0.03;
           targetRotZ = -0.02;
-          targetScale = isMobile ? 0.65 : 0.72;
+          targetScale = isMobile ? 0.55 : 0.6;
         } else {
           // Section 04: RESONANCE (MOLECULAR HARMONY)
           const t = Math.min(1, Math.max(0, (p - 0.38) / 0.12));
@@ -401,7 +401,7 @@ export default function Scene({
           targetRotX = 0.04;
           targetRotY = 0.8 + time * 0.03;
           targetRotZ = 0.02;
-          targetScale = isMobile ? 0.65 : 0.72;
+          targetScale = isMobile ? 0.55 : 0.6;
         }
       }
 

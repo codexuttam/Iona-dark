@@ -16,6 +16,7 @@ export default function SideNavigation({
     >
       <div className="flex flex-col gap-3">
         {SECTIONS.map((sec, idx) => {
+          if (!sec.num) return null;
           const isActive = idx === activeSectionIndex;
           return (
             <button

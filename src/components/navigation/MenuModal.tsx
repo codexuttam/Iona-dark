@@ -39,7 +39,9 @@ export default function MenuModal({ isOpen, onClose, onNavigate }: MenuModalProp
           <span className="text-[11px] uppercase tracking-[0.25em] text-[#CBD5E1] font-mono mb-3 font-medium">
             INDEX DIRECTORY
           </span>
-          {SECTIONS.map((sec) => (
+          {SECTIONS.map((sec) => {
+            if (!sec.num) return null;
+            return (
             <button
               key={sec.id}
               onClick={() => {
@@ -58,7 +60,8 @@ export default function MenuModal({ isOpen, onClose, onNavigate }: MenuModalProp
               </div>
               <ArrowRight className="w-4 h-4 text-white/40 group-hover:text-white group-hover:translate-x-1 transition-all" />
             </button>
-          ))}
+            );
+          })}
         </div>
 
         {/* Specifications & Ethos */}
